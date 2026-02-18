@@ -1,0 +1,10 @@
+pdf_file,page,label_raw,label_norm,x_center,y_center,bbox,rule,confidence
+BX-FM_10-30-2025-Model.pdf,1,65.25,6525,255.0,529.5,"250.0,520.0,260.0,539.0",decimal_elevation,0.8
+BX-FM_10-30-2025-Model.pdf,1,68.05,6805,235.5,486.5,"231.0,477.0,240.0,496.0",decimal_elevation,0.8
+BX-FM_10-30-2025-Model.pdf,1,75.25,7525,245.0,525.5,"240.0,515.0,250.0,536.0",decimal_elevation,0.8
+BX-FM_10-30-2025-Model.pdf,1,76.41,7641,271.0,441.5,"266.0,432.0,276.0,451.0",decimal_elevation,0.8
+BX-FM_10-30-2025-Model.pdf,1,76.42,7642,263.0,441.5,"258.0,431.0,268.0,452.0",decimal_elevation,0.8
+BX-FM_10-30-2025-Model.pdf,1,76.43,7643,271.0,410.5,"266.0,400.0,276.0,421.0",decimal_elevation,0.8
+BX-FM_10-30-2025-Model.pdf,1,116.02,11602,343.5,325.5,"339.0,316.0,348.0,335.0",decimal_elevation,0.8
+BX-FM_10-30-2025-Model.pdf,1,116.01,11601,342.5,304.5,"338.0,295.0,347.0,314.0",decimal_elevation,0.8
+BX-FM_10-30-2025-Model.pdf,1,95.15,9515,316.5,390.0,"312.0,381.0,321.0,399.0",decimal_elevation,0.8

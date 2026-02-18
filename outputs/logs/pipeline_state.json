@@ -1,0 +1,58 @@
+{
+  "generated_at_utc": "2026-02-18T22:15:26.997302+00:00",
+  "current_stage": "milestone_4_ask_user_gate",
+  "status": "blocked",
+  "reason": "node_id_ambiguity",
+  "inputs_used": [
+    {
+      "path": "data/raw/BX-FM_10-30-2025-Model.pdf",
+      "exists": true,
+      "sha256": "b75e7d53fbffdcb5d97cb7bcd726057e6d3080d585ea84e5078fc94072ad58bd"
+    },
+    {
+      "path": "data/raw/BX-FM_10-30-2025-Model2.pdf",
+      "exists": true,
+      "sha256": "c76be6a622f55c908c055ac8b6c1ff33596a4e0952e69569badff915566c4770"
+    },
+    {
+      "path": "data/interim/pdf_words_raw.csv",
+      "exists": true,
+      "sha256": "1502dcae761ed10ebe1b80495190ec4dbcbd512e6e801b248ea1a16d18bdc762"
+    },
+    {
+      "path": "data/interim/pdf_annots_raw.csv",
+      "exists": true,
+      "sha256": "dc7a382859da62d2457c7b4674d6b50ffaca36de8b8259d38c7c717e35d7c338"
+    },
+    {
+      "path": "data/processed/nodes.csv",
+      "exists": true,
+      "sha256": "ead6006c94d96e087f5f8a52a566f8e17737f31d754d83ef3b0ec5373697e2ec"
+    },
+    {
+      "path": "data/processed/links.csv",
+      "exists": true,
+      "sha256": "b9861144e184b6a7fa156b73b471b0ef0ac322797eca09652eb2d57ebbcfddb9"
+    }
+  ],
+  "outputs_produced": [
+    "outputs/ask_user/questions.md",
+    "outputs/ask_user/questions.json",
+    "outputs/ask_user/ambiguous_nodes.csv",
+    "outputs/ask_user/answers.yml"
+  ],
+  "key_counts": {
+    "data/interim/pdf_words_raw.csv": 32,
+    "data/interim/pdf_annots_raw.csv": 935,
+    "data/processed/pdf_node_id_candidates.csv": 696,
+    "data/processed/pdf_elevation_candidates.csv": 9,
+    "data/processed/id_map_nodes.csv": 696,
+    "outputs/review/node_crosswalk.csv": 174,
+    "outputs/ask_user/ambiguous_nodes.csv": 48
+  },
+  "assumptions_used": {
+    "topology_assist": true,
+    "unresolved_count": 48
+  },
+  "next_action": "wait for answers.yml then rerun reconciliation"
+}

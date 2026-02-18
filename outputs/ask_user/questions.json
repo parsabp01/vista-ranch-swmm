@@ -1,0 +1,16 @@
+{
+  "reason": "node_id_ambiguity",
+  "question_count": 3,
+  "ambiguous_count": 48,
+  "options": {
+    "prefix": [
+      "J",
+      "MH",
+      "IN"
+    ]
+  },
+  "files": {
+    "details": "outputs/ask_user/ambiguous_nodes.csv",
+    "answers_template": "outputs/ask_user/answers.yml"
+  }
+}

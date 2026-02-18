@@ -1,0 +1,17 @@
+project:
+  name: vista-ranch-swmm
+  units: US
+  flow_units: CFS
+
+subcatchment:
+  percent_impervious_default: 55.0
+  slope_percent_default: 1.0
+  tc_length_default_ft: 200.0
+  min_width_ft: 10.0
+
+hydraulics:
+  manning_n_pipe_default: 0.013
+  conduit_length_default_ft: 50.0
+
+qa:
+  allow_negative_slope: false

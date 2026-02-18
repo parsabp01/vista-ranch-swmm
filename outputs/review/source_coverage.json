@@ -1,0 +1,14 @@
+{
+  "nodes_matched_pct": 97.7,
+  "links_matched_pct": 100.0,
+  "inflows_matched_pct": 2.87,
+  "subcatchments_matched_pct": 100.0,
+  "counts": {
+    "swmm_nodes": 174,
+    "swmm_links": 249,
+    "excel_nodes_rows": 89,
+    "excel_links_rows": 252,
+    "excel_rational_rows": 786
+  },
+  "pdf_label_populated": true
+}
