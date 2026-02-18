@@ -1,0 +1,47 @@
+{
+  "generated_at_utc": "2026-02-18T21:00:46.936283+00:00",
+  "required_inputs": {
+    "workbook": "data/raw/Copy of BX-HH-Vista Ranch_10-30-2025.xlsm",
+    "pdfs": [
+      "data/raw/BX-FM_10-30-2025-Model.pdf",
+      "data/raw/BX-FM_10-30-2025-Model2.pdf"
+    ],
+    "planning_doc": "data/raw/Hydraulic Model Planning.docx"
+  },
+  "files": [
+    {
+      "kind": "workbook",
+      "path": "data/raw/Copy of BX-HH-Vista Ranch_10-30-2025.xlsm",
+      "exists": true,
+      "size_bytes": 576047,
+      "sha256": "7d366ad7b8edaac0d9d44dd209a1cd7ff73953a033119a3ef510f272b4b906e3",
+      "modified_time_utc": "2026-02-18T19:44:47.713902+00:00"
+    },
+    {
+      "kind": "planning_doc",
+      "path": "data/raw/Hydraulic Model Planning.docx",
+      "exists": true,
+      "size_bytes": 15759,
+      "sha256": "ff4dd7c68b587fdd9ecb46365fdf191edeb81bce207404394402bc1210d72b0d",
+      "modified_time_utc": "2026-02-18T19:44:47.713902+00:00"
+    },
+    {
+      "kind": "pdf",
+      "path": "data/raw/BX-FM_10-30-2025-Model.pdf",
+      "exists": true,
+      "size_bytes": 578756,
+      "sha256": "b75e7d53fbffdcb5d97cb7bcd726057e6d3080d585ea84e5078fc94072ad58bd",
+      "modified_time_utc": "2026-02-18T19:44:47.693903+00:00"
+    },
+    {
+      "kind": "pdf",
+      "path": "data/raw/BX-FM_10-30-2025-Model2.pdf",
+      "exists": true,
+      "size_bytes": 7217070,
+      "sha256": "c76be6a622f55c908c055ac8b6c1ff33596a4e0952e69569badff915566c4770",
+      "modified_time_utc": "2026-02-18T19:44:47.709903+00:00"
+    }
+  ],
+  "status": "ready",
+  "notes": []
+}

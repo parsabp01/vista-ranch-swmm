@@ -1,0 +1,12 @@
+{
+  "generated_at_utc": "2026-02-18T21:02:28.977221+00:00",
+  "junction_count": 174,
+  "conduit_count": 249,
+  "subcatchment_count": 174,
+  "inflow_count": 174,
+  "assumptions": {
+    "topology_mode": "extracted_links",
+    "single_outfall": "OUT1",
+    "rainfall_timeseries": "TS1 design storm placeholder"
+  }
+}

@@ -1,0 +1,13 @@
+required_inputs:
+  workbook: data/raw/Copy of BX-HH-Vista Ranch_10-30-2025.xlsm
+  pdfs:
+    - data/raw/BX-FM_10-30-2025-Model.pdf
+    - data/raw/BX-FM_10-30-2025-Model2.pdf
+  planning_doc: data/raw/Hydraulic Model Planning.docx
+
+classification_keywords:
+  nodes: [node, junction, manhole, inlet, outfall, rim, invert]
+  links: [link, conduit, pipe, upstream, downstream, diameter, length, slope]
+  rational: [rational, tc, c, area, intensity, q]
+
+candidate_header_scan_rows: 20

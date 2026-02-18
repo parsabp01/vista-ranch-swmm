@@ -1,0 +1,8 @@
+cols,detected_header_row,headers_preview,non_empty_headers,rows,sheet_name
+132,7,"jct | inlet | inlet | jct. | ""c"" | base | base | mod. | mod. | slope | dist. | vel",28,749,HYDROLOGY
+18,18,t56013 | 8 | 9.8 | 4.5276000000000005 | 4.980360000000001 | 0.5082000000000001 | 427.7 | 424.23 | 1180 | 0.003042372881355911 | 20 | 32.108971468560014,13,455,DI TABLE
+26,8,stream jct | stream jct | hgl elev. | egl elev. | (in) | (cfs) | (ft) | (fps) | (ft) | (ft/ft) | loss | type,22,690,HYDRAULICS
+12,1,,0,24, 
+16,3,location | name | keystroke | description | worksheet formulas,5,92,Reference
+47,18,"jct | inlet | area | jct area | ""c"" | base ca | base | mca | mca | slope | dist. | vel",28,213,Formluas
+12,5,location | macro or dialog box | keystroke | description | modules | userforms,6,34,VBA reference

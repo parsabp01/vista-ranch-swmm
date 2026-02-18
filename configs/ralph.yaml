@@ -1,0 +1,6 @@
+ralph:
+  reflect: "Summarize data quality issues from latest stage outputs"
+  act: "Apply deterministic mapping/default corrections"
+  learn: "Record what changed and which checks improved"
+  plan: "Set next stage rerun target and unresolved questions"
+  hone: "Refine extraction/config rules and re-run"
