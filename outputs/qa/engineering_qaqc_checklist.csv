@@ -1,0 +1,13 @@
+check,status,severity,evidence_path,notes
+Flow units configured,PASS,high,models/model.inp,FLOW_UNITS should be present
+Raingage linked to timeseries,PASS,high,models/model.inp,RG1 must reference TS1
+Subcatchments present,PASS,high,models/model.inp,Required for runoff generation
+Subcatchment outlets assigned,PASS,high,models/model.inp,Outlet column should map to node IDs
+Outfall boundary defined,PASS,high,models/model.inp,Need at least one outfall
+Simulation dates configured,PASS,medium,models/model.inp,Date bounds present
+Infiltration settings configured,PASS,medium,models/model.inp,Horton parameters present
+Conduit geometry non-negative,PASS,high,models/model.inp,No NaN geometry values
+Losses table present,PASS,low,models/model.inp,Minor loss defaults included
+Coordinates present,PASS,medium,models/model.inp,Node coordinates required for map QA
+Topology derived from extracted links,PASS,high,outputs/logs/build_summary.json,Should not be synthetic chain
+QA high findings clear,PASS,high,outputs/qa/qa_summary.json,High findings must be zero
