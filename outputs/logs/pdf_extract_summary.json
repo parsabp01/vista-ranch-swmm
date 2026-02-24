@@ -1,0 +1,54 @@
+{
+  "generated_at_utc": "2026-02-18T22:14:21.805540+00:00",
+  "pdfs": [
+    {
+      "pdf_file": "BX-FM_10-30-2025-Model.pdf",
+      "pages": [
+        {
+          "page": 1,
+          "word_count": 24,
+          "annot_count": 732
+        }
+      ]
+    },
+    {
+      "pdf_file": "BX-FM_10-30-2025-Model2.pdf",
+      "pages": [
+        {
+          "page": 1,
+          "word_count": 8,
+          "annot_count": 203
+        }
+      ]
+    }
+  ],
+  "flattened": false,
+  "avg_tokens_per_page": 483.5,
+  "top_examples": [
+    "NEES",
+    "TEMPERANCE",
+    "LOCAN",
+    "DEWOLF",
+    "TEAGUE",
+    "SHEPHERD",
+    "ERRIN",
+    "HARLAN",
+    "RANCH",
+    "D",
+    "LOCAN",
+    "DEWOLF",
+    "TEMPERANCE",
+    "ENTERPRISE",
+    "CANAL",
+    "BASIN",
+    "\"BX\"",
+    "DRY",
+    "CREEK",
+    "CHANNEL",
+    "FWY",
+    "168",
+    "LU",
+    "TEXT",
+    "SHEP"
+  ]
+}
