@@ -1,18 +1,22 @@
 {
   "nodes_matched_pct": 97.7,
   "links_matched_pct": 100.0,
-  "inflows_matched_pct": 2.87,
-  "nodes_matched_pct": 5.17,
-  "links_matched_pct": 100.0,
-  "inflows_matched_pct": 5.17,
+  "inflows_matched_pct": 100.0,
+  "strict_match_pct": 98.34,
+  "normalized_or_suffix_match_pct": 1.66,
+  "low_confidence_match_count": 0,
+  "unresolved_count": 0,
   "subcatchments_matched_pct": 100.0,
+  "inlet_to_junction_map_coverage_pct": 100.0,
+  "inflow_to_swmm_node_coverage_pct": 100.0,
+  "system_boundary_consistency": "pass",
   "counts": {
-    "swmm_nodes": 174,
-    "swmm_links": 249,
-    "excel_nodes_rows": 89,
-    "excel_links_rows": 252,
-    "excel_rational_rows": 786
+    "inflow_records": 302,
+    "junction_map_rows": 32,
+    "inlet_map_rows": 299,
+    "inlet_to_junction_rows": 297,
+    "hydrology_last_valid_row": 684,
+    "hydrology_rows_excluded_as_trailing_noninputs": 13
   },
   "pdf_label_populated": true
-  }
 }
