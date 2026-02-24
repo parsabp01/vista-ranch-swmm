@@ -1,0 +1,56 @@
+{
+  "generated_at_utc": "2026-02-24T17:41:08.375153+00:00",
+  "inflow_records": 304,
+  "inflow_matched_pct": 99.34,
+  "strict_match_pct": 97.7,
+  "normalized_or_suffix_match_pct": 1.64,
+  "low_confidence_match_count": 2,
+  "unresolved_count": 2,
+  "inflow_to_inlet_pct": 98.36,
+  "inlet_to_junction_pct": 99.34,
+  "inflow_to_swmm_node_pct": 99.34,
+  "system_boundary_consistency_pass": true,
+  "cross_boundary_edges": 0,
+  "regression_validation": {
+    "hydrology_schema": {
+      "B": "junction_id",
+      "C": "inlet_id",
+      "D": "inlet_area"
+    },
+    "column_d_used_as_inlet_id_count": 0,
+    "row_checks": {
+      "265": {
+        "mapped_canonical_inlet_ids": [
+          "I_99"
+        ],
+        "mapped_inlet_id_source_cols": [
+          "C"
+        ]
+      },
+      "330": {
+        "mapped_canonical_inlet_ids": [
+          "I_117_1"
+        ],
+        "mapped_inlet_id_source_cols": [
+          "C"
+        ]
+      },
+      "431": {
+        "mapped_canonical_inlet_ids": [
+          "I_137_1"
+        ],
+        "mapped_inlet_id_source_cols": [
+          "C"
+        ]
+      },
+      "499": {
+        "mapped_canonical_inlet_ids": [
+          "I_165"
+        ],
+        "mapped_inlet_id_source_cols": [
+          "C"
+        ]
+      }
+    }
+  }
+}

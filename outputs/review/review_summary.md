@@ -1,29 +1,23 @@
 # Review Summary
 
-- Node crosswalk rows: 174
-- Link crosswalk rows: 249
-- Nodes with derived values: 169
-- Links inferred/low-confidence: 0
-- Synthetic/defaulted values present: YES
+- Inflow records mapped: 304
+- Inflow matched %: 99.34%
+- Strict match %: 97.7%
+- Normalized/suffix match %: 1.64%
+- Low-confidence match count: 2
+- Unresolved count: 2
+- Inlet->junction coverage: 99.34%
+- Inflow->SWMM node coverage: 99.34%
+- BASIN boundary consistency: PASS
 
-## Top 20 Critical Items
-1. NODE J002: derived mapping; verify Excel/PDF ID alignment
-2. NODE J003: derived mapping; verify Excel/PDF ID alignment
-3. NODE J004: derived mapping; verify Excel/PDF ID alignment
-4. NODE J006: derived mapping; verify Excel/PDF ID alignment
-5. NODE J011: derived mapping; verify Excel/PDF ID alignment
-6. NODE J012: derived mapping; verify Excel/PDF ID alignment
-7. NODE J013: derived mapping; verify Excel/PDF ID alignment
-8. NODE J014: derived mapping; verify Excel/PDF ID alignment
-9. NODE J015: derived mapping; verify Excel/PDF ID alignment
-10. NODE J016: derived mapping; verify Excel/PDF ID alignment
-11. NODE J017: derived mapping; verify Excel/PDF ID alignment
-12. NODE J018: derived mapping; verify Excel/PDF ID alignment
-13. NODE J019: derived mapping; verify Excel/PDF ID alignment
-14. NODE J020: derived mapping; verify Excel/PDF ID alignment
-15. NODE J021: derived mapping; verify Excel/PDF ID alignment
-16. NODE J022: derived mapping; verify Excel/PDF ID alignment
-17. NODE J023: derived mapping; verify Excel/PDF ID alignment
-18. NODE J024: derived mapping; verify Excel/PDF ID alignment
-19. NODE J025: derived mapping; verify Excel/PDF ID alignment
-20. NODE J026: derived mapping; verify Excel/PDF ID alignment
+## HYDROLOGY schema lock validation
+- Column B parsed as junction IDs
+- Column C parsed as inlet IDs
+- Column D parsed as inlet area (never inlet ID)
+- Regression guard count (D looked numeric while C empty): 0
+
+## Target row checks
+- Row 265: inlet_ids=['I_99'], inlet_id_source_cols=['C']
+- Row 330: inlet_ids=['I_117_1'], inlet_id_source_cols=['C']
+- Row 431: inlet_ids=['I_137_1'], inlet_id_source_cols=['C']
+- Row 499: inlet_ids=['I_165'], inlet_id_source_cols=['C']
