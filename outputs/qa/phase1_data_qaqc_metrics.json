@@ -1,4 +1,12 @@
 {
+  "junction_count": 268,
+  "link_count": 252,
+  "inflow_record_count": 302,
+  "system_count": 9,
+  "high_count": 3,
+  "medium_count": 24,
+  "low_count": 1,
+  "orphan_junction_count": 20,
   "junction_count": 174,
   "link_count": 252,
   "inflow_record_count": 302,

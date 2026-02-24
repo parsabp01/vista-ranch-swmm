@@ -1,4 +1,8 @@
 check_name,status,metric,value,message
+unmapped_inflow_count,pass,count,0,Inflows missing receiving node.
+duplicate_inflow_source_row_count,pass,count,0,Duplicate inflow source rows.
+inflow_source_row_multi_node_count,pass,count,0,Source rows mapped to >1 node.
+column_d_used_as_inlet_id_count,pass,count,0,HYDROLOGY Column D regression guard.
 unmapped_inflow_count,pass,count,0,Inflows missing receiving SWMM node.
 duplicate_inflow_source_row_count,pass,count,0,Duplicate inflow source rows.
 inflow_source_row_multi_node_count,pass,count,0,Source rows mapped to >1 SWMM node.

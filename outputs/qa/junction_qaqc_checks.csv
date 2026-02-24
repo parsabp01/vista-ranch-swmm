@@ -1,3 +1,5 @@
 check_name,status,metric,value,message
+junction_defaults_concentration,warn,default_ratio,1.0,Default-heavy junction geometry in current build.
+junction_orphan_count,warn,count,20.0,Orphan typed junction IDs.
 junction_defaults_concentration,warn,default_ratio,1.0,Current build uses synthetic default junction geometry for all modeled nodes.
 junction_orphan_count,warn,count,2.0,Orphan junctions not connected to any link.

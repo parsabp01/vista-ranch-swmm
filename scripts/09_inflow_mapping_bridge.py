@@ -7,6 +7,8 @@ from pathlib import Path
 
 import pandas as pd
 
+from id_utils import norm_numeric_id, swmm_junction_id, typed_canonical_id
+
 ROOT = Path(__file__).resolve().parents[1]
 RAW_XLSM = ROOT / 'data/raw/Copy of BX-HH-Vista Ranch_10-30-2025.xlsm'
 PROC = ROOT / 'data/processed'
@@ -61,6 +63,8 @@ hydrology_last_valid_row = final_basin_row
 hyd = hyd_all.iloc[:hydrology_last_valid_row].copy()
 excluded_trailing_rows = list(range(hydrology_last_valid_row + 1, len(hyd_all) + 1))
 
+records, system_id, pending = [], 1, []
+hyd_lookup = {}
 records: list[dict] = []
 system_id = 1
 pending_inlets: list[dict] = []
@@ -88,6 +92,23 @@ validation = {
 for i, row in hyd.iterrows():
     source_row = i + 1
     b_raw, c_raw, d_raw = row['col_b_jct'], row['col_c_inlet_id'], row['col_d_inlet_area']
+    if str(b_raw).strip().upper() == 'BASIN':
+        records.append({'source_row': source_row, 'system_id': system_id, 'event': 'BASIN_BREAK', 'junction_id': None, 'inlet_id': None})
+        system_id += 1
+        pending = []
+        continue
+
+    junction_id = norm_numeric_id(b_raw)
+    inlet_id = norm_numeric_id(c_raw)
+    inlet_area = as_float(d_raw)
+
+    if inlet_id is None and norm_numeric_id(d_raw) is not None:
+        validation['column_d_used_as_inlet_id_count'] += 1
+
+    hyd_lookup[source_row] = {'junction_id': junction_id, 'inlet_id': inlet_id, 'inlet_area': inlet_area, 'system_id': system_id}
+
+    if inlet_id and not junction_id:
+        pending.append({'inlet_id': inlet_id, 'source_row_hydrology': source_row, 'inlet_area': inlet_area})
     b_txt = '' if pd.isna(b_raw) else str(b_raw).strip()
     c_txt = '' if pd.isna(c_raw) else str(c_raw).strip()
     d_txt = '' if pd.isna(d_raw) else str(d_raw).strip()
@@ -121,6 +142,9 @@ for i, row in hyd.iterrows():
 
     if junction_id:
         records.append({'source_row': source_row, 'system_id': system_id, 'event': 'JUNCTION_SEQ', 'junction_id': junction_id, 'inlet_id': None})
+        for p in pending:
+            records.append({'source_row': p['source_row_hydrology'], 'system_id': system_id, 'event': 'INLET_TO_JUNCTION', 'junction_id': junction_id, 'inlet_id': p['inlet_id'], 'inlet_area': p['inlet_area']})
+        pending = []
         for p in pending_inlets:
             records.append({'source_row': p['source_row_hydrology'], 'system_id': system_id, 'event': 'INLET_TO_JUNCTION', 'junction_id': junction_id, 'inlet_id': p['inlet_id'], 'inlet_area': p['inlet_area']})
         pending_inlets = []
@@ -139,6 +163,31 @@ for i, row in hyd.iterrows():
 sys_df = pd.DataFrame(records)
 bridge = sys_df[sys_df['event'] == 'INLET_TO_JUNCTION'][['system_id', 'inlet_id', 'junction_id', 'source_row', 'inlet_area']].drop_duplicates()
 bridge = bridge.rename(columns={'junction_id': 'receiving_junction_id', 'source_row': 'source_row_hydrology', 'inlet_area': 'inlet_area_from_hydrology_col_d'})
+bridge['canonical_inlet_id'] = bridge['inlet_id'].map(lambda x: typed_canonical_id(x, 'inlet'))
+bridge['canonical_receiving_junction_id'] = bridge['receiving_junction_id'].map(lambda x: typed_canonical_id(x, 'junction'))
+bridge['match_method'] = 'hydrology_sequence_upstream_assignment'
+bridge['confidence'] = 0.98
+
+# inlets
+inlets = []
+for i, row in dit.iterrows():
+    inlet_id = norm_numeric_id(row.iloc[0])
+    if inlet_id:
+        inlets.append({'inlet_id': inlet_id, 'source_row_di_table': i + 1})
+id_map_inlets = pd.DataFrame(inlets).drop_duplicates('inlet_id')
+id_map_inlets['canonical_inlet_id'] = id_map_inlets['inlet_id'].map(lambda x: typed_canonical_id(x, 'inlet'))
+id_map_inlets['match_method'] = 'di_table_identity'
+id_map_inlets['confidence'] = 1.0
+
+# topology
+edges = []
+for i, row in hyc.iterrows():
+    ds = norm_numeric_id(row.iloc[0]); us = norm_numeric_id(row.iloc[1])
+    if ds and us:
+        edges.append({'source_row_hydraulics': i + 1, 'upstream_junction_id': us, 'downstream_junction_id': ds})
+edge_df = pd.DataFrame(edges).drop_duplicates()
+edge_df['canonical_upstream_junction_id'] = edge_df['upstream_junction_id'].map(lambda x: typed_canonical_id(x, 'junction'))
+edge_df['canonical_downstream_junction_id'] = edge_df['downstream_junction_id'].map(lambda x: typed_canonical_id(x, 'junction'))
 bridge['match_method'] = 'hydrology_sequence_upstream_assignment'
 bridge['confidence'] = 0.98
 
@@ -188,6 +237,8 @@ edge_df = pd.DataFrame(edges).drop_duplicates()
 jseq = sys_df[sys_df['event'] == 'JUNCTION_SEQ'][['system_id', 'junction_id', 'source_row']].copy()
 jseq['next_junction_id'] = jseq.groupby('system_id')['junction_id'].shift(-1)
 seg = jseq[jseq['next_junction_id'].notna()][['system_id', 'junction_id', 'next_junction_id', 'source_row']].rename(columns={'junction_id': 'upstream_junction_id', 'next_junction_id': 'downstream_junction_id', 'source_row': 'source_row_hydrology'})
+seg['canonical_upstream_junction_id'] = seg['upstream_junction_id'].map(lambda x: typed_canonical_id(x, 'junction'))
+seg['canonical_downstream_junction_id'] = seg['downstream_junction_id'].map(lambda x: typed_canonical_id(x, 'junction'))
 seg['segment_method'] = 'hydrology_junction_sequence'
 
 j2s = jseq[['junction_id', 'system_id']].drop_duplicates()
@@ -195,6 +246,30 @@ edge_map = edge_df.merge(j2s.rename(columns={'junction_id': 'upstream_junction_i
 edge_map = edge_map.merge(j2s.rename(columns={'junction_id': 'downstream_junction_id', 'system_id': 'downstream_system_id'}), on='downstream_junction_id', how='left')
 edge_map['crosses_basin_boundary'] = edge_map['upstream_system_id'].notna() & edge_map['downstream_system_id'].notna() & (edge_map['upstream_system_id'] != edge_map['downstream_system_id'])
 
+# junction map from union of known junction IDs
+junction_universe = set(j2s['junction_id'].dropna().astype(str).tolist())
+junction_universe.update(edge_map['upstream_junction_id'].dropna().astype(str).tolist())
+junction_universe.update(edge_map['downstream_junction_id'].dropna().astype(str).tolist())
+if (PROC / 'id_map_nodes.csv').exists():
+    nmap = pd.read_csv(PROC / 'id_map_nodes.csv')
+    for v in nmap.get('excel_id_raw', pd.Series(dtype=object)):
+        j = norm_numeric_id(v)
+        if j:
+            junction_universe.add(j)
+
+id_map_junctions = pd.DataFrame({'junction_id': sorted(junction_universe, key=lambda x: float(x))}) if junction_universe else pd.DataFrame(columns=['junction_id'])
+id_map_junctions['canonical_junction_id'] = id_map_junctions['junction_id'].map(lambda x: typed_canonical_id(x, 'junction'))
+id_map_junctions['canonical_swmm_node_id'] = id_map_junctions['junction_id'].map(swmm_junction_id)
+id_map_junctions['source'] = 'hydrology_hydraulics_union'
+id_map_junctions['match_method'] = 'typed_numeric_normalization'
+id_map_junctions['confidence'] = 1.0
+
+# inflows
+rational = pd.read_csv(PROC / 'rational_data.csv') if (PROC / 'rational_data.csv').exists() else pd.DataFrame()
+rows, excluded_noninput_unresolved = [], 0
+for idx, r in rational.iterrows():
+    source_tab = str(r.get('source_sheet', ''))
+    source_row = int(float(r.get('source_row'))) if pd.notna(r.get('source_row')) and str(r.get('source_row')).strip() else None
 rational = pd.read_csv(PROC / 'rational_data.csv') if (PROC / 'rational_data.csv').exists() else pd.DataFrame()
 rows = []
 excluded_noninput_unresolved = 0
@@ -206,6 +281,14 @@ for idx, r in rational.iterrows():
         excluded_noninput_unresolved += 1
         continue
 
+    inlet_id = norm_numeric_id(r.get('inlet'))
+    jct_id = norm_numeric_id(r.get('jct'))
+    inlet_area, inlet_id_source_col, inlet_area_source_col = None, None, None
+
+    if source_tab.upper() == 'HYDROLOGY' and source_row in hyd_lookup:
+        lk = hyd_lookup[source_row]
+        inlet_id, jct_id, inlet_area = lk['inlet_id'], lk['junction_id'], lk['inlet_area']
+        inlet_id_source_col, inlet_area_source_col = 'C', 'D'
     q = as_float(r.get('q'))
 # inflow mapping
 rational = pd.read_csv(PROC / 'rational_data.csv') if (PROC / 'rational_data.csv').exists() else pd.DataFrame()
@@ -243,6 +326,10 @@ for idx, r in rational.iterrows():
         'inlet_id_source_col': inlet_id_source_col,
         'inlet_area_source_col': inlet_area_source_col,
         'inlet_area_value': inlet_area,
+        'q_cfs': as_float(r.get('q')),
+        'raw_inlet': r.get('inlet'),
+        'raw_junction': r.get('jct'),
+        'canonical_inlet_id': typed_canonical_id(inlet_id, 'inlet'),
         'q_cfs': q,
         'raw_inlet': r.get('inlet'),
         'raw_junction': r.get('jct'),
@@ -275,6 +362,16 @@ for idx, r in rational.iterrows():
             method.append('hydrology_c_unbridged')
         else:
             method.append('normalized_or_suffix_inlet_only')
+            rec['confidence'] = 0.7
+
+    if jct_id:
+        rec['receiving_junction_id'] = jct_id
+        rec['receiving_canonical_junction_id'] = typed_canonical_id(jct_id, 'junction')
+        if rec['system_id'] is None:
+            sh = j2s[j2s['junction_id'] == jct_id]
+            if not sh.empty:
+                rec['system_id'] = int(sh.iloc[0]['system_id'])
+        rec['canonical_swmm_node_id'] = swmm_junction_id(jct_id)
             rec['confidence'] = max(rec['confidence'], 0.7)
 
     if jct_id:
@@ -290,6 +387,34 @@ for idx, r in rational.iterrows():
         rec['confidence'] = max(rec['confidence'], 0.9)
 
     rec['match_method'] = ';'.join(method)
+    rec['evidence'] = f"inlet_id={inlet_id}|jct_id={jct_id}|source={source_tab}/{source_row}"
+    rec['confidence_tier'] = 'strict' if rec['confidence'] >= 0.95 and 'strict_hydrology_c_to_bridge' in rec['match_method'] else ('normalized_or_suffix' if rec['confidence'] >= 0.7 else 'low')
+    rows.append(rec)
+
+existing_pairs = {(r.get('canonical_inlet_id'), r.get('receiving_junction_id')) for r in rows}
+for _, b in bridge.iterrows():
+    pair = (typed_canonical_id(b['inlet_id'], 'inlet'), str(b['receiving_junction_id']))
+    if pair in existing_pairs:
+        continue
+    inlet_id, jct_id = str(b['inlet_id']), str(b['receiving_junction_id'])
+    rows.append({
+        'record_index': None, 'source_tab': 'HYDROLOGY', 'source_row': int(b['source_row_hydrology']),
+        'inlet_id_source_col': 'C', 'inlet_area_source_col': 'D', 'inlet_area_value': b.get('inlet_area_from_hydrology_col_d'),
+        'q_cfs': None, 'raw_inlet': inlet_id, 'raw_junction': jct_id,
+        'canonical_inlet_id': typed_canonical_id(inlet_id, 'inlet'),
+        'receiving_junction_id': jct_id,
+        'receiving_canonical_junction_id': typed_canonical_id(jct_id, 'junction'),
+        'canonical_swmm_node_id': swmm_junction_id(jct_id), 'system_id': int(b['system_id']),
+        'match_method': 'strict_hydrology_c_to_bridge', 'confidence': 0.95,
+        'evidence': f"bridge_row={int(b['source_row_hydrology'])}|typed_ids", 'confidence_tier': 'strict',
+    })
+
+idf = pd.DataFrame(rows)
+for row_no in [265, 330, 431, 499]:
+    x = idf[(idf['source_tab'].str.upper() == 'HYDROLOGY') & (idf['source_row'] == row_no)]
+    validation['row_checks'][str(row_no)] = {'mapped_canonical_inlet_ids': sorted(x['canonical_inlet_id'].dropna().unique().tolist()), 'mapped_inlet_id_source_cols': sorted(x['inlet_id_source_col'].dropna().unique().tolist())}
+
+# write outputs
     rec['evidence'] = f"inlet_id={inlet_id}|jct_id={jct_id}|source_tab={source_tab}|row={source_row}|valid_hydrology_extent<=${hydrology_last_valid_row}"
     rec['evidence'] = f"inlet_id={inlet_id}|jct_id={jct_id}|source_tab={source_tab}|row={source_row}"
     if rec['confidence'] >= 0.95 and 'strict_hydrology_c_to_bridge' in rec['match_method']:
@@ -413,6 +538,9 @@ coverage = {
 low = idf[idf['confidence_tier'] == 'low'][['source_tab', 'source_row', 'raw_inlet', 'raw_junction', 'match_method', 'confidence']]
 low.to_csv(LOG / 'inflow_low_confidence.csv', index=False)
 
+state = {
+    'generated_at_utc': pd.Timestamp.now('UTC').isoformat(),
+    'current_stage': 'phase1_data_qaqc',
 summary_md = [
     '# Review Summary',
     '',
@@ -459,6 +587,12 @@ state = {
         'unresolved_count': unresolved_count,
     },
     'assumptions_used': {
+        'typed_canonical_id_namespaces': {'junction': 'J_*', 'inlet': 'IN_*'},
+        'hydrology_schema_locked': {'B': 'junction', 'C': 'inlet_id', 'D': 'inlet_area'},
+        'rows_after_final_basin_excluded': True,
+    },
+    'blockers': [],
+    'next_action': 'run phase1 data qaqc checks with typed canonical endpoint matching',
         'hydrology_schema_locked': {'B': 'junction', 'C': 'inlet_id', 'D': 'inlet_area'},
         'hydrology_valid_extent': f'rows <= {hydrology_last_valid_row}',
         'trailing_hydrology_rows_excluded_as_noninputs': True,
