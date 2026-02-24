@@ -1,0 +1,29 @@
+check_name,severity,entity_type,entity_id,system_id,status,message,source_file,source_row,recommended_action
+link_missing_endpoint,HIGH,link,row_250,,fail,Missing upstream/downstream endpoint.,data/processed/links.csv,8.0,Populate both endpoints.
+link_missing_endpoint,HIGH,link,row_251,,fail,Missing upstream/downstream endpoint.,data/processed/links.csv,23.0,Populate both endpoints.
+link_missing_endpoint,HIGH,link,row_252,,fail,Missing upstream/downstream endpoint.,data/processed/links.csv,19.0,Populate both endpoints.
+junction_defaults_concentration,MEDIUM,junction,ALL,,warn,Synthetic/default geometry concentration appears high under current assumptions.,models/model.inp,,Validate key junction geometry against engineering sheets.
+junction_orphan,MEDIUM,junction,J_102_2,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_132_1,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_134_1,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_136_6,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_136_7,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_136_8,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_136_9,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_137_1,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_137_2,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_163,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_164,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_175,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_177,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_180,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_182,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_26_1,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_4_1,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_70_01,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_84_1,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+junction_orphan,MEDIUM,junction,J_94_2,,warn,Junction has no connected links.,data/processed/links.csv,,Confirm intentional isolation or add connectivity.
+link_duplicate_id,MEDIUM,link,50-51,,warn,Duplicate pipe_id appears in processed links.,data/processed/links.csv,,Confirm if parallel pipes need unique IDs.
+model_conduit_missing_from_model,MEDIUM,model,CONDUITS,,warn,1 processed conduits not present in model [CONDUITS].,models/model.inp,,Review model build truncation/index assumptions.
+topology_isolated_subnetworks,MEDIUM,system,graph_components,,warn,Network has 21 connected components.,data/processed/links.csv,,Validate disconnected systems against BASIN segmentation.
+topology_dead_end_nodes,LOW,junction,dead_end_summary,,warn,83 degree-1 nodes detected.,data/processed/links.csv,,Review whether dead ends are expected starts/termini.

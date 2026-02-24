@@ -1,0 +1,17 @@
+{
+  "junction_count": 268,
+  "link_count": 252,
+  "inflow_record_count": 302,
+  "system_count": 9,
+  "high_count": 3,
+  "medium_count": 24,
+  "low_count": 1,
+  "orphan_junction_count": 20,
+  "missing_link_endpoint_count": 3,
+  "self_loop_link_count": 0,
+  "cross_system_edge_count": 0,
+  "unmapped_inflow_count": 0,
+  "duplicate_inflow_source_row_count": 0,
+  "column_d_used_as_inlet_id_count": 0,
+  "qa_status": "blocked"
+}

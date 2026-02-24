@@ -1,0 +1,16 @@
+check_name,status,metric,value,message
+target_link_endpoint_resolution,pass,bool,True,101-101.1 endpoints resolve: J_101->J_101_1
+target_link_endpoint_resolution,pass,bool,True,101.1-107 endpoints resolve: J_101_1->J_107
+target_link_endpoint_resolution,pass,bool,True,102-102.1 endpoints resolve: J_102->J_102_1
+target_link_endpoint_resolution,pass,bool,True,102.1-102.3 endpoints resolve: J_102_1->J_102_3
+target_link_endpoint_resolution,pass,bool,True,102.3-102.4 endpoints resolve: J_102_3->J_102_4
+target_link_endpoint_resolution,pass,bool,True,102.4-103.3 endpoints resolve: J_102_4->J_103_3
+target_link_endpoint_resolution,pass,bool,True,103-103.2 endpoints resolve: J_103->J_103_2
+target_link_endpoint_resolution,pass,bool,True,103.1-103.2 endpoints resolve: J_103_1->J_103_2
+target_link_endpoint_resolution,pass,bool,True,103.2-103.3 endpoints resolve: J_103_2->J_103_3
+target_link_endpoint_resolution,pass,bool,True,103.3-103.4 endpoints resolve: J_103_3->J_103_4
+missing_link_endpoint_count,fail,count,3,Links missing endpoint references.
+self_loop_link_count,pass,count,0,Self-loop links.
+endpoint_not_in_canonical_set_count,pass,count,0,Link endpoints outside typed canonical set.
+non_positive_length_count,pass,count,0,Links with non-positive length.
+invalid_diameter_count,pass,count,0,Links with non-positive diameter.
