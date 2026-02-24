@@ -1,5 +1,6 @@
 {
   "generated_at_utc": "2026-02-24T17:41:20.593050+00:00",
+  "generated_at_utc": "2026-02-24T17:17:04.128735+00:00",
   "current_stage": "milestone_5_build_qa_rerun",
   "status": "ready",
   "key_metrics": {
@@ -23,4 +24,13 @@
     "2 unresolved inflow records - see outputs/logs/inflow_low_confidence.csv"
   ],
   "next_action": "ready for user review of remaining true unresolved records"
+    "inflow_matched_pct": 98.69
+  },
+  "assumptions_used": {
+    "build_uses_id_map_inflows_when_available": true,
+    "fallback_to_order_mapping_only_if_missing": true,
+    "basin_boundaries_respected": true
+  },
+  "blockers": [],
+  "next_action": "ready_for_user_validation_of remaining low-confidence inlet/junction records"
 }

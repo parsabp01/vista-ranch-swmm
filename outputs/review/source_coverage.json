@@ -12,6 +12,13 @@
   "system_boundary_consistency": "pass",
   "counts": {
     "inflow_records": 304,
+  "inflows_matched_pct": 98.69,
+  "subcatchments_matched_pct": 100.0,
+  "inlet_to_junction_map_coverage_pct": 98.69,
+  "inflow_to_swmm_node_coverage_pct": 98.69,
+  "system_boundary_consistency": "pass",
+  "counts": {
+    "inflow_records": 306,
     "junction_map_rows": 32,
     "inlet_map_rows": 299,
     "inlet_to_junction_rows": 297

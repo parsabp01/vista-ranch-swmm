@@ -21,3 +21,10 @@
 - Row 330: inlet_ids=['I_117_1'], inlet_id_source_cols=['C']
 - Row 431: inlet_ids=['I_137_1'], inlet_id_source_cols=['C']
 - Row 499: inlet_ids=['I_165'], inlet_id_source_cols=['C']
+- Inflow records mapped: 306
+- Inflow->inlet coverage: 98.37%
+- Inlet->junction coverage: 98.69%
+- Inflow->SWMM node coverage: 98.69%
+- BASIN boundary consistency: PASS
+
+See outputs/logs/inflow_mapping_summary.json for detailed diagnostics.

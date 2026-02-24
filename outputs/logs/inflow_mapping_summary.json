@@ -53,4 +53,11 @@
       }
     }
   }
+  "generated_at_utc": "2026-02-24T17:15:47.933662+00:00",
+  "inflow_records": 306,
+  "inflow_to_inlet_pct": 98.37,
+  "inlet_to_junction_pct": 98.69,
+  "inflow_to_swmm_node_pct": 98.69,
+  "system_boundary_consistency_pass": true,
+  "cross_boundary_edges": 0
 }
