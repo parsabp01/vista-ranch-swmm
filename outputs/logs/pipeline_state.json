@@ -1,4 +1,18 @@
 {
+  "generated_at_utc": "2026-02-24T22:13:19.677632+00:00",
+  "current_stage": "phase2_runtime_qaqc",
+  "status": "ready",
+  "key_metrics": {
+    "phase2_required_sections_present": 12,
+    "phase2_required_sections_total": 12,
+    "phase2_high_count": 0,
+    "phase2_medium_count": 3,
+    "phase2_low_count": 2,
+    "phase2_qa_status": "needs_review",
+    "phase2_inflow_preflight_rows": 3
+  },
+  "blockers": [],
+  "next_action": "swmm_gui_manual_qaqc"
   "generated_at_utc": "2026-02-24T22:01:39.911896+00:00",
   "generated_at_utc": "2026-02-24T21:53:17.532947+00:00",
   "current_stage": "phase1_data_qaqc",

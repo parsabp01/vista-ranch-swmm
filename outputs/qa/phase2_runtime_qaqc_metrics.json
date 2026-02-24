@@ -1,0 +1,15 @@
+{
+  "generated_at_utc": "2026-02-24T22:13:19.669232+00:00",
+  "required_sections_present_count": 12,
+  "required_sections_total": 12,
+  "junction_count": 174,
+  "outfall_count": 1,
+  "conduit_count": 249,
+  "xsection_count": 249,
+  "inflow_entry_count": 137,
+  "unique_inflow_nodes": 134,
+  "high_count": 0,
+  "medium_count": 3,
+  "low_count": 2,
+  "qa_status": "needs_review"
+}
