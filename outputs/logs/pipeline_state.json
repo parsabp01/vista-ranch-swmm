@@ -23,6 +23,15 @@
       "path": "data/interim/pdf_annots_raw.csv",
       "exists": true,
       "sha256": "dc7a382859da62d2457c7b4674d6b50ffaca36de8b8259d38c7c717e35d7c338"
+  "generated_at_utc": "2026-02-18T21:02:38.801565+00:00",
+  "current_stage": "milestone_c_engineering_qaqc",
+  "status": "ready",
+  "message": "QA complete",
+  "inputs_used": [
+    {
+      "path": "models/model.inp",
+      "exists": true,
+      "sha256": "e4b396cfbd898a1cb5b9015b65670f936f5e5af7a8a1bfd8163c8a81f715134f"
     },
     {
       "path": "data/processed/nodes.csv",
@@ -55,4 +64,28 @@
     "unresolved_count": 48
   },
   "next_action": "wait for answers.yml then rerun reconciliation"
+    "outputs/qa/engineering_qaqc_checklist.csv",
+    "outputs/qa/engineering_qaqc_summary.md"
+  ],
+  "key_counts": {
+    "data/interim/nodes_raw.csv": 89,
+    "data/interim/links_raw.csv": 252,
+    "data/interim/rational_raw.csv": 786,
+    "data/processed/nodes.csv": 89,
+    "data/processed/links.csv": 252,
+    "data/processed/rational_data.csv": 786,
+    "data/processed/subcatchment_defaults.csv": 786,
+    "outputs/qa/qa_findings.csv": 0,
+    "models/model.inp_lines": 1852
+  },
+  "assumptions_used": {
+    "synthetic_fallback_allowed": true,
+    "default_config": "configs/defaults.yaml",
+    "build_assumptions": {
+      "topology_mode": "extracted_links",
+      "single_outfall": "OUT1",
+      "rainfall_timeseries": "TS1 design storm placeholder"
+    }
+  },
+  "next_action": "await user review or improve node/inflow matching confidence"
 }
