@@ -15,3 +15,10 @@ hydraulics:
 
 qa:
   allow_negative_slope: false
+
+label_mapping:
+  pdf_label_conventions:
+    boxed_numeric: junction
+    unboxed_numeric: inlet
+    numeric_with_units_or_quote: pipe_size_or_dimension
+  hydrology_system_break_token: BASIN
