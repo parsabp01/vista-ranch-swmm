@@ -5,6 +5,7 @@
 - Links: 252
 - Inflow records: 1215
 - Systems: 325
+- Findings: HIGH=0, MEDIUM=3, LOW=1
 - Findings: HIGH=0, MEDIUM=6, LOW=1
 
 ## Key Integrity Metrics

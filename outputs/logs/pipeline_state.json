@@ -1,4 +1,5 @@
 {
+  "generated_at_utc": "2026-02-24T22:01:39.911896+00:00",
   "generated_at_utc": "2026-02-24T21:53:17.532947+00:00",
   "current_stage": "phase1_data_qaqc",
   "status": "ready",
@@ -8,6 +9,7 @@
     "inflow_record_count": 1215,
     "system_count": 325,
     "high_count": 0,
+    "medium_count": 3,
     "medium_count": 6,
     "low_count": 1,
     "orphan_junction_count": 0,

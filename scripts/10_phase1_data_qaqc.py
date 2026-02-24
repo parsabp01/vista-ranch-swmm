@@ -321,6 +321,17 @@ priority.to_csv(OUT_REV / 'phase1_priority_review_list.csv', index=False)
 # Remaining MEDIUM/LOW review packet
 remaining = findings_df[findings_df['severity'].isin(['MEDIUM', 'LOW'])].copy()
 remaining['plain_english_interpretation'] = remaining['message'].fillna('').astype(str)
+
+def propose_disposition(check_name: str) -> str:
+    if check_name in {'inflow_duplicate_source_row', 'inflow_source_row_multi_node'}:
+        return 'fix_mapping'
+    if check_name in {'inflow_unmapped'}:
+        return 'manual_engineering_review'
+    if check_name in {'topology_dead_end_nodes'}:
+        return 'accept_as_assumption'
+    return 'manual_engineering_review'
+
+remaining['recommended_disposition'] = remaining['check_name'].map(propose_disposition)
 remaining = remaining.sort_values(['severity', 'system_id', 'entity_id'], key=lambda s: s.map({'MEDIUM': 0, 'LOW': 1}) if s.name == 'severity' else s, na_position='last')
 remaining.to_csv(OUT_QA / 'phase1_remaining_findings_packet.csv', index=False)
 
@@ -329,6 +340,7 @@ if remaining.empty:
     packet_md.append('- No MEDIUM or LOW findings remain.')
 else:
     for _, r in remaining.iterrows():
+        packet_md.append(f"- [{r['severity']}] {r['check_name']} | {r['entity_type']} {r['entity_id']} | disposition={r['recommended_disposition']} | {r['plain_english_interpretation']} | source_dataset={r['source_dataset']} tab={r['source_tab']} row={r['source_row']}")
         packet_md.append(f"- [{r['severity']}] {r['check_name']} | {r['entity_type']} {r['entity_id']} | {r['plain_english_interpretation']} | source_dataset={r['source_dataset']} tab={r['source_tab']} row={r['source_row']}")
 (OUT_QA / 'phase1_remaining_findings_packet.md').write_text('\n'.join(packet_md) + '\n', encoding='utf-8')
 
