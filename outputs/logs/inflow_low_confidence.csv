@@ -1,1 +1,3 @@
 source_tab,source_row,raw_inlet,raw_junction,match_method,confidence
+HYDROLOGY,687,,,hydrology_c_unbridged,0.5
+HYDROLOGY,688,,,hydrology_c_unbridged,0.5
