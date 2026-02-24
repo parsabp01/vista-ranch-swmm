@@ -1,93 +1,16 @@
 {
-  "generated_at_utc": "2026-02-24T21:31:56.122985+00:00",
-  "current_stage": "phase1_data_qaqc",
+  "generated_at_utc": "2026-02-24T22:13:19.677632+00:00",
+  "current_stage": "phase2_runtime_qaqc",
   "status": "ready",
   "key_metrics": {
-    "junction_count": 268,
-    "link_count": 252,
-    "inflow_record_count": 302,
-    "system_count": 9,
-    "high_count": 3,
-    "medium_count": 24,
-    "low_count": 1,
-    "orphan_junction_count": 20,
-  "generated_at_utc": "2026-02-24T18:53:52.755980+00:00",
-  "current_stage": "phase1_data_qaqc",
-  "status": "ready",
-  "key_metrics": {
-    "junction_count": 174,
-    "link_count": 252,
-    "inflow_record_count": 302,
-    "system_count": 9,
-    "high_count": 121,
-    "medium_count": 6,
-    "low_count": 1,
-    "orphan_junction_count": 2,
-    "missing_link_endpoint_count": 3,
-    "self_loop_link_count": 0,
-    "cross_system_edge_count": 0,
-    "unmapped_inflow_count": 0,
-    "duplicate_inflow_source_row_count": 0,
-    "column_d_used_as_inlet_id_count": 0,
-    "qa_status": "blocked"
-  },
-  "blockers": [
-    "3 HIGH findings remain"
-  ],
-  "next_action": "resolve remaining true HIGH data issues (3 links with missing endpoints) then rerun phase1 qaqc"
-  },
-  "blockers": [
-    "121 HIGH findings in outputs/qa/phase1_data_qaqc_findings.csv"
-  ],
-  "next_action": "manual review top HIGH/MEDIUM Phase 1 findings before Phase 2 runtime interpretation"
-  "generated_at_utc": "2026-02-24T18:27:53.398964+00:00",
-  "generated_at_utc": "2026-02-24T17:41:20.593050+00:00",
-  "generated_at_utc": "2026-02-24T17:17:04.128735+00:00",
-  "current_stage": "milestone_5_build_qa_rerun",
-  "status": "ready",
-  "key_metrics": {
-    "nodes_matched_pct": 97.7,
-    "inflow_matched_pct": 100.0,
-    "strict_match_pct": 98.34,
-    "normalized_or_suffix_match_pct": 1.66,
-    "low_confidence_match_count": 0,
-    "unresolved_count": 0
-  },
-  "assumptions_used": {
-    "hydrology_last_valid_row": 684,
-    "final_basin_row": 684,
-    "rows_after_684_excluded_as_noninputs": true,
-    "column_d_never_used_as_inlet_id": true,
-    "build_uses_id_map_inflows_when_available": true
+    "phase2_required_sections_present": 12,
+    "phase2_required_sections_total": 12,
+    "phase2_high_count": 0,
+    "phase2_medium_count": 3,
+    "phase2_low_count": 2,
+    "phase2_qa_status": "needs_review",
+    "phase2_inflow_preflight_rows": 3
   },
   "blockers": [],
-  "next_action": "ready for user acceptance; no unresolved inflow records remain"
-    "inflow_matched_pct": 99.34,
-    "strict_match_pct": 97.7,
-    "normalized_or_suffix_match_pct": 1.64,
-    "low_confidence_match_count": 2,
-    "unresolved_count": 2
-  },
-  "assumptions_used": {
-    "hydrology_schema_locked": {
-      "B": "junction",
-      "C": "inlet_id",
-      "D": "inlet_area"
-    },
-    "column_d_never_used_as_inlet_id": true,
-    "build_uses_id_map_inflows_when_available": true
-  },
-  "blockers": [
-    "2 unresolved inflow records - see outputs/logs/inflow_low_confidence.csv"
-  ],
-  "next_action": "ready for user review of remaining true unresolved records"
-    "inflow_matched_pct": 98.69
-  },
-  "assumptions_used": {
-    "build_uses_id_map_inflows_when_available": true,
-    "fallback_to_order_mapping_only_if_missing": true,
-    "basin_boundaries_respected": true
-  },
-  "blockers": [],
-  "next_action": "ready_for_user_validation_of remaining low-confidence inlet/junction records"
+  "next_action": "swmm_gui_manual_qaqc"
 }

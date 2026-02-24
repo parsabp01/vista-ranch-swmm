@@ -1,0 +1,22 @@
+# Phase 2A Inflow Preflight
+
+## inflow_duplicate_source_row
+- Affected count: 302
+- Classification: **runtime_nonblocking_bookkeeping**
+- Runtime impact: Creates duplicated [INFLOWS] entries for nodes: J086, J101, J114
+- Example entities: Formluas|33; HYDROLOGY|101; HYDROLOGY|104; HYDROLOGY|108; HYDROLOGY|109; HYDROLOGY|113; HYDROLOGY|115; HYDROLOGY|116; HYDROLOGY|12; HYDROLOGY|120
+- Notes: Most duplicates map to same node and many are zero-baseline rows; however duplicate [INFLOWS] node lines exist and should be consolidated.
+
+## inflow_source_row_multi_node
+- Affected count: 302
+- Classification: **runtime_nonblocking_bookkeeping**
+- Runtime impact: No direct 1:1 source-row provenance in model.inp; appears to be mapping-table expansion artifact.
+- Example entities: Formluas|33->0.96|J001; HYDROLOGY|101->0.95|J035; HYDROLOGY|104->0.95|J036; HYDROLOGY|108->0.95|J038; HYDROLOGY|109->0.95|J038; HYDROLOGY|113->0.95|J040; HYDROLOGY|115->0.95|J041; HYDROLOGY|116->0.95|J041; HYDROLOGY|12->0.95|J001; HYDROLOGY|120->0.95|J043
+- Notes: Model [INFLOWS] is node-based; ambiguity exists in bookkeeping table, not in INP parser execution path.
+
+## inflow_unmapped
+- Affected count: 2
+- Classification: **accepted_baseline_assumption**
+- Runtime impact: Omitted from [INFLOWS]; total omitted |q|=0.0000 cfs.
+- Example entities: HYDROLOGY|687|raw_inlet=nan|raw_junction=nan|q=nan; HYDROLOGY|688|raw_inlet=nan|raw_junction=nan|q=nan
+- Notes: Both unmapped records have null q_cfs and occur after final BASIN/trailing non-input rows in prior parser notes.
