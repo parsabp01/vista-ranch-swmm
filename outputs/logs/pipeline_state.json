@@ -1,4 +1,28 @@
 {
+  "generated_at_utc": "2026-02-24T18:53:52.755980+00:00",
+  "current_stage": "phase1_data_qaqc",
+  "status": "ready",
+  "key_metrics": {
+    "junction_count": 174,
+    "link_count": 252,
+    "inflow_record_count": 302,
+    "system_count": 9,
+    "high_count": 121,
+    "medium_count": 6,
+    "low_count": 1,
+    "orphan_junction_count": 2,
+    "missing_link_endpoint_count": 3,
+    "self_loop_link_count": 0,
+    "cross_system_edge_count": 0,
+    "unmapped_inflow_count": 0,
+    "duplicate_inflow_source_row_count": 0,
+    "column_d_used_as_inlet_id_count": 0,
+    "qa_status": "blocked"
+  },
+  "blockers": [
+    "121 HIGH findings in outputs/qa/phase1_data_qaqc_findings.csv"
+  ],
+  "next_action": "manual review top HIGH/MEDIUM Phase 1 findings before Phase 2 runtime interpretation"
   "generated_at_utc": "2026-02-24T18:27:53.398964+00:00",
   "generated_at_utc": "2026-02-24T17:41:20.593050+00:00",
   "generated_at_utc": "2026-02-24T17:17:04.128735+00:00",
