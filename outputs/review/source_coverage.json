@@ -1,6 +1,17 @@
 {
   "nodes_matched_pct": 97.7,
   "links_matched_pct": 100.0,
+  "inflows_matched_pct": 99.34,
+  "strict_match_pct": 97.7,
+  "normalized_or_suffix_match_pct": 1.64,
+  "low_confidence_match_count": 2,
+  "unresolved_count": 2,
+  "subcatchments_matched_pct": 100.0,
+  "inlet_to_junction_map_coverage_pct": 99.34,
+  "inflow_to_swmm_node_coverage_pct": 99.34,
+  "system_boundary_consistency": "pass",
+  "counts": {
+    "inflow_records": 304,
   "inflows_matched_pct": 98.69,
   "subcatchments_matched_pct": 100.0,
   "inlet_to_junction_map_coverage_pct": 98.69,
