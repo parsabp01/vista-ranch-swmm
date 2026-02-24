@@ -50,6 +50,20 @@ def canonical_swmm(j: str | None) -> str | None:
     return f"J{int(float(j)):03d}" if float(j).is_integer() else f"J{j.replace('.', '_')}"
 
 
+hyd_all = pd.read_excel(RAW_XLSM, sheet_name='HYDROLOGY', header=None, usecols='B:D')
+hyd_all.columns = ['col_b_jct', 'col_c_inlet_id', 'col_d_inlet_area']
+dit = pd.read_excel(RAW_XLSM, sheet_name='DI TABLE', header=None, usecols='B:C')
+hyc = pd.read_excel(RAW_XLSM, sheet_name='HYDRAULICS', header=None, usecols='B:C')
+
+basin_rows = [i + 1 for i, v in enumerate(hyd_all['col_b_jct']) if str(v).strip().upper() == 'BASIN']
+final_basin_row = max(basin_rows) if basin_rows else len(hyd_all)
+hydrology_last_valid_row = final_basin_row
+hyd = hyd_all.iloc[:hydrology_last_valid_row].copy()
+excluded_trailing_rows = list(range(hydrology_last_valid_row + 1, len(hyd_all) + 1))
+
+records: list[dict] = []
+system_id = 1
+pending_inlets: list[dict] = []
 # Read deterministic schemas
 hyd = pd.read_excel(RAW_XLSM, sheet_name='HYDROLOGY', header=None, usecols='B:D')  # B=jct, C=inlet id, D=inlet area
 hyd.columns = ['col_b_jct', 'col_c_inlet_id', 'col_d_inlet_area']
@@ -66,6 +80,9 @@ validation = {
     'hydrology_schema': {'B': 'junction_id', 'C': 'inlet_id', 'D': 'inlet_area'},
     'column_d_used_as_inlet_id_count': 0,
     'row_checks': {},
+    'hydrology_last_valid_row': hydrology_last_valid_row,
+    'final_basin_row': final_basin_row,
+    'hydrology_rows_excluded_as_trailing_noninputs': len(excluded_trailing_rows),
 }
 
 for i, row in hyd.iterrows():
@@ -104,6 +121,9 @@ for i, row in hyd.iterrows():
 
     if junction_id:
         records.append({'source_row': source_row, 'system_id': system_id, 'event': 'JUNCTION_SEQ', 'junction_id': junction_id, 'inlet_id': None})
+        for p in pending_inlets:
+            records.append({'source_row': p['source_row_hydrology'], 'system_id': system_id, 'event': 'INLET_TO_JUNCTION', 'junction_id': junction_id, 'inlet_id': p['inlet_id'], 'inlet_area': p['inlet_area']})
+        pending_inlets = []
         for pending in pending_inlets:
             records.append({
                 'source_row': pending['source_row_hydrology'],
@@ -140,6 +160,12 @@ if not nodes_map.empty:
     for _, r in nodes_map.iterrows():
         j = norm_id(r.get('excel_id_raw'))
         if j:
+            jrows.append({'junction_id': j, 'canonical_junction_id': canonical_jct(j), 'canonical_swmm_node_id': canonical_swmm(j), 'source': 'id_map_nodes', 'match_method': r.get('match_method', 'reuse'), 'confidence': r.get('confidence', 0.7)})
+id_map_junctions = pd.DataFrame(jrows).drop_duplicates('junction_id')
+
+edges = []
+for i, row in hyc.iterrows():
+    ds = norm_id(row.iloc[0]); us = norm_id(row.iloc[1])
             jrows.append({
                 'junction_id': j,
                 'canonical_junction_id': canonical_jct(j),
@@ -169,6 +195,18 @@ edge_map = edge_df.merge(j2s.rename(columns={'junction_id': 'upstream_junction_i
 edge_map = edge_map.merge(j2s.rename(columns={'junction_id': 'downstream_junction_id', 'system_id': 'downstream_system_id'}), on='downstream_junction_id', how='left')
 edge_map['crosses_basin_boundary'] = edge_map['upstream_system_id'].notna() & edge_map['downstream_system_id'].notna() & (edge_map['upstream_system_id'] != edge_map['downstream_system_id'])
 
+rational = pd.read_csv(PROC / 'rational_data.csv') if (PROC / 'rational_data.csv').exists() else pd.DataFrame()
+rows = []
+excluded_noninput_unresolved = 0
+for idx, r in rational.iterrows():
+    source_tab = str(r.get('source_sheet', ''))
+    source_row = int(float(r.get('source_row'))) if pd.notna(r.get('source_row')) and str(r.get('source_row')).strip() else None
+
+    if source_tab.upper() == 'HYDROLOGY' and source_row and source_row > hydrology_last_valid_row:
+        excluded_noninput_unresolved += 1
+        continue
+
+    q = as_float(r.get('q'))
 # inflow mapping
 rational = pd.read_csv(PROC / 'rational_data.csv') if (PROC / 'rational_data.csv').exists() else pd.DataFrame()
 rows = []
@@ -220,6 +258,11 @@ for idx, r in rational.iterrows():
     }
 
     method = []
+    if inlet_id:
+        hit = bridge[bridge['inlet_id'] == inlet_id]
+        if not hit.empty:
+            jct_id = str(hit.iloc[0]['receiving_junction_id'])
+            rec['system_id'] = int(hit.iloc[0]['system_id'])
     bridge_hit = pd.DataFrame()
     if inlet_id:
         bridge_hit = bridge[bridge['inlet_id'] == inlet_id]
@@ -247,6 +290,7 @@ for idx, r in rational.iterrows():
         rec['confidence'] = max(rec['confidence'], 0.9)
 
     rec['match_method'] = ';'.join(method)
+    rec['evidence'] = f"inlet_id={inlet_id}|jct_id={jct_id}|source_tab={source_tab}|row={source_row}|valid_hydrology_extent<=${hydrology_last_valid_row}"
     rec['evidence'] = f"inlet_id={inlet_id}|jct_id={jct_id}|source_tab={source_tab}|row={source_row}"
     if rec['confidence'] >= 0.95 and 'strict_hydrology_c_to_bridge' in rec['match_method']:
         rec['confidence_tier'] = 'strict'
@@ -264,6 +308,7 @@ for _, b in bridge.iterrows():
     pair = (canonical_inlet(str(b['inlet_id'])), str(b['receiving_junction_id']))
     if pair in existing_pairs:
         continue
+    inlet_id = str(b['inlet_id']); jct_id = str(b['receiving_junction_id'])
     inlet_id = str(b['inlet_id'])
     jct_id = str(b['receiving_junction_id'])
     rows.append({
@@ -286,6 +331,9 @@ for _, b in bridge.iterrows():
         'evidence': f"bridge_row={int(b['source_row_hydrology'])}|inlet_col=C|area_col=D",
         'confidence_tier': 'strict',
     })
+
+idf = pd.DataFrame(rows)
+
 idf = pd.DataFrame(rows)
 
 # Required row checks from user
@@ -323,6 +371,13 @@ summary = {
     'unresolved_count': unresolved_count,
     'inflow_to_inlet_pct': round(100.0 * idf['canonical_inlet_id'].notna().mean() if len(idf) else 0.0, 2),
     'inlet_to_junction_pct': round(inlet_to_junction, 2),
+    'inflow_to_swmm_node_pct': round(inflow_matched_pct, 2),
+    'system_boundary_consistency_pass': boundary_ok,
+    'cross_boundary_edges': int(edge_map['crosses_basin_boundary'].fillna(False).sum()) if len(edge_map) else 0,
+    'hydrology_last_valid_row': hydrology_last_valid_row,
+    'final_basin_row': final_basin_row,
+    'hydrology_rows_excluded_as_trailing_noninputs': len(excluded_trailing_rows),
+    'unresolved_rows_excluded_as_noninputs_count': excluded_noninput_unresolved,
     'inflow_to_swmm_node_pct': round(inflow_to_swmm, 2),
     'system_boundary_consistency_pass': boundary_ok,
     'cross_boundary_edges': int(edge_map['crosses_basin_boundary'].fillna(False).sum()) if len(edge_map) else 0,
@@ -340,6 +395,7 @@ coverage = {
     'unresolved_count': unresolved_count,
     'subcatchments_matched_pct': 100.0,
     'inlet_to_junction_map_coverage_pct': round(inlet_to_junction, 2),
+    'inflow_to_swmm_node_coverage_pct': round(inflow_matched_pct, 2),
     'inflow_to_swmm_node_coverage_pct': round(inflow_to_swmm, 2),
     'system_boundary_consistency': 'pass' if boundary_ok else 'fail',
     'counts': {
@@ -347,10 +403,15 @@ coverage = {
         'junction_map_rows': int(len(id_map_junctions)),
         'inlet_map_rows': int(len(id_map_inlets)),
         'inlet_to_junction_rows': int(len(bridge)),
+        'hydrology_last_valid_row': hydrology_last_valid_row,
+        'hydrology_rows_excluded_as_trailing_noninputs': len(excluded_trailing_rows),
     },
     'pdf_label_populated': True,
 }
 (REV / 'source_coverage.json').write_text(json.dumps(coverage, indent=2), encoding='utf-8')
+
+low = idf[idf['confidence_tier'] == 'low'][['source_tab', 'source_row', 'raw_inlet', 'raw_junction', 'match_method', 'confidence']]
+low.to_csv(LOG / 'inflow_low_confidence.csv', index=False)
 
 summary_md = [
     '# Review Summary',
@@ -362,6 +423,13 @@ summary_md = [
     f"- Low-confidence match count: {low_count}",
     f"- Unresolved count: {unresolved_count}",
     f"- Inlet->junction coverage: {round(inlet_to_junction, 2)}%",
+    f"- Inflow->SWMM node coverage: {round(inflow_matched_pct, 2)}%",
+    f"- BASIN boundary consistency: {'PASS' if boundary_ok else 'FAIL'}",
+    f"- HYDROLOGY final BASIN row: {final_basin_row}",
+    f"- HYDROLOGY last valid row: {hydrology_last_valid_row}",
+    f"- HYDROLOGY trailing rows excluded as non-inputs: {len(excluded_trailing_rows)}",
+    '',
+]
     f"- Inflow->SWMM node coverage: {round(inflow_to_swmm, 2)}%",
     f"- BASIN boundary consistency: {'PASS' if boundary_ok else 'FAIL'}",
     '',
@@ -392,6 +460,13 @@ state = {
     },
     'assumptions_used': {
         'hydrology_schema_locked': {'B': 'junction', 'C': 'inlet_id', 'D': 'inlet_area'},
+        'hydrology_valid_extent': f'rows <= {hydrology_last_valid_row}',
+        'trailing_hydrology_rows_excluded_as_noninputs': True,
+        'basin_break_rule_enforced': True,
+        'id_map_nodes_reuse': True,
+    },
+    'blockers': [] if unresolved_count == 0 else ['unresolved_inflow_records_present'],
+    'next_action': 'rerun build/qa to propagate corrected inflow mapping',
         'basin_break_rule_enforced': True,
         'id_map_nodes_reuse': True,
         'pipe_info_rule': 'hydrology_pipe_leg_is_immediately_downstream_for_consistency_checks',
