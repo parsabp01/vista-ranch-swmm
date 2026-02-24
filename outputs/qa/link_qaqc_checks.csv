@@ -1,0 +1,5 @@
+check_name,status,metric,value,message
+missing_link_endpoint_count,fail,count,3,Links missing endpoint references.
+self_loop_link_count,pass,count,0,Self-loop links where upstream=downstream.
+non_positive_length_count,pass,count,0,Links with non-positive length.
+invalid_diameter_count,pass,count,0,Links with non-positive diameter.

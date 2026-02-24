@@ -506,7 +506,6 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
     subcatchments = []
     subareas = []
     infiltration = []
-    inflows = []
 
     for i, nid in enumerate(node_ids):
         src = q_rows.iloc[i] if i < len(q_rows) else pd.Series(dtype=object)
@@ -514,7 +513,6 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
         width = _to_float(subs.iloc[i]["width_ft"]) if i < len(subs) and "width_ft" in subs.columns else 150.0
         slope_pct = _to_float(subs.iloc[i]["slope_percent"]) if i < len(subs) and "slope_percent" in subs.columns else 1.0
         imperv = _to_float(subs.iloc[i]["percent_impervious"]) if i < len(subs) and "percent_impervious" in subs.columns else 55.0
-        q = _to_float(src.get("q")) if not src.empty else None
 
         area_ac = max(area_ac or 0.25, 0.01)
         width = max(width or 10.0, 10.0)
@@ -525,7 +523,24 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
         subcatchments.append((sc_id, "RG1", nid, area_ac, imperv, width, slope_pct, 0.0, ""))
         subareas.append((sc_id, 0.05, 0.10, 0.01, 0.1, 25.0, "OUTLET", ""))
         infiltration.append((sc_id, 3.0, 0.5, 4.0, 7.0, 0.0))
-        inflows.append((nid, "FLOW", "", "", "", round(q or 0.0, 4), "", ""))
+
+    inflows = []
+    inflow_map_path = processed / "id_map_inflows.csv"
+    if inflow_map_path.exists() and inflow_map_path.stat().st_size > 0:
+        inflow_df = pd.read_csv(inflow_map_path)
+        if "canonical_swmm_node_id" in inflow_df.columns:
+            inflow_df = inflow_df[inflow_df["canonical_swmm_node_id"].astype(str).str.len() > 0]
+            inflow_df = inflow_df[inflow_df["canonical_swmm_node_id"].isin(node_ids)]
+            for nid, grp in inflow_df.groupby("canonical_swmm_node_id"):
+                q_vals = grp["q_cfs"].apply(_to_float) if "q_cfs" in grp.columns else pd.Series(dtype=float)
+                q_total = float(q_vals.fillna(0.0).sum()) if not q_vals.empty else 0.0
+                inflows.append((nid, "FLOW", "", "", "", round(q_total, 4), "", ""))
+
+    if not inflows:
+        for i, nid in enumerate(node_ids):
+            src = q_rows.iloc[i] if i < len(q_rows) else pd.Series(dtype=object)
+            q = _to_float(src.get("q")) if not src.empty else None
+            inflows.append((nid, "FLOW", "", "", "", round(q or 0.0, 4), "", ""))
 
     model_text = []
     model_text.append("[TITLE]\n;; Auto-generated SWMM model (pipeline build stage)")

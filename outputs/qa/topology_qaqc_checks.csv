@@ -1,0 +1,5 @@
+check_name,status,metric,value,message
+connected_component_count,warn,count,3,Connected components in undirected network graph.
+dead_end_count,warn,count,66,Degree-1 nodes.
+cycle_detected,pass,bool,False,Directed cycle presence in network.
+cross_system_edge_count,pass,count,0,Edges crossing BASIN system boundaries.
