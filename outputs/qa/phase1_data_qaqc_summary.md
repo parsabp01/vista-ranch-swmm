@@ -1,53 +1,27 @@
 # Phase 1 Data QA/QC Summary (Pre-SWMM Runtime)
 
-- QA Status: **blocked**
-- Junctions: 268
+- QA Status: **needs_review**
+- Junctions: 248
 - Links: 252
-- Inflow records: 302
-- Systems: 9
-- Findings: HIGH=3, MEDIUM=24, LOW=1
+- Inflow records: 1215
+- Systems: 325
+- Findings: HIGH=0, MEDIUM=3, LOW=1
 
 ## Key Integrity Metrics
-- Orphan junctions: 20
-- Junctions: 174
-- Links: 252
-- Inflow records: 302
-- Systems: 9
-- Findings: HIGH=121, MEDIUM=6, LOW=1
-
-## Key Integrity Metrics
-- Orphan junctions: 2
-- Missing link endpoints: 3
+- Orphan junctions: 0
+- Missing link endpoints: 0
+- Excluded non-data link rows: 3
 - Self-loop links: 0
 - Cross-system edges: 0
-- Unmapped inflows: 0
-- Duplicate inflow source rows: 0
+- Unmapped inflows: 2
+- Duplicate inflow source rows: 302
 - HYDROLOGY Column D used as inlet ID count: 0
 
 ## Top Risks
-- [HIGH] link_missing_endpoint | link row_250 | Missing upstream/downstream endpoint. (source: data/processed/links.csv)
-- [HIGH] link_missing_endpoint | link row_251 | Missing upstream/downstream endpoint. (source: data/processed/links.csv)
-- [HIGH] link_missing_endpoint | link row_252 | Missing upstream/downstream endpoint. (source: data/processed/links.csv)
-- [MEDIUM] junction_defaults_concentration | junction ALL | Synthetic/default geometry concentration appears high under current assumptions. (source: models/model.inp)
-- [MEDIUM] junction_orphan | junction J_102_2 | Junction has no connected links. (source: data/processed/links.csv)
-- [MEDIUM] junction_orphan | junction J_132_1 | Junction has no connected links. (source: data/processed/links.csv)
-- [MEDIUM] junction_orphan | junction J_134_1 | Junction has no connected links. (source: data/processed/links.csv)
-- [MEDIUM] junction_orphan | junction J_136_6 | Junction has no connected links. (source: data/processed/links.csv)
-- [MEDIUM] junction_orphan | junction J_136_7 | Junction has no connected links. (source: data/processed/links.csv)
-- [MEDIUM] junction_orphan | junction J_136_8 | Junction has no connected links. (source: data/processed/links.csv)
+- [MEDIUM] inflow_duplicate_source_row | inflow source_row_duplicates | 302 duplicate inflow source rows. (dataset: inflow, tab: HYDROLOGY, row: grouped_by_source_tab_and_source_row)
+- [MEDIUM] inflow_source_row_multi_node | inflow source_row_multi_node | 302 source rows map to multiple SWMM nodes. (dataset: inflow, tab: HYDROLOGY, row: grouped_by_source_tab_and_source_row)
+- [MEDIUM] inflow_unmapped | inflow unmapped | 2 inflow records missing node mapping. (dataset: inflow, tab: HYDROLOGY, row: id_map_inflows_unmapped_rows)
+- [LOW] topology_dead_end_nodes | junction dead_end_summary | 83 degree-1 nodes detected. (dataset: topology, tab: HYDRAULICS, row: derived_from_links_graph)
 
 ## Phase 2 Handoff (Runtime/Simulation Focus)
-- Validate residual HIGH findings first; then assess MEDIUM findings (defaults concentration/disconnected components/cycles) before interpreting runtime hydraulic results.
-- [HIGH] link_endpoint_node_missing | link 101-101.1 | Endpoint node reference not found in canonical node set. (source: data/processed/links.csv)
-- [HIGH] link_endpoint_node_missing | link 101.1-107 | Endpoint node reference not found in canonical node set. (source: data/processed/links.csv)
-- [HIGH] link_endpoint_node_missing | link 102-102.1 | Endpoint node reference not found in canonical node set. (source: data/processed/links.csv)
-- [HIGH] link_endpoint_node_missing | link 102.1-102.3 | Endpoint node reference not found in canonical node set. (source: data/processed/links.csv)
-- [HIGH] link_endpoint_node_missing | link 102.3-102.4 | Endpoint node reference not found in canonical node set. (source: data/processed/links.csv)
-- [HIGH] link_endpoint_node_missing | link 102.4-103.3 | Endpoint node reference not found in canonical node set. (source: data/processed/links.csv)
-- [HIGH] link_endpoint_node_missing | link 103-103.2 | Endpoint node reference not found in canonical node set. (source: data/processed/links.csv)
-- [HIGH] link_endpoint_node_missing | link 103.1-103.2 | Endpoint node reference not found in canonical node set. (source: data/processed/links.csv)
-- [HIGH] link_endpoint_node_missing | link 103.2-103.3 | Endpoint node reference not found in canonical node set. (source: data/processed/links.csv)
-- [HIGH] link_endpoint_node_missing | link 103.3-103.4 | Endpoint node reference not found in canonical node set. (source: data/processed/links.csv)
-
-## Phase 2 Handoff (Runtime/Simulation Focus)
-- Verify the highest-risk MEDIUM findings in SWMM context (defaults concentration, disconnected components, duplicate inflow source-row semantics) before interpreting hydraulic performance results.
+- Proceed to Phase 2 once MEDIUM findings are reviewed and accepted.
