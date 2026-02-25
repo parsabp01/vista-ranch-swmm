@@ -1,5 +1,7 @@
 {
   "generated_at_utc": "2026-02-25T23:38:44.420838+00:00",
+  "generated_at_utc": "2026-02-25T23:29:29.623425+00:00",
+  "generated_at_utc": "2026-02-25T23:12:19.963565+00:00",
   "current_stage": "qa",
   "status": "ready",
   "message": "QA complete",
@@ -8,6 +10,7 @@
       "path": "models/model.inp",
       "exists": true,
       "sha256": "32b30507ced0e19fc3859398ea6037ceebb44ea7c4ccb170b49998b6d8343dc5"
+      "sha256": "739891c16faa20ae95ab97acbe831b48097749f5ac8e37865d25fe1541930c1c"
     },
     {
       "path": "data/processed/nodes.csv",
@@ -33,6 +36,7 @@
     "data/processed/rational_data.csv": 786,
     "data/processed/subcatchment_defaults.csv": 786,
     "outputs/qa/qa_findings.csv": 0,
+    "outputs/qa/qa_findings.csv": 5,
     "models/model.inp_lines": 3161
   },
   "assumptions_used": {
@@ -54,4 +58,13 @@
     }
   },
   "next_action": "swmm_gui_manual_qaqc"
+  "next_action": "resolve blocking issues",
+  "blockers": [
+    "required_section: Missing [RAINGAGES] in model.inp",
+    "required_section: Missing [TIMESERIES] in model.inp",
+    "required_section: Missing [SUBCATCHMENTS] in model.inp",
+    "required_section: Missing [SUBAREAS] in model.inp",
+    "required_section: Missing [INFILTRATION] in model.inp"
+  ]
+  "next_action": "resolve blocking issues"
 }
