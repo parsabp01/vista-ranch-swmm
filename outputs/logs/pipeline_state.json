@@ -1,61 +1,55 @@
 {
-  "generated_at_utc": "2026-02-25T20:15:22.249177+00:00",
-  "current_stage": "phase2_runtime_qaqc",
-  "status": "ready",
-  "key_metrics": {
-    "basin_marker_count": 9,
-    "modeled_outfall_count": 4,
-    "missing_terminal_outfall_count": 5,
-    "excel_junction_count": 266,
-    "excel_inlet_count": 297,
-    "missing_excel_junction_count": 95,
-    "missing_excel_inlet_count": 113
-  },
-  "blockers": [
-    "terminal_outfall_reconciliation_incomplete"
+  "generated_at_utc": "2026-02-25T22:21:10.358659+00:00",
+  "current_stage": "qa",
+  "status": "blocked",
+  "message": "QA complete",
+  "inputs_used": [
+    {
+      "path": "models/model.inp",
+      "exists": true,
+      "sha256": "bb282a3511b1de49df187e76b08b46cd5a8646f8c0db76adaae6a0b6a184d8c0"
+    },
+    {
+      "path": "data/processed/nodes.csv",
+      "exists": true,
+      "sha256": "ead6006c94d96e087f5f8a52a566f8e17737f31d754d83ef3b0ec5373697e2ec"
+    },
+    {
+      "path": "data/processed/links.csv",
+      "exists": true,
+      "sha256": "b9861144e184b6a7fa156b73b471b0ef0ac322797eca09652eb2d57ebbcfddb9"
+    }
   ],
-  "next_action": "user_review_missing_branches_and_unaccounted_structures"
-  "generated_at_utc": "2026-02-25T19:57:40.840290+00:00",
-  "current_stage": "phase1_data_qaqc",
-  "status": "ready",
-  "key_metrics": {
-  "generated_at_utc": "2026-02-24T22:13:19.677632+00:00",
-  "current_stage": "phase2_runtime_qaqc",
-  "status": "ready",
-  "key_metrics": {
-    "phase2_required_sections_present": 12,
-    "phase2_required_sections_total": 12,
-    "phase2_high_count": 0,
-    "phase2_medium_count": 3,
-    "phase2_low_count": 2,
-    "phase2_qa_status": "needs_review",
-    "phase2_inflow_preflight_rows": 3
+  "outputs_produced": [
+    "outputs/qa/qa_findings.csv",
+    "outputs/qa/qa_summary.json"
+  ],
+  "key_counts": {
+    "data/interim/nodes_raw.csv": 89,
+    "data/interim/links_raw.csv": 252,
+    "data/interim/rational_raw.csv": 786,
+    "data/processed/nodes.csv": 89,
+    "data/processed/links.csv": 252,
+    "data/processed/rational_data.csv": 786,
+    "data/processed/subcatchment_defaults.csv": 786,
+    "outputs/qa/qa_findings.csv": 5,
+    "models/model.inp_lines": 3095
   },
-  "blockers": [],
-  "next_action": "swmm_gui_manual_qaqc"
-  "generated_at_utc": "2026-02-24T22:01:39.911896+00:00",
-  "generated_at_utc": "2026-02-24T21:53:17.532947+00:00",
-  "current_stage": "phase1_data_qaqc",
-  "status": "ready",
-  "key_metrics": {
-    "junction_count": 248,
-    "link_count": 252,
-    "inflow_record_count": 1215,
-    "system_count": 325,
-    "high_count": 0,
-    "medium_count": 3,
-    "medium_count": 6,
-    "low_count": 1,
-    "orphan_junction_count": 0,
-    "missing_link_endpoint_count": 0,
-    "self_loop_link_count": 0,
-    "excluded_link_noise_row_count": 3,
-    "cross_system_edge_count": 0,
-    "unmapped_inflow_count": 2,
-    "duplicate_inflow_source_row_count": 302,
-    "column_d_used_as_inlet_id_count": 0,
-    "qa_status": "needs_review"
+  "assumptions_used": {
+    "synthetic_fallback_allowed": true,
+    "default_config": "configs/defaults.yaml",
+    "build_assumptions": {
+      "topology_mode": "inlet_aware_hydraulic_baseline",
+      "outfall_mode": "basin_segmented",
+      "subcatchments_included": false,
+      "inflow_mode": "static_known_flows_at_inlets",
+      "inlet_nodes_modeled_as": "junctions",
+      "coordinates_mode": "orthogonal_schematic_from_lengths",
+      "column_d_used_as_inlet_id_count": 0,
+      "assumptions_enabled": true,
+      "min_slope_assumed": 0.002,
+      "interpolation_enabled": true
+    }
   },
-  "blockers": [],
-  "next_action": "phase2_runtime_qa"
+  "next_action": "resolve blocking issues"
 }
