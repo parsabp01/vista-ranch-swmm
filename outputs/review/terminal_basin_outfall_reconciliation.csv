@@ -1,0 +1,10 @@
+basin_index,terminal_junction_source_id,basin_row,expected_outfall_id,outfall_modeled,status
+1,77,232,O_77,True,modeled
+2,134,486,O_134,False,missing_outfall
+3,134.1,491,O_134_1,True,modeled
+4,135,496,O_135,True,modeled
+5,156,582,O_156,True,modeled
+6,184,669,O_184,False,missing_outfall
+7,185,674,O_185,False,missing_outfall
+8,186,679,O_186,False,missing_outfall
+9,187,684,O_187,False,missing_outfall
