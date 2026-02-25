@@ -1023,8 +1023,14 @@ conduit,L_J_132_1__J_133,HYDROLOGY,481,132.1,junction->junction downstream condu
 conduit,L_J_133__J_134,HYDROLOGY,482,133,junction->junction downstream conduit
 conduit,L_J_134__O_134,HYDROLOGY,484,134,terminal junction->outfall per BASIN rule
 node,J_134_1,HYDROLOGY,489,134.1,junction from HYDROLOGY B
+node,IN_161,HYDROLOGY/DI TABLE,488,161,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_161__J_134_1,DI TABLE,488,161,inlet->junction conduit
+inflow,IN_161,HYDROLOGY,488,161,known flow cfs=0.21328506117211926
 conduit,L_J_134_1__O_134_1,HYDROLOGY,489,134.1,terminal junction->outfall per BASIN rule
 node,J_135,HYDROLOGY,494,135,junction from HYDROLOGY B
+node,IN_163,HYDROLOGY/DI TABLE,493,163,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_163__J_135,DI TABLE,493,163,inlet->junction conduit
+inflow,IN_163,HYDROLOGY,493,163,known flow cfs=2.9030708929392315
 conduit,L_J_135__O_135,HYDROLOGY,494,135,terminal junction->outfall per BASIN rule
 node,J_136,HYDROLOGY,500,136,junction from HYDROLOGY B
 node,J_136_1,HYDROLOGY,503,136.1,junction from HYDROLOGY B
@@ -1218,7 +1224,6 @@ conduit,L_J_156__O_156,HYDROLOGY,580,156,terminal junction->outfall per BASIN ru
 node,J_157,HYDROLOGY,585,157,junction from HYDROLOGY B
 node,J_158,HYDROLOGY,587,158,junction from HYDROLOGY B
 node,J_159,HYDROLOGY,589,159,junction from HYDROLOGY B
-node,J_159_1,HYDROLOGY,591,159.1,junction from HYDROLOGY B
 node,J_159_1,HYDROLOGY,592,159.1,junction from HYDROLOGY B
 node,J_159_2,HYDROLOGY,593,159.2,junction from HYDROLOGY B
 node,J_160,HYDROLOGY,596,160,junction from HYDROLOGY B
