@@ -1,4 +1,20 @@
 {
+  "generated_at_utc": "2026-02-25T20:15:22.249177+00:00",
+  "current_stage": "phase2_runtime_qaqc",
+  "status": "ready",
+  "key_metrics": {
+    "basin_marker_count": 9,
+    "modeled_outfall_count": 4,
+    "missing_terminal_outfall_count": 5,
+    "excel_junction_count": 266,
+    "excel_inlet_count": 297,
+    "missing_excel_junction_count": 95,
+    "missing_excel_inlet_count": 113
+  },
+  "blockers": [
+    "terminal_outfall_reconciliation_incomplete"
+  ],
+  "next_action": "user_review_missing_branches_and_unaccounted_structures"
   "generated_at_utc": "2026-02-25T19:57:40.840290+00:00",
   "current_stage": "phase1_data_qaqc",
   "status": "ready",
