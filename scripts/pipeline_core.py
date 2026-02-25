@@ -527,6 +527,15 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
             rec["structure_type"] = "junction" if is_j else "inlet"
             all_structures.append(rec)
         if is_j:
+
+        is_junction_candidate = bool(jct_id)
+        is_inlet_candidate = bool(inlet_id) and not bool(jct_id)
+        rec["basin_index"] = cur["index"]
+        if is_junction_candidate or is_inlet_candidate:
+            rec["structure_type"] = "junction" if is_junction_candidate else "inlet"
+            all_structures.append(rec)
+
+        if is_junction_candidate:
             cur["junction_rows"].append(rec)
         elif is_i:
             cur["inlet_rows"].append(rec)
@@ -601,6 +610,19 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
                         elif jr.get("invert") is not None:
                             jr["rim"] = jr["invert"] + 8.0
                             add_assumption(sid, "node", "rim", round(jr["rim"], 6), "junction_rim_default_plus_8ft", f"HYDROLOGY row {jr['row_idx']}")
+        # inlet rows are attached to most-recent upstream junction in same basin
+        pending_inlets = list(basin["inlet_rows"])
+        for inlet in pending_inlets:
+            recv = next((jr for jr in reversed(jrows) if jr["row_idx"] < inlet["row_idx"]), None)
+            if recv is None:
+                add_finding("HIGH", "inlet_receiving_junction_missing", "No upstream receiving junction found for inlet row.", inlet["row_idx"], in_name(inlet["inlet_id"]))
+                continue
+            inlet_swmm = in_name(inlet["inlet_id"])
+            recv_swmm = j_name(recv["jct_id"])
+            recv_node = nodes.get(recv_swmm)
+            if recv_node is None:
+                add_finding("HIGH", "inlet_receiving_junction_missing", "Receiving junction missing for inlet row.", inlet["row_idx"], inlet_swmm)
+                continue
 
             for jr in jrows:
                 jid = j_name(jr["jct_id"])
@@ -767,6 +789,40 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
         for idx, jr in enumerate(jrows):
             sw = j_name(jr["jct_id"])
             if sw in base_node_ids:
+                conduits.append({
+                    "cid": cid,
+                    "us": inlet_swmm,
+                    "ds": recv_swmm,
+                    "length": max(length_ft, 0.1),
+                    "dia_ft": max((12.0 / 12.0), 0.5),
+                    "source_row": inlet["row_idx"],
+                    "source_tab": "DI TABLE",
+                    "link_type": "inlet",
+                })
+                crosswalk.append({"object_type": "conduit", "swmm_id": cid, "source_tab": "DI TABLE", "source_row": inlet["row_idx"], "source_id": inlet["inlet_id"], "notes": "inlet->junction conduit"})
+
+            if inlet.get("known_q_cfs") is not None and inlet["known_q_cfs"] > 0:
+                inflow_by_node[inlet_swmm] += inlet["known_q_cfs"]
+                crosswalk.append({"object_type": "inflow", "swmm_id": inlet_swmm, "source_tab": "HYDROLOGY", "source_row": inlet["row_idx"], "source_id": inlet["inlet_id"], "notes": f"known flow cfs={inlet['known_q_cfs']}"})
+            elif inlet.get("known_q_cfs") is None:
+                add_finding("HIGH", "inlet_known_flow_missing", "Inlet known flow missing/invalid in HYDROLOGY col R.", inlet["row_idx"], inlet_swmm)
+
+        # junction->downstream junction conduits from current row attributes
+        for i, jr in enumerate(jrows[:-1]):
+            dn = jrows[i + 1]
+            us_swmm = j_name(jr["jct_id"])
+            dn_swmm = j_name(dn["jct_id"])
+            if us_swmm == dn_swmm:
+                add_finding("HIGH", "junction_self_loop_candidate", "Self-loop prevented during build.", jr["row_idx"], us_swmm)
+                continue
+            if us_swmm not in nodes or dn_swmm not in nodes:
+                add_finding("HIGH", "junction_conduit_endpoint_missing_node", "Skipped conduit because endpoint node missing due incomplete junction geometry.", jr["row_idx"], f"{us_swmm}->{dn_swmm}")
+                continue
+            if jr["length_ft"] is None or jr["dia_in"] is None:
+                add_finding("HIGH", "junction_pipe_geometry_missing", "Missing S/V geometry for junction downstream conduit.", jr["row_idx"], us_swmm)
+                continue
+            cid = f"L_{us_swmm}__{dn_swmm}"
+            if cid in seen_cids:
                 continue
             req_missing = []
             req_present = []
@@ -819,6 +875,33 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
                 "required_fields_present":";".join(req_present),
                 "decision_class":decision,
                 "recommended_fix":rec_fix,
+                "link_type": "junction",
+            })
+            crosswalk.append({"object_type": "conduit", "swmm_id": cid, "source_tab": "HYDROLOGY", "source_row": jr["row_idx"], "source_id": jr["jct_id"], "notes": "junction->junction downstream conduit"})
+
+        # terminal junction to basin-specific outfall
+        terminal = jrows[-1]
+        term_swmm = j_name(terminal["jct_id"])
+        of_swmm = out_name(terminal["jct_id"])
+        if term_swmm not in nodes:
+            add_finding("HIGH", "terminal_junction_missing_node", "Skipped basin outfall link because terminal junction node missing geometry.", terminal["row_idx"], term_swmm)
+            continue
+        outfalls[of_swmm] = {"elev": nodes[term_swmm]["elev"], "source_row": terminal["row_idx"], "terminal": term_swmm, "basin_index": basin["index"]}
+        cid = f"L_{term_swmm}__{of_swmm}"
+        if terminal.get("length_ft") is None or terminal.get("dia_in") is None:
+            add_finding("HIGH", "terminal_outfall_geometry_missing", "Skipped terminal->outfall conduit due missing S/V geometry on terminal row.", terminal["row_idx"], cid)
+            continue
+        if cid not in seen_cids:
+            seen_cids.add(cid)
+            conduits.append({
+                "cid": cid,
+                "us": term_swmm,
+                "ds": of_swmm,
+                "length": max(terminal["length_ft"], 0.1),
+                "dia_ft": max(terminal["dia_in"] / 12.0, 0.5),
+                "source_row": terminal["row_idx"],
+                "source_tab": "HYDROLOGY",
+                "link_type": "outfall",
             })
 
     # flag duplicates/conflicts
@@ -865,6 +948,7 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
     nodes, outfalls, conduits, inflow_by_node, findings, crosswalk = build_network(assumptions_enabled)
 
     # coordinates: orthogonal schematic from lengths
+    # deterministic orthogonal schematic coordinates from link lengths
     coords: dict[str, tuple[float, float]] = {}
     x0 = 0.0
     y0 = 0.0
@@ -901,6 +985,42 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
                 findings.append({"severity": "LOW", "check_name": "coordinate_collision_resolved", "message": "Coordinate collision resolved", "source_row": None, "entity": node_id})
             coords[node_id] = (px, py)
             occupied[(px, py)] = node_id
+        terminal = basin["junction_rows"][-1]
+        term_swmm = j_name(terminal["jct_id"])
+        if term_swmm not in nodes:
+            continue
+        coords[term_swmm] = (x0, y0)
+        of_swmm = out_name(terminal["jct_id"])
+        coords[of_swmm] = (x0, y0 - 10.0)
+
+        jset = {j_name(jr["jct_id"]) for jr in basin["junction_rows"]}
+        incoming_j = defaultdict(list)
+        incoming_i = defaultdict(list)
+        for c in conduits:
+            if c["ds"] not in jset:
+                continue
+            if c.get("link_type") == "junction":
+                incoming_j[c["ds"]].append(c)
+            elif c.get("link_type") == "inlet":
+                incoming_i[c["ds"]].append(c)
+
+        occupied: dict[tuple[float, float], str] = {coords[term_swmm]: term_swmm, coords[of_swmm]: of_swmm}
+
+        def place_node(node_id: str, recv_id: str, axis: str, sign: int, length: float) -> None:
+            rx, ry = coords[recv_id]
+            px = rx + (sign * length if axis == "x" else 0.0)
+            py = ry + (sign * length if axis == "y" else 0.0)
+            key = (px, py)
+            k = 0
+            while key in occupied and occupied[key] != node_id:
+                k += 1
+                if axis == "x":
+                    key = (px, py + 10.0 * k)
+                else:
+                    key = (px + 10.0 * k, py)
+                add_finding("LOW", "coordinate_collision_resolved", f"Coordinate collision resolved against {occupied.get((px, py), 'unknown')}", None, node_id)
+            coords[node_id] = key
+            occupied[key] = node_id
 
         changed = True
         while changed:
@@ -935,6 +1055,34 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
         x0 = max_x + max(200.0, 2 * max_len)
 
     # outputs
+                if recv in incoming_j:
+                    for c in incoming_j[recv]:
+                        if c["us"] in nodes and c["us"] not in coords:
+                            place_node(c["us"], recv, "y", +1, c["length"])
+                            changed = True
+                ins = [c for c in incoming_i.get(recv, []) if c["us"] in nodes and c["us"] not in coords]
+                if not ins:
+                    continue
+                has_j = any(c["us"] in coords for c in incoming_j.get(recv, [])) or bool(incoming_j.get(recv))
+                if has_j:
+                    side_cycle = [("x", +1), ("x", -1), ("y", -1)]
+                elif len(ins) == 1:
+                    side_cycle = [("y", +1)]
+                elif len(ins) == 2:
+                    side_cycle = [("x", -1), ("x", +1)]
+                else:
+                    side_cycle = [("x", +1), ("y", +1), ("x", -1), ("y", -1)]
+                for idx, c in enumerate(ins):
+                    axis, sign = side_cycle[idx % len(side_cycle)]
+                    place_node(c["us"], recv, axis, sign, c["length"])
+                    changed = True
+
+        xs = [p[0] for n, p in coords.items() if n in jset or n.startswith("IN_") or n == of_swmm]
+        max_x = max(xs) if xs else x0
+        max_len = max([c["length"] for c in conduits if c.get("link_type") in {"junction", "inlet", "outfall"}] or [100.0])
+        x0 = max_x + max(200.0, 2 * max_len)
+
+    # write traceability artifacts
     pd.DataFrame(crosswalk).to_csv(ROOT / "outputs/review/source_traceability_crosswalk.csv", index=False)
     pd.DataFrame(findings).to_csv(ROOT / "outputs/qa/inlet_knownflow_hydraulic_baseline_findings.csv", index=False)
     pd.DataFrame(assumption_apps).to_csv(ROOT / "outputs/review/assumption_applications.csv", index=False)
@@ -981,6 +1129,49 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
         encoding="utf-8",
     )
 
+    modeled_nodes = set(nodes.keys())
+    unaccounted_rows = []
+    for rec in all_structures:
+        sid = rec["jct_id"] if rec["structure_type"] == "junction" else rec["inlet_id"]
+        swmm_id = j_name(sid) if rec["structure_type"] == "junction" else in_name(sid)
+        unaccounted_rows.append({
+            "source_tab": "HYDROLOGY",
+            "source_row": rec["row_idx"],
+            "basin_index": rec["basin_index"],
+            "structure_type": rec["structure_type"],
+            "source_id": sid,
+            "swmm_id": swmm_id,
+            "modeled": swmm_id in modeled_nodes,
+        })
+    pd.DataFrame(unaccounted_rows).to_csv(ROOT / "outputs/review/excel_unaccounted_structures.csv", index=False)
+
+    outfall_links = {c["cid"] for c in conduits if c.get("link_type") == "outfall"}
+    outfall_rows = []
+    for basin in basins:
+        if not basin.get("junction_rows"):
+            continue
+        term = basin["junction_rows"][-1]
+        tid = j_name(term["jct_id"])
+        oid = out_name(term["jct_id"])
+        outfall_rows.append({
+            "basin_index": basin["index"],
+            "terminal_source_row": term["row_idx"],
+            "terminal_junction": tid,
+            "outfall_id": oid,
+            "outfall_node_modeled": oid in outfalls,
+            "outfall_conduit_modeled": f"L_{tid}__{oid}" in outfall_links,
+        })
+    pd.DataFrame(outfall_rows).to_csv(ROOT / "outputs/review/terminal_basin_outfall_reconciliation.csv", index=False)
+    (ROOT / "outputs/review/phase2_terminal_branch_confusion.md").write_text(
+        "# Phase 2 Terminal Branch Confusion\n\n"
+        "Topology uses HYDROLOGY BASIN markers only. Each basin terminal junction discharges to basin-specific outfall O_<terminal_id>.\n\n"
+        f"- Basins parsed: {len([b for b in basins if b.get('junction_rows')])}\n"
+        f"- Outfall nodes modeled: {len(outfalls)}\n"
+        f"- Outfall conduits modeled: {len(outfall_links)}\n",
+        encoding="utf-8",
+    )
+
+    # model sections
     junction_rows = sorted(nodes.items(), key=lambda kv: kv[0])
     outfall_rows = sorted(outfalls.items(), key=lambda kv: kv[0])
     inflow_rows = sorted([(k, v) for k, v in inflow_by_node.items() if v > 0], key=lambda t: t[0])

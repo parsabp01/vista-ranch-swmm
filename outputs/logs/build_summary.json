@@ -5,6 +5,12 @@
   "conduit_count": 550,
   "subcatchment_count": 0,
   "inflow_count": 285,
+  "generated_at_utc": "2026-02-25T20:56:33.349336+00:00",
+  "junction_count": 356,
+  "outfall_count": 4,
+  "conduit_count": 337,
+  "subcatchment_count": 0,
+  "inflow_count": 184,
   "assumptions": {
     "topology_mode": "inlet_aware_hydraulic_baseline",
     "outfall_mode": "basin_segmented",
@@ -21,4 +27,7 @@
   "assumptions_enabled": true,
   "min_slope_assumed": 0.002,
   "interpolation_enabled": true
+    "column_d_used_as_inlet_id_count": 0
+  },
+  "geometry_mode": "orthogonal_schematic_from_lengths"
 }
