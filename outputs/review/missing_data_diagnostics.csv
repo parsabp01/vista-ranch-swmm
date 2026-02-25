@@ -10,6 +10,7 @@ HYDROLOGY,206,1,junction,71.2,J_71_2,,J_71_3,AC,AA;S,MISSING_DATA,interpolate in
 HYDROLOGY,209,1,junction,71.3,J_71_3,,J_71_4,AC,AA;S,MISSING_DATA,interpolate invert/rim
 HYDROLOGY,210,1,junction,71.4,J_71_4,,J_71_5,AC,AA;S,MISSING_DATA,interpolate invert/rim
 HYDROLOGY,11,1,inlet,1,IN_1,,,DI_G;DI_H;DI_I,,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,12,1,inlet,2,IN_2,,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
 HYDROLOGY,152,1,inlet,57,IN_57,J_55,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
 HYDROLOGY,172,1,inlet,75.25,IN_75_25,J_65_2,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
 HYDROLOGY,176,1,inlet,75.3,IN_75_3,J_65_3,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
@@ -19,6 +20,17 @@ HYDROLOGY,182,1,inlet,75.6,IN_75_6,J_68_05,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABL
 HYDROLOGY,208,1,inlet,77.2,IN_77_2,J_71_2,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
 HYDROLOGY,212,1,inlet,77.3,IN_77_3,J_71_4,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
 HYDROLOGY,213,1,inlet,77.4,IN_77_4,J_71_4,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,11,1,inlet,1,IN_1,,,DI_G;DI_H;DI_I,,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,12,1,inlet,2,IN_2,,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,152,1,inlet,57,IN_57,J_55,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,172,1,inlet,75.25,IN_75_25,J_65_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,176,1,inlet,75.3,IN_75_3,J_65_3,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,177,1,inlet,75.4,IN_75_4,J_65_3,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,181,1,inlet,75.5,IN_75_5,J_68_05,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,182,1,inlet,75.6,IN_75_6,J_68_05,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,208,1,inlet,77.2,IN_77_2,J_71_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,212,1,inlet,77.3,IN_77_3,J_71_4,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,213,1,inlet,77.4,IN_77_4,J_71_4,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
 HYDROLOGY,258,2,junction,84,J_84,,J_84_1,AC,AA;S,MISSING_DATA,interpolate invert/rim
 HYDROLOGY,260,2,junction,84.1,J_84_1,,J_85,AC,AA;S,MISSING_DATA,interpolate invert/rim
 HYDROLOGY,275,2,junction,89,J_89,,J_90,AC,AA;S,MISSING_DATA,interpolate invert/rim
@@ -67,6 +79,7 @@ HYDROLOGY,435,2,junction,114.1,J_114_1,,J_114_2,AC,AA;S,MISSING_DATA,interpolate
 HYDROLOGY,437,2,junction,114.2,J_114_2,,J_115,AC,AA;S,MISSING_DATA,interpolate invert/rim
 HYDROLOGY,441,2,junction,116,J_116,,J_117,AC,AA;S,MISSING_DATA,interpolate invert/rim
 HYDROLOGY,484,2,junction,134,J_134,,,AC,AA;S,MISSING_DATA,interpolate invert/rim
+HYDROLOGY,234,2,inlet,83,IN_83,,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
 HYDROLOGY,259,2,inlet,96,IN_96,J_84,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
 HYDROLOGY,261,2,inlet,97,IN_97,J_84_1,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
 HYDROLOGY,277,2,inlet,103,IN_103,J_89,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
@@ -123,6 +136,64 @@ HYDROLOGY,434,2,inlet,138,IN_138,J_114,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE mi
 HYDROLOGY,436,2,inlet,139,IN_139,J_114_1,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
 HYDROLOGY,456,2,inlet,149,IN_149,J_121,,DI_G;DI_H,DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
 HYDROLOGY,470,2,inlet,156,IN_156,J_127,,DI_H,DI_G;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,259,2,inlet,96,IN_96,J_84,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,261,2,inlet,97,IN_97,J_84_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,277,2,inlet,103,IN_103,J_89,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,278,2,inlet,104,IN_104,J_89,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,302,2,inlet,112.1,IN_112_1,J_95_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,315,2,inlet,116,IN_116,J_96_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,317,2,inlet,116.01,IN_116_01,J_97,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,318,2,inlet,116.02,IN_116_02,J_97,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,320,2,inlet,116.1,IN_116_1,J_97_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,333,2,inlet,118,IN_118,J_101,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,334,2,inlet,118.1,IN_118_1,J_101,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,337,2,inlet,119,IN_119,J_101_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,338,2,inlet,119.1,IN_119_1,J_101_1,,DI_G;DI_I,DI_H,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,340,2,inlet,119.2,IN_119_2,J_102,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,343,2,inlet,120,IN_120,J_102_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,346,2,inlet,121,IN_121,J_102_3,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,349,2,inlet,122,IN_122,J_102_4,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,350,2,inlet,122.1,IN_122_1,J_102_4,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,351,2,inlet,122.2,IN_122_2,J_102_4,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,354,2,inlet,123,IN_123,J_103,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,355,2,inlet,123.1,IN_123_1,J_103,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,359,2,inlet,123.2,IN_123_2,J_103_3,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,360,2,inlet,123.3,IN_123_3,J_103_3,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,363,2,inlet,123.4,IN_123_4,J_103_4,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,367,2,inlet,124,IN_124,J_104,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,368,2,inlet,124.1,IN_124_1,J_104,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,370,2,inlet,124.2,IN_124_2,J_105,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,373,2,inlet,124.3,IN_124_3,J_105_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,374,2,inlet,124.4,IN_124_4,J_105_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,377,2,inlet,124.5,IN_124_5,J_105_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,378,2,inlet,124.6,IN_124_6,J_105_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,381,2,inlet,125,IN_125,J_105_4,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,382,2,inlet,126,IN_126,J_105_4,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,386,2,inlet,127,IN_127,J_107,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,387,2,inlet,127.1,IN_127_1,J_107,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,389,2,inlet,127.2,IN_127_2,J_108,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,392,2,inlet,128,IN_128,J_108_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,393,2,inlet,128.1,IN_128_1,J_108_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,395,2,inlet,128.2,IN_128_2,J_108_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,399,2,inlet,129,IN_129,J_108_4,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,400,2,inlet,129.1,IN_129_1,J_108_4,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,402,2,inlet,129.2,IN_129_2,J_109,,DI_G;DI_I,DI_H,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,404,2,inlet,130,IN_130,J_109_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,405,2,inlet,130.1,IN_130_1,J_109_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,409,2,inlet,130.2,IN_130_2,J_110,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,410,2,inlet,130.3,IN_130_3,J_110,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,413,2,inlet,130.4,IN_130_4,J_110_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,414,2,inlet,130.5,IN_130_5,J_110_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,416,2,inlet,131,IN_131,J_110_3,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,417,2,inlet,132,IN_132,J_110_3,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,430,2,inlet,137,IN_137,J_113_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,431,2,inlet,137.1,IN_137_1,J_113_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,434,2,inlet,138,IN_138,J_114,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,436,2,inlet,139,IN_139,J_114_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,456,2,inlet,149,IN_149,J_121,,DI_G;DI_H,DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,470,2,inlet,156,IN_156,J_127,,DI_H,DI_G;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,488,3,inlet,161,IN_161,,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,493,4,inlet,163,IN_163,,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
 HYDROLOGY,500,5,junction,136,J_136,,J_136_1,AC,AA;S,MISSING_DATA,interpolate invert/rim
 HYDROLOGY,503,5,junction,136.1,J_136_1,,J_136_2,AC,AA;S,MISSING_DATA,interpolate invert/rim
 HYDROLOGY,505,5,junction,136.2,J_136_2,,J_136_3,AC,AA;S,MISSING_DATA,interpolate invert/rim
@@ -155,6 +226,24 @@ HYDROLOGY,529,5,inlet,168,IN_168,J_137_2,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE 
 HYDROLOGY,585,6,junction,157,J_157,,J_158,AC,AA;S,MISSING_DATA,interpolate invert/rim
 HYDROLOGY,587,6,junction,158,J_158,,J_159,AC,AA;S,MISSING_DATA,interpolate invert/rim
 HYDROLOGY,589,6,junction,159,J_159,,J_159_1,AC,AA;S,MISSING_DATA,interpolate invert/rim
+HYDROLOGY,502,5,inlet,165.1,IN_165_1,J_136,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,504,5,inlet,165.2,IN_165_2,J_136_1,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,506,5,inlet,165.3,IN_165_3,J_136_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,508,5,inlet,165.4,IN_165_4,J_136_3,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,510,5,inlet,165.5,IN_165_5,J_136_4,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,513,5,inlet,165.6,IN_165_6,J_136_6,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,514,5,inlet,165.7,IN_165_7,J_136_6,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,517,5,inlet,165.8,IN_165_8,J_136_7,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,518,5,inlet,165.9,IN_165_9,J_136_7,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,522,5,inlet,166,IN_166,J_136_9,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,523,5,inlet,166.1,IN_166_1,J_136_9,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,525,5,inlet,166.2,IN_166_2,J_137,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,528,5,inlet,167,IN_167,J_137_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,529,5,inlet,168,IN_168,J_137_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,585,6,junction,157,J_157,,J_158,AC,AA;S,MISSING_DATA,interpolate invert/rim
+HYDROLOGY,587,6,junction,158,J_158,,J_159,AC,AA;S,MISSING_DATA,interpolate invert/rim
+HYDROLOGY,589,6,junction,159,J_159,,J_159_1,AC,AA;S,MISSING_DATA,interpolate invert/rim
+HYDROLOGY,591,6,junction,159.1,J_159_1,,J_159_1,AA;AC;S,,DUPLICATE_OR_CONFLICT,deduplicate conflicting IDs/rows
 HYDROLOGY,592,6,junction,159.1,J_159_1,,J_159_2,AC,AA;S,DUPLICATE_OR_CONFLICT,deduplicate conflicting IDs/rows
 HYDROLOGY,593,6,junction,159.2,J_159_2,,J_160,AC,AA;S,MISSING_DATA,interpolate invert/rim
 HYDROLOGY,605,6,junction,163,J_163,,J_164,AC,AA;S,MISSING_DATA,interpolate invert/rim
@@ -196,6 +285,28 @@ HYDROLOGY,657,6,inlet,229,IN_229,J_180_2,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE 
 HYDROLOGY,658,6,inlet,230,IN_230,J_180_2,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
 HYDROLOGY,664,6,inlet,231,IN_231,J_182_2,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
 HYDROLOGY,665,6,inlet,232,IN_232,J_182_2,,,DI_G;DI_H;DI_I,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,586,6,inlet,195,IN_195,J_157,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,588,6,inlet,196,IN_196,J_158,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,590,6,inlet,197,IN_197,J_159,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,594,6,inlet,198,IN_198,J_159_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,595,6,inlet,199,IN_199,J_159_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,606,6,inlet,205,IN_205,J_163,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,626,6,inlet,215,IN_215,J_170,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,628,6,inlet,216,IN_216,J_171,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,629,6,inlet,217,IN_217,J_171,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,631,6,inlet,218,IN_218,J_172,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,632,6,inlet,219,IN_219,J_172,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,635,6,inlet,220,IN_220,J_173,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,638,6,inlet,221,IN_221,J_174,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,639,6,inlet,222,IN_222,J_174,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,643,6,inlet,223,IN_223,J_176,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,644,6,inlet,224,IN_224,J_176,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,646,6,inlet,225,IN_225,J_177,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,656,6,inlet,228,IN_228,J_180_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,657,6,inlet,229,IN_229,J_180_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,658,6,inlet,230,IN_230,J_180_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,664,6,inlet,231,IN_231,J_182_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
+HYDROLOGY,665,6,inlet,232,IN_232,J_182_2,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
 HYDROLOGY,672,7,junction,185,J_185,,,AC,AA;S,MISSING_DATA,interpolate invert/rim
 HYDROLOGY,671,7,inlet,233,IN_233,,,,DI_G;DI_H;DI_I,TOPOLOGY_AMBIGUITY,resolve receiving junction
 HYDROLOGY,677,8,junction,186,J_186,,,AC,AA;S,MISSING_DATA,interpolate invert/rim
@@ -213,3 +324,13 @@ HYDROLOGY,694,10,inlet,6109,IN_6109,,,DI_G;DI_H;DI_I,,TOPOLOGY_AMBIGUITY,resolve
 HYDROLOGY,695,10,inlet,6190,IN_6190,,,DI_G;DI_H;DI_I,,TOPOLOGY_AMBIGUITY,resolve receiving junction
 HYDROLOGY,696,10,inlet,6209,IN_6209,,,DI_G;DI_H;DI_I,,TOPOLOGY_AMBIGUITY,resolve receiving junction
 HYDROLOGY,591,6,junction,159.1,J_159_1,,,,,DUPLICATE_OR_CONFLICT,drop duplicate row 591; keep row 592
+HYDROLOGY,687,10,inlet,5613,IN_5613,,,DI_G;DI_H;DI_I,,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,688,10,inlet,6026,IN_6026,,,DI_G;DI_H;DI_I,,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,689,10,inlet,6072,IN_6072,,,DI_G;DI_H;DI_I,,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,690,10,inlet,6145,IN_6145,,,DI_G;DI_H;DI_I,,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,691,10,inlet,6180,IN_6180,,,DI_G;DI_H;DI_I,,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,692,10,inlet,6128,IN_6128,,,DI_G;DI_H;DI_I,,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,693,10,inlet,6134,IN_6134,,,DI_G;DI_H;DI_I,,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,694,10,inlet,6109,IN_6109,,,DI_G;DI_H;DI_I,,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,695,10,inlet,6190,IN_6190,,,DI_G;DI_H;DI_I,,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
+HYDROLOGY,696,10,inlet,6209,IN_6209,,,DI_G;DI_H;DI_I,,MISSING_DATA,DI TABLE missing length/invert; apply min-slope
