@@ -1152,6 +1152,7 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
                     recv_dn = next((jr for jr in basin.get("junction_rows", []) if jr["row_idx"] > row["source_row"]), None)
                     recv = recv_up or recv_dn
                 modeled_reason = "NOT_MODELED_NO_ANCHOR" if recv is None else "NOT_MODELED_BUILD_FAILURE_WITH_ANCHOR"
+                modeled_reason = "NOT_MODELED_NO_ANCHOR" if recv is None else "NOT_MODELED_DUPLICATE_CONFLICT"
             else:
                 modeled_reason = "NOT_MODELED_BUILD_FAILURE_WITH_ANCHOR"
         unaccounted_rows.append({**row, "modeled": modeled, "modeled_reason": modeled_reason, "assumptions_used": swmm_id in assumption_swmm_ids})

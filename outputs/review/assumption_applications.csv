@@ -132,4 +132,6 @@ J_186,node,invert,380.94,receiving_junction_invert_default_for_inlet_fallback,HY
 O_186,outfall,invert,380.674,outfall_invert_from_terminal_min_slope,HYDROLOGY row 677
 IN_235,link,receiving_junction,J_187,topology_fallback_first_downstream_junction,HYDROLOGY row 681;receive=J_187
 J_187,node,invert,381.4,receiving_junction_invert_default_for_inlet_fallback,HYDROLOGY row 682;needed_by_inlet_row=681
+J_187,node,invert,381.4,terminal_invert_default_no_upstream,HYDROLOGY row 682
+J_187,node,rim,389.4,terminal_rim_default_plus_8ft,HYDROLOGY row 682
 O_187,outfall,invert,381.03,outfall_invert_from_terminal_min_slope,HYDROLOGY row 682

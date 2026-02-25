@@ -8,4 +8,7 @@
 - Conduits: 561
 - Inflow nodes: 296
 - QA findings (HIGH): 5
+- Conduits: 558
+- Inflow nodes: 293
+- QA findings (HIGH): 8
 - QA findings (MEDIUM/LOW): 0
