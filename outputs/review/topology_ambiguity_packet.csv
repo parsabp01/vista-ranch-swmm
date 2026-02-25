@@ -1,0 +1,18 @@
+basin_index,source_row,structure_type,source_id,swmm_id,upstream_junction_candidate,downstream_junction_candidate,proposed_receiving_junction,rationale,confidence
+1,11,inlet,1,IN_1,,J_1,J_1,fallback to first downstream in basin,high
+5,498,inlet,164,IN_164,,J_136,J_136,fallback to first downstream in basin,high
+5,499,inlet,165,IN_165,,J_136,J_136,fallback to first downstream in basin,high
+6,584,inlet,194,IN_194,,J_157,J_157,fallback to first downstream in basin,high
+7,671,inlet,233,IN_233,,J_185,J_185,fallback to first downstream in basin,high
+8,676,inlet,234,IN_234,,J_186,J_186,fallback to first downstream in basin,high
+9,681,inlet,235,IN_235,,J_187,J_187,fallback to first downstream in basin,high
+10,687,inlet,5613,IN_5613,,,,fallback to first downstream in basin,low
+10,688,inlet,6026,IN_6026,,,,fallback to first downstream in basin,low
+10,689,inlet,6072,IN_6072,,,,fallback to first downstream in basin,low
+10,690,inlet,6145,IN_6145,,,,fallback to first downstream in basin,low
+10,691,inlet,6180,IN_6180,,,,fallback to first downstream in basin,low
+10,692,inlet,6128,IN_6128,,,,fallback to first downstream in basin,low
+10,693,inlet,6134,IN_6134,,,,fallback to first downstream in basin,low
+10,694,inlet,6109,IN_6109,,,,fallback to first downstream in basin,low
+10,695,inlet,6190,IN_6190,,,,fallback to first downstream in basin,low
+10,696,inlet,6209,IN_6209,,,,fallback to first downstream in basin,low

@@ -429,6 +429,7 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
     di = wb["DI TABLE"]
     roughness = float(ctx.defaults_cfg["hydraulics"].get("manning_n_pipe_default", 0.013))
     min_slope = 0.002
+    resolve_topology_ambiguity = os.getenv("PIPELINE_RESOLVE_TOPOLOGY_AMBIGUITY", "0") == "1"
 
     def norm_id(v: object) -> str | None:
         if v is None:
@@ -485,6 +486,8 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
     # Parse HYDROLOGY + BASIN segmentation
     basins: list[dict] = []
     all_structures: list[dict] = []
+    hyd_rows_context: list[dict] = []
+    basin_boundaries: list[int] = []
     cur = {"index": 1, "junction_rows": [], "inlet_rows": []}
     for row_idx, row in enumerate(hyd.iter_rows(min_row=1, max_col=29, values_only=True), start=1):
         b = row[1] if len(row) > 1 else None  # B
@@ -496,6 +499,9 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
         aa = row[26] if len(row) > 26 else None  # AA
         ac = row[28] if len(row) > 28 else None  # AC
 
+        hyd_rows_context.append({"row_idx": row_idx, "col_b": b, "col_c": c, "is_basin": str(b or "").strip().upper() == "BASIN"})
+        if str(b or "").strip().upper() == "BASIN":
+            basin_boundaries.append(row_idx)
         if str(b or "").strip().upper() == "BASIN":
             if cur["junction_rows"] or cur["inlet_rows"]:
                 cur["basin_break_row"] = row_idx
@@ -694,6 +700,17 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
             # inlets
             for inlet in basin["inlet_rows"]:
                 inlet_swmm = in_name(inlet["inlet_id"])
+                recv_up = next((jr for jr in reversed(jrows) if jr["row_idx"] < inlet["row_idx"]), None)
+                recv_down = next((jr for jr in jrows if jr["row_idx"] > inlet["row_idx"]), None)
+                recv = recv_up
+                if recv is None and resolve_topology_ambiguity:
+                    recv = recv_down
+                    if recv is not None and apply_assumptions:
+                        add_assumption(inlet_swmm, "link", "receiving_junction", j_name(recv["jct_id"]), "topology_fallback_first_downstream_junction", f"HYDROLOGY row {inlet['row_idx']};receive={j_name(recv['jct_id'])}")
+                recv_swmm = j_name(recv["jct_id"]) if recv else None
+                recv_node = nodes.get(recv_swmm) if recv_swmm else None
+                if recv_node is None:
+                    add_finding("HIGH", "inlet_receiving_junction_missing", "No receiving junction found for inlet row in same basin.", inlet["row_idx"], inlet_swmm)
                 recv = next((jr for jr in reversed(jrows) if jr["row_idx"] < inlet["row_idx"]), None)
                 recv_swmm = j_name(recv["jct_id"]) if recv else None
                 recv_node = nodes.get(recv_swmm) if recv_swmm else None
@@ -899,6 +916,112 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
                 "required_fields_present": ";".join(req_present),
                 "decision_class": decision,
                 "recommended_fix": rec_fix,
+            })
+        for inlet in basin.get("inlet_rows", []):
+            sw = in_name(inlet["inlet_id"])
+            if sw in base_node_ids:
+                continue
+            recv = next((jr for jr in reversed(jrows) if jr["row_idx"] < inlet["row_idx"]), None)
+            recv_sw = j_name(recv["jct_id"]) if recv else ""
+            di_rec = di_geom.get(inlet["inlet_id"], {})
+            req_missing=[]; req_present=[]
+            for fld,key in [("DI_G","up_inv"),("DI_H","dn_inv"),("DI_I","length")]:
+                if di_rec.get(key) is None: req_missing.append(fld)
+                else: req_present.append(fld)
+            decision = "TOPOLOGY_AMBIGUITY" if not recv_sw else ("MISSING_DATA" if req_missing else "MISSING_DATA")
+            rec_fix = "resolve receiving junction" if not recv_sw else "DI TABLE missing length/invert; apply min-slope"
+            missing_rows.append({
+                "source_tab":"HYDROLOGY",
+                "source_row":inlet["row_idx"],
+                "basin_index":basin["index"],
+                "structure_type":"inlet",
+                "source_id":inlet["inlet_id"],
+                "swmm_id":sw,
+                "receiving_junction_swmm_id":recv_sw,
+                "downstream_junction_swmm_id":"",
+                "required_fields_missing":";".join(req_missing),
+                "required_fields_present":";".join(req_present),
+                "decision_class":decision,
+                "recommended_fix":rec_fix,
+            })
+
+    # flag duplicates/conflicts
+    for r in missing_rows:
+        k = (r["structure_type"], str(r["source_id"]))
+        if id_counts.get(k, 0) > 1:
+            r["decision_class"] = "DUPLICATE_OR_CONFLICT"
+            r["recommended_fix"] = "deduplicate conflicting IDs/rows"
+
+    # topology ambiguity packet (context/proposal)
+    packet_rows: list[dict] = []
+    md_probe = list(missing_rows)
+    for m in md_probe:
+        if m.get("decision_class") != "TOPOLOGY_AMBIGUITY":
+            continue
+        basin = next((b for b in basins if b["index"] == m["basin_index"]), None)
+        if not basin:
+            continue
+        jrows = basin.get("junction_rows", [])
+        up = next((jr for jr in reversed(jrows) if jr["row_idx"] < m["source_row"]), None)
+        dn = next((jr for jr in jrows if jr["row_idx"] > m["source_row"]), None)
+        proposed = j_name(up["jct_id"]) if up else (j_name(dn["jct_id"]) if dn else "")
+        rationale = "nearest upstream junction" if up else "fallback to first downstream in basin"
+        conf = "high" if up or dn else "low"
+        packet_rows.append({
+            "basin_index": m["basin_index"],
+            "source_row": m["source_row"],
+            "structure_type": m["structure_type"],
+            "source_id": m["source_id"],
+            "swmm_id": m["swmm_id"],
+            "upstream_junction_candidate": j_name(up["jct_id"]) if up else "",
+            "downstream_junction_candidate": j_name(dn["jct_id"]) if dn else "",
+            "proposed_receiving_junction": proposed,
+            "rationale": rationale,
+            "confidence": conf,
+        })
+
+    pd.DataFrame(packet_rows).to_csv(ROOT / "outputs/review/topology_ambiguity_packet.csv", index=False)
+    md_lines = ["# Topology Ambiguity Packet", ""]
+    for p in packet_rows:
+        md_lines.append(f"## {p['swmm_id']} (Basin {p['basin_index']}, row {p['source_row']})")
+        md_lines.append(f"- structure_type: {p['structure_type']}")
+        md_lines.append(f"- upstream_junction_candidate: {p['upstream_junction_candidate'] or 'blank'}")
+        md_lines.append(f"- downstream_junction_candidate: {p['downstream_junction_candidate'] or 'blank'}")
+        md_lines.append(f"- proposed_receiving_junction: {p['proposed_receiving_junction'] or 'blank'}")
+        md_lines.append(f"- rationale: {p['rationale']}")
+        md_lines.append(f"- confidence: {p['confidence']}")
+        above = [r for r in hyd_rows_context if p['source_row'] - 5 <= r['row_idx'] <= p['source_row'] + 5]
+        prev_b = max([b for b in basin_boundaries if b < p['source_row']], default=None)
+        next_b = min([b for b in basin_boundaries if b > p['source_row']], default=None)
+        md_lines.append(f"- basin_segment_boundaries: prev={prev_b if prev_b else 'START'}; next={next_b if next_b else 'END'}")
+        md_lines.append("")
+        md_lines.append("| row | col_b | col_c | basin_marker |")
+        md_lines.append("|---:|---|---|---|")
+        for r in above:
+            md_lines.append(f"| {r['row_idx']} | {str(r['col_b'] or '')} | {str(r['col_c'] or '')} | {'BASIN' if r['is_basin'] else ''} |")
+        md_lines.append("")
+    (ROOT / "outputs/review/topology_ambiguity_packet.md").write_text("\n".join(md_lines) + "\n", encoding="utf-8")
+
+    for d in dropped_duplicates:
+        missing_rows.append({
+            "source_tab": "HYDROLOGY",
+            "source_row": d["dropped_source_row"],
+            "basin_index": d["basin_index"],
+            "structure_type": d["structure_type"],
+            "source_id": d["swmm_id"].replace("J_", "").replace("IN_", "").replace("_", "."),
+            "swmm_id": d["swmm_id"],
+            "receiving_junction_swmm_id": "",
+            "downstream_junction_swmm_id": "",
+            "required_fields_missing": "",
+            "required_fields_present": "",
+            "decision_class": "DUPLICATE_OR_CONFLICT",
+            "recommended_fix": f"drop duplicate row {d['dropped_source_row']}; keep row {d['kept_source_row']}",
+        })
+
+    md_df = pd.DataFrame(missing_rows)
+    md_df.to_csv(ROOT / "outputs/review/missing_data_diagnostics.csv", index=False)
+
+    # summary markdown (single final-consistent section)
             })
         for inlet in basin.get("inlet_rows", []):
             sw = in_name(inlet["inlet_id"])
@@ -1401,11 +1524,14 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
             "assumptions_enabled": assumptions_enabled,
             "min_slope_assumed": min_slope,
             "interpolation_enabled": assumptions_enabled,
+        "topology_ambiguity_auto_resolve": resolve_topology_ambiguity,
+            "topology_ambiguity_auto_resolve": resolve_topology_ambiguity,
         },
         "geometry_mode": "orthogonal_schematic_from_lengths",
         "assumptions_enabled": assumptions_enabled,
         "min_slope_assumed": min_slope,
         "interpolation_enabled": assumptions_enabled,
+        "topology_ambiguity_auto_resolve": resolve_topology_ambiguity,
     }
     return "\n".join(text) + "\n", metadata
 
