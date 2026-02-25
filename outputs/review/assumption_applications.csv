@@ -90,6 +90,11 @@ O_156,outfall,invert,377.572,outfall_invert_from_terminal_min_slope,HYDROLOGY ro
 J_157,node,invert,386.768,junction_linear_interpolation_or_min_slope,HYDROLOGY row 585
 J_158,node,invert,386.57,junction_linear_interpolation_or_min_slope,HYDROLOGY row 587
 J_159,node,invert,385.416,junction_linear_interpolation_or_min_slope,HYDROLOGY row 589
+J_157,node,invert,386.77,junction_linear_interpolation_or_min_slope,HYDROLOGY row 585
+J_158,node,invert,386.572,junction_linear_interpolation_or_min_slope,HYDROLOGY row 587
+J_159,node,invert,385.418,junction_linear_interpolation_or_min_slope,HYDROLOGY row 589
+J_159_1,node,invert,384.088,junction_linear_interpolation_or_min_slope,HYDROLOGY row 591
+J_159_1,node,rim,391.701201,junction_rim_interpolation,HYDROLOGY row 591
 J_159_1,node,invert,384.086,junction_linear_interpolation_or_min_slope,HYDROLOGY row 592
 J_159_2,node,invert,383.672,junction_linear_interpolation_or_min_slope,HYDROLOGY row 593
 J_163,node,invert,381.004556,junction_linear_interpolation_or_min_slope,HYDROLOGY row 605

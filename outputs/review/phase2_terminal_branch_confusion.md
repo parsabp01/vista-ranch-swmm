@@ -5,3 +5,5 @@ Topology uses HYDROLOGY BASIN markers only. Each basin terminal junction dischar
 - Basins parsed: 9
 - Outfall nodes modeled: 9
 - Outfall conduits modeled: 9
+- Outfall nodes modeled: 4
+- Outfall conduits modeled: 4
