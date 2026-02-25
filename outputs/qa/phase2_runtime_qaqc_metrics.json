@@ -1,0 +1,15 @@
+{
+  "generated_at_utc": "2026-02-25T19:57:37.361047+00:00",
+  "required_sections_present_count": 7,
+  "required_sections_total": 7,
+  "junction_count": 355,
+  "outfall_count": 4,
+  "conduit_count": 337,
+  "inflow_entry_count": 183,
+  "unique_inflow_nodes": 183,
+  "self_loop_conduit_count": 0,
+  "high_count": 0,
+  "medium_count": 0,
+  "low_count": 0,
+  "qa_status": "ready_for_swmm_gui"
+}
