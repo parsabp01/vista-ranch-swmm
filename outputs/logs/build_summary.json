@@ -1,28 +1,10 @@
 {
-  "generated_at_utc": "2026-02-25T22:41:32.629975+00:00",
+  "generated_at_utc": "2026-02-25T23:12:17.117496+00:00",
   "junction_count": 560,
   "outfall_count": 9,
   "conduit_count": 558,
   "subcatchment_count": 0,
   "inflow_count": 293,
-  "generated_at_utc": "2026-02-25T22:21:08.869578+00:00",
-  "junction_count": 552,
-  "outfall_count": 9,
-  "conduit_count": 550,
-  "subcatchment_count": 0,
-  "inflow_count": 285,
-  "generated_at_utc": "2026-02-25T21:49:05.525758+00:00",
-  "junction_count": 552,
-  "outfall_count": 9,
-  "conduit_count": 550,
-  "subcatchment_count": 0,
-  "inflow_count": 285,
-  "generated_at_utc": "2026-02-25T20:56:33.349336+00:00",
-  "junction_count": 356,
-  "outfall_count": 4,
-  "conduit_count": 337,
-  "subcatchment_count": 0,
-  "inflow_count": 184,
   "assumptions": {
     "topology_mode": "inlet_aware_hydraulic_baseline",
     "outfall_mode": "basin_segmented",
@@ -34,16 +16,12 @@
     "assumptions_enabled": true,
     "min_slope_assumed": 0.002,
     "interpolation_enabled": true,
-    "topology_ambiguity_auto_resolve": true
-    "interpolation_enabled": true
+    "topology_ambiguity_auto_resolve": true,
+    "hydrology_source_row_cutoff": 684
   },
   "geometry_mode": "orthogonal_schematic_from_lengths",
   "assumptions_enabled": true,
   "min_slope_assumed": 0.002,
   "interpolation_enabled": true,
   "topology_ambiguity_auto_resolve": true
-  "interpolation_enabled": true
-    "column_d_used_as_inlet_id_count": 0
-  },
-  "geometry_mode": "orthogonal_schematic_from_lengths"
 }

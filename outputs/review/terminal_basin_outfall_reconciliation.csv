@@ -8,11 +8,3 @@ basin_index,terminal_source_row,terminal_junction,outfall_id,outfall_node_modele
 7,672,J_185,O_185,True,True
 8,677,J_186,O_186,True,True
 9,682,J_187,O_187,True,True
-2,484,J_134,O_134,False,False
-3,489,J_134_1,O_134_1,True,True
-4,494,J_135,O_135,True,True
-5,580,J_156,O_156,True,True
-6,667,J_184,O_184,False,False
-7,672,J_185,O_185,False,False
-8,677,J_186,O_186,False,False
-9,682,J_187,O_187,False,False
