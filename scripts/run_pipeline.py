@@ -111,17 +111,53 @@ def main() -> None:
         except Exception:
             pass
 
+    pipeline_status = result.status
+    next_action = "run next pipeline stage" if result.status == "ready" else "resolve blocking issues"
+    blockers: list[str] = []
+
+    if args.stage == "qa":
+        qa_summary_path = ROOT / "outputs/qa/qa_summary.json"
+        qa_findings_path = ROOT / "outputs/qa/qa_findings.csv"
+        qa_summary = {}
+        if qa_summary_path.exists():
+            try:
+                qa_summary = json.loads(qa_summary_path.read_text(encoding="utf-8"))
+            except Exception:
+                qa_summary = {}
+        qa_status = str(qa_summary.get("status", result.status))
+        high_count = int(qa_summary.get("high_count", 0) or 0)
+
+        if qa_status in {"ready", "ready_for_swmm_gui"} and high_count == 0:
+            pipeline_status = "ready"
+            next_action = "swmm_gui_manual_qaqc"
+        else:
+            pipeline_status = "blocked"
+            next_action = "resolve blocking issues"
+            if qa_findings_path.exists():
+                lines = [ln.strip() for ln in qa_findings_path.read_text(encoding="utf-8").splitlines() if ln.strip()]
+                if len(lines) > 1:
+                    headers = lines[0].split(",")
+                    for raw in lines[1:]:
+                        vals = raw.split(",")
+                        row = {headers[i]: vals[i] if i < len(vals) else "" for i in range(len(headers))}
+                        if row.get("severity", "").lower() == "high":
+                            blockers.append(f"{row.get('check', 'unknown_check')}: {row.get('message', '')}")
+            if not blockers and high_count > 0:
+                blockers.append(f"qa_summary reported {high_count} high-severity finding(s)")
+
     payload = {
         "generated_at_utc": now_utc(),
         "current_stage": result.stage,
-        "status": result.status,
+        "status": pipeline_status,
         "message": result.message,
         "inputs_used": inputs_used,
         "outputs_produced": result.produced_files,
         "key_counts": _key_counts(args.stage),
         "assumptions_used": assumptions,
-        "next_action": "run next pipeline stage" if result.status == "ready" else "resolve blocking issues",
+        "next_action": next_action,
     }
+    if blockers:
+        payload["blockers"] = blockers
 
     state_path = ROOT / "outputs/logs/pipeline_state.json"
     state_path.parent.mkdir(parents=True, exist_ok=True)
