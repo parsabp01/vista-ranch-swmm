@@ -1404,9 +1404,18 @@ conduit,L_J_182_1__J_182_2,HYDROLOGY,661,182.1,junction->junction downstream con
 conduit,L_J_182_2__J_183,HYDROLOGY,662,182.2,junction->junction downstream conduit
 conduit,L_J_183__J_184,HYDROLOGY,666,183,junction->junction downstream conduit
 conduit,L_J_184__O_184,HYDROLOGY,667,184,terminal junction->outfall per BASIN rule
-node,J_185,HYDROLOGY,672,185,junction assumed from default terminal fallback
+node,J_185,HYDROLOGY,672,185,junction synthesized for inlet fallback receive node
+node,IN_233,HYDROLOGY/DI TABLE,671,233,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_233__J_185,DI TABLE,671,233,inlet->junction conduit
+inflow,IN_233,HYDROLOGY,671,233,known flow cfs=0.4164568814957421
 conduit,L_J_185__O_185,HYDROLOGY,672,185,terminal junction->outfall per BASIN rule
-node,J_186,HYDROLOGY,677,186,junction assumed from default terminal fallback
+node,J_186,HYDROLOGY,677,186,junction synthesized for inlet fallback receive node
+node,IN_234,HYDROLOGY/DI TABLE,676,234,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_234__J_186,DI TABLE,676,234,inlet->junction conduit
+inflow,IN_234,HYDROLOGY,676,234,known flow cfs=0.12166511375169345
 conduit,L_J_186__O_186,HYDROLOGY,677,186,terminal junction->outfall per BASIN rule
-node,J_187,HYDROLOGY,682,187,junction assumed from default terminal fallback
+node,J_187,HYDROLOGY,682,187,junction synthesized for inlet fallback receive node
+node,IN_235,HYDROLOGY/DI TABLE,681,235,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_235__J_187,DI TABLE,681,235,inlet->junction conduit
+inflow,IN_235,HYDROLOGY,681,235,known flow cfs=0.08005677182162368
 conduit,L_J_187__O_187,HYDROLOGY,682,187,terminal junction->outfall per BASIN rule

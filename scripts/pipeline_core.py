@@ -694,6 +694,32 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
                         add_assumption(inlet_swmm, "link", "receiving_junction", j_name(recv["jct_id"]), "topology_fallback_first_downstream_junction", f"HYDROLOGY row {inlet['row_idx']};receive={j_name(recv['jct_id'])}")
                 recv_swmm = j_name(recv["jct_id"]) if recv else None
                 recv_node = nodes.get(recv_swmm) if recv_swmm else None
+                if recv_node is None and recv is not None and apply_assumptions:
+                    recv_inv = recv.get("invert")
+                    recv_rim = recv.get("rim")
+                    if recv_inv is None and recv_rim is not None:
+                        recv_inv = recv_rim - 8.0
+                        add_assumption(recv_swmm, "node", "invert", round(recv_inv, 6), "receiving_junction_invert_default_for_inlet_fallback", f"HYDROLOGY row {recv['row_idx']};needed_by_inlet_row={inlet['row_idx']}")
+                    if recv_rim is None and recv_inv is not None:
+                        recv_rim = recv_inv + 8.0
+                        add_assumption(recv_swmm, "node", "rim", round(recv_rim, 6), "receiving_junction_rim_default_plus_8ft_for_inlet_fallback", f"HYDROLOGY row {recv['row_idx']};needed_by_inlet_row={inlet['row_idx']}")
+                    if recv_inv is None and recv_rim is None:
+                        recv_inv = 0.0
+                        recv_rim = 8.0
+                        add_assumption(recv_swmm, "node", "invert", round(recv_inv, 6), "receiving_junction_invert_default_zero_for_inlet_fallback", f"HYDROLOGY row {recv['row_idx']};needed_by_inlet_row={inlet['row_idx']}")
+                        add_assumption(recv_swmm, "node", "rim", round(recv_rim, 6), "receiving_junction_rim_default_plus_8ft_for_inlet_fallback", f"HYDROLOGY row {recv['row_idx']};needed_by_inlet_row={inlet['row_idx']}")
+                    if recv_swmm not in nodes:
+                        nodes[recv_swmm] = {
+                            "elev": recv_inv,
+                            "max_depth": max(recv_rim - recv_inv, 0.01),
+                            "source_type": "junction",
+                            "source_row": recv["row_idx"],
+                            "source_id": recv["jct_id"],
+                            "rim": recv_rim,
+                            "basin_index": basin["index"],
+                        }
+                        crosswalk.append({"object_type": "node", "swmm_id": recv_swmm, "source_tab": "HYDROLOGY", "source_row": recv["row_idx"], "source_id": recv["jct_id"], "notes": "junction synthesized for inlet fallback receive node"})
+                    recv_node = nodes.get(recv_swmm)
                 if recv_node is None:
                     add_finding("HIGH", "inlet_receiving_junction_missing", "No receiving junction found for inlet row in same basin.", inlet["row_idx"], inlet_swmm)
                     continue
@@ -1125,12 +1151,59 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
                     recv_up = next((jr for jr in reversed(basin.get("junction_rows", [])) if jr["row_idx"] < row["source_row"]), None)
                     recv_dn = next((jr for jr in basin.get("junction_rows", []) if jr["row_idx"] > row["source_row"]), None)
                     recv = recv_up or recv_dn
+                modeled_reason = "NOT_MODELED_NO_ANCHOR" if recv is None else "NOT_MODELED_BUILD_FAILURE_WITH_ANCHOR"
                 modeled_reason = "NOT_MODELED_NO_ANCHOR" if recv is None else "NOT_MODELED_DUPLICATE_CONFLICT"
             else:
-                modeled_reason = "NOT_MODELED_DUPLICATE_CONFLICT"
+                modeled_reason = "NOT_MODELED_BUILD_FAILURE_WITH_ANCHOR"
         unaccounted_rows.append({**row, "modeled": modeled, "modeled_reason": modeled_reason, "assumptions_used": swmm_id in assumption_swmm_ids})
 
     pd.DataFrame(unaccounted_rows).to_csv(ROOT / "outputs/review/excel_unaccounted_structures.csv", index=False)
+
+
+    # explicit duplicate/conflict evidence for targeted high-confidence inlets
+    target_inlets = {"IN_233", "IN_234", "IN_235"}
+    evidence_lines = ["# Duplicate/Conflict Evidence", ""]
+    evidence_lines.append("This packet verifies whether remaining modeled=False inlet records are caused by real object collisions or by classification artifacts.")
+    evidence_lines.append("")
+    crosswalk_by_id: defaultdict[str, list[dict]] = defaultdict(list)
+    for row in crosswalk:
+        crosswalk_by_id[str(row.get("swmm_id", ""))].append(row)
+    conduit_ids = {c["cid"] for c in conduits}
+    for tid in sorted(target_inlets):
+        row = by_swmm.get(tid)
+        evidence_lines.append(f"## {tid}")
+        if row is None:
+            evidence_lines.append("- status: not present in <=684 source set.")
+            evidence_lines.append("")
+            continue
+        basin = next((b for b in basins if b["index"] == row["basin_index"]), None)
+        recv_up = next((jr for jr in reversed(basin.get("junction_rows", [])) if jr["row_idx"] < row["source_row"]), None) if basin else None
+        recv_dn = next((jr for jr in basin.get("junction_rows", []) if jr["row_idx"] > row["source_row"]), None) if basin else None
+        recv = recv_up or recv_dn
+        recv_swmm = j_name(recv["jct_id"]) if recv else ""
+        proposed_cid = f"L_{tid}__{recv_swmm}" if recv_swmm else ""
+        node_sources = crosswalk_by_id.get(tid, [])
+        conduit_sources = crosswalk_by_id.get(proposed_cid, []) if proposed_cid else []
+        evidence_lines.append(f"- source: HYDROLOGY row {row['source_row']} (inlet_id={row['source_id']}, basin={row['basin_index']}).")
+        evidence_lines.append(f"- expected receiving junction: {recv_swmm or 'none'}.")
+        evidence_lines.append(f"- duplicate check (node id): {tid} -> {'already exists' if tid in modeled_nodes else 'not pre-existing'}." )
+        evidence_lines.append(f"- duplicate check (conduit id): {proposed_cid or 'none'} -> {'already exists' if proposed_cid in conduit_ids else 'not pre-existing'}." )
+        evidence_lines.append(f"- duplicate check (inflow target): {tid} -> {'already targeted' if any(r.get('object_type')=='inflow' for r in node_sources) else 'not pre-existing'}." )
+        evidence_lines.append("- conflicting object IDs: " + (", ".join(sorted({r.get('swmm_id','') for r in node_sources + conduit_sources if r.get('swmm_id')})) if (node_sources or conduit_sources) else "none"))
+        if node_sources or conduit_sources:
+            evidence_lines.append("- conflict provenance:")
+            for r in node_sources + conduit_sources:
+                evidence_lines.append(f"  - {r.get('object_type')} {r.get('swmm_id')} from {r.get('source_tab')} row {r.get('source_row')} (source_id={r.get('source_id')})")
+        else:
+            evidence_lines.append("- conflict provenance: none found in source_traceability_crosswalk.")
+        modeled_row = next((u for u in unaccounted_rows if u["swmm_id"] == tid), None)
+        evidence_lines.append(f"- collision verdict: {'REAL' if (tid in dropped_swmm_ids) else 'ARTIFACT_OF_CONFLICT_DETECTION_LOGIC'}.")
+        if modeled_row:
+            evidence_lines.append(f"- current modeled status: modeled={modeled_row['modeled']} reason={modeled_row['modeled_reason']}.")
+        evidence_lines.append("")
+
+    (ROOT / "outputs/review/duplicate_conflict_evidence.md").write_text("\n".join(evidence_lines) + "\n", encoding="utf-8")
+
 
     outfall_links = {c["cid"] for c in conduits if c.get("link_type") == "outfall"}
     outfall_recon = []
