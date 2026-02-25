@@ -1,61 +1,15 @@
 {
-  "generated_at_utc": "2026-02-25T20:15:22.249177+00:00",
+  "generated_at_utc": "2026-02-25T20:56:37.642258+00:00",
   "current_stage": "phase2_runtime_qaqc",
   "status": "ready",
   "key_metrics": {
-    "basin_marker_count": 9,
-    "modeled_outfall_count": 4,
-    "missing_terminal_outfall_count": 5,
-    "excel_junction_count": 266,
-    "excel_inlet_count": 297,
-    "missing_excel_junction_count": 95,
-    "missing_excel_inlet_count": 113
-  },
-  "blockers": [
-    "terminal_outfall_reconciliation_incomplete"
-  ],
-  "next_action": "user_review_missing_branches_and_unaccounted_structures"
-  "generated_at_utc": "2026-02-25T19:57:40.840290+00:00",
-  "current_stage": "phase1_data_qaqc",
-  "status": "ready",
-  "key_metrics": {
-  "generated_at_utc": "2026-02-24T22:13:19.677632+00:00",
-  "current_stage": "phase2_runtime_qaqc",
-  "status": "ready",
-  "key_metrics": {
-    "phase2_required_sections_present": 12,
-    "phase2_required_sections_total": 12,
+    "phase2_required_sections_present": 8,
+    "phase2_required_sections_total": 8,
     "phase2_high_count": 0,
-    "phase2_medium_count": 3,
-    "phase2_low_count": 2,
-    "phase2_qa_status": "needs_review",
-    "phase2_inflow_preflight_rows": 3
+    "phase2_medium_count": 0,
+    "phase2_low_count": 0,
+    "phase2_qa_status": "ready_for_swmm_gui"
   },
   "blockers": [],
   "next_action": "swmm_gui_manual_qaqc"
-  "generated_at_utc": "2026-02-24T22:01:39.911896+00:00",
-  "generated_at_utc": "2026-02-24T21:53:17.532947+00:00",
-  "current_stage": "phase1_data_qaqc",
-  "status": "ready",
-  "key_metrics": {
-    "junction_count": 248,
-    "link_count": 252,
-    "inflow_record_count": 1215,
-    "system_count": 325,
-    "high_count": 0,
-    "medium_count": 3,
-    "medium_count": 6,
-    "low_count": 1,
-    "orphan_junction_count": 0,
-    "missing_link_endpoint_count": 0,
-    "self_loop_link_count": 0,
-    "excluded_link_noise_row_count": 3,
-    "cross_system_edge_count": 0,
-    "unmapped_inflow_count": 2,
-    "duplicate_inflow_source_row_count": 302,
-    "column_d_used_as_inlet_id_count": 0,
-    "qa_status": "needs_review"
-  },
-  "blockers": [],
-  "next_action": "phase2_runtime_qa"
 }
