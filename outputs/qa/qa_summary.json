@@ -1,9 +1,6 @@
 {
-  "generated_at_utc": "2026-02-25T22:41:33.741889+00:00",
-  "generated_at_utc": "2026-02-25T22:21:10.355981+00:00",
-  "generated_at_utc": "2026-02-25T21:49:06.599046+00:00",
-  "generated_at_utc": "2026-02-25T20:56:34.860727+00:00",
-  "status": "blocked",
-  "finding_count": 5,
-  "high_count": 5
+  "generated_at_utc": "2026-02-25T23:38:44.419250+00:00",
+  "status": "ready_for_swmm_gui",
+  "finding_count": 0,
+  "high_count": 0
 }

@@ -1,6 +1,0 @@
-check,message,severity
-required_section,Missing [RAINGAGES] in model.inp,high
-required_section,Missing [TIMESERIES] in model.inp,high
-required_section,Missing [SUBCATCHMENTS] in model.inp,high
-required_section,Missing [SUBAREAS] in model.inp,high
-required_section,Missing [INFILTRATION] in model.inp,high
