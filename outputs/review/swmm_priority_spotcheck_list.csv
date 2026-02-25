@@ -19,3 +19,23 @@ priority_rank,entity_type,entity_id,risk_reason,source
 18,node,IN_115,nonzero_inflow_2.6607_cfs,model [INFLOWS]
 19,node,IN_116_1,nonzero_inflow_3.2795_cfs,model [INFLOWS]
 20,node,IN_12,nonzero_inflow_0.4473_cfs,model [INFLOWS]
+1,node,J086,duplicate_inflow_entries,model [INFLOWS]
+2,node,J101,duplicate_inflow_entries,model [INFLOWS]
+3,node,J114,duplicate_inflow_entries,model [INFLOWS]
+4,node,J084,non_zero_inflow_2.4116_cfs,model [INFLOWS]
+5,node,J086,non_zero_inflow_1.5096_cfs,model [INFLOWS]
+6,node,J101,non_zero_inflow_0.8485_cfs,model [INFLOWS]
+7,node,J114,non_zero_inflow_0.5986_cfs,model [INFLOWS]
+8,node,J116,non_zero_inflow_3.2191_cfs,model [INFLOWS]
+9,node,J136,non_zero_inflow_0.4449_cfs,model [INFLOWS]
+10,node,J180,non_zero_inflow_66.4124_cfs,model [INFLOWS]
+11,node,J182,non_zero_inflow_68.4609_cfs,model [INFLOWS]
+12,link,101.1-107,long_conduit_1716.0,HYDRAULICS row 278
+13,link,169-173,long_conduit_1463.0,HYDRAULICS row 619
+14,link,115-117,long_conduit_1329.0,HYDRAULICS row 358
+15,link,173-176,long_conduit_1310.0,HYDRAULICS row 617
+16,link,85-87,long_conduit_1292.0,HYDRAULICS row 472
+17,link,176-178,long_conduit_1260.0,HYDRAULICS row 615
+18,link,65-65.1,long_conduit_1237.0,HYDRAULICS row 34
+19,link,69-71,long_conduit_1195.0,HYDRAULICS row 28
+20,link,181-182.2,long_conduit_1162.0,HYDRAULICS row 674
