@@ -1,4 +1,11 @@
 {
+  "generated_at_utc": "2026-02-25T21:49:08.555377+00:00",
+  "required_sections_total": 8,
+  "required_sections_present_count": 8,
+  "junction_count": 552,
+  "outfall_count": 9,
+  "conduit_count": 550,
+  "inflow_line_count": 285,
   "generated_at_utc": "2026-02-25T20:56:37.637507+00:00",
   "required_sections_total": 8,
   "required_sections_present_count": 8,

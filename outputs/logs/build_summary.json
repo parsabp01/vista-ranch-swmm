@@ -1,4 +1,10 @@
 {
+  "generated_at_utc": "2026-02-25T21:49:05.525758+00:00",
+  "junction_count": 552,
+  "outfall_count": 9,
+  "conduit_count": 550,
+  "subcatchment_count": 0,
+  "inflow_count": 285,
   "generated_at_utc": "2026-02-25T20:56:33.349336+00:00",
   "junction_count": 356,
   "outfall_count": 4,
@@ -12,6 +18,15 @@
     "inflow_mode": "static_known_flows_at_inlets",
     "inlet_nodes_modeled_as": "junctions",
     "coordinates_mode": "orthogonal_schematic_from_lengths",
+    "column_d_used_as_inlet_id_count": 0,
+    "assumptions_enabled": true,
+    "min_slope_assumed": 0.002,
+    "interpolation_enabled": true
+  },
+  "geometry_mode": "orthogonal_schematic_from_lengths",
+  "assumptions_enabled": true,
+  "min_slope_assumed": 0.002,
+  "interpolation_enabled": true
     "column_d_used_as_inlet_id_count": 0
   },
   "geometry_mode": "orthogonal_schematic_from_lengths"
