@@ -542,6 +542,57 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
     if cur["junction_rows"] or cur["inlet_rows"]:
         basins.append(cur)
 
+    def _structure_swmm_id(rec: dict) -> str:
+        return j_name(rec["jct_id"]) if rec["structure_type"] == "junction" else in_name(rec["inlet_id"])
+
+    def _completeness_score(rec: dict) -> int:
+        if rec["structure_type"] == "junction":
+            return sum(1 for k in ("rim", "soffit", "dia_in", "length_ft", "invert") if rec.get(k) is not None)
+        return sum(1 for k in ("known_q_cfs",) if rec.get(k) is not None) + sum(
+            1 for k in ("up_inv", "dn_inv", "length") if di_geom.get(rec["inlet_id"], {}).get(k) is not None
+        )
+
+    duplicate_groups: dict[tuple[int, str, str], list[dict]] = defaultdict(list)
+    for basin in basins:
+        for rec in basin["junction_rows"]:
+            duplicate_groups[(basin["index"], "junction", _structure_swmm_id({**rec, "structure_type": "junction"}))].append(rec)
+        for rec in basin["inlet_rows"]:
+            duplicate_groups[(basin["index"], "inlet", _structure_swmm_id({**rec, "structure_type": "inlet"}))].append(rec)
+
+    dropped_duplicates: list[dict] = []
+    for basin in basins:
+        for key_name, skey in (("junction_rows", "junction"), ("inlet_rows", "inlet")):
+            resolved: list[dict] = []
+            seen_ids: set[str] = set()
+            for rec in basin[key_name]:
+                sw = _structure_swmm_id({**rec, "structure_type": skey})
+                if sw in seen_ids:
+                    continue
+                grp = [r for r in basin[key_name] if _structure_swmm_id({**r, "structure_type": skey}) == sw]
+                if len(grp) == 1:
+                    resolved.append(rec)
+                    seen_ids.add(sw)
+                    continue
+                grp_sorted = sorted(grp, key=lambda r: (-_completeness_score({**r, "structure_type": skey}), r["row_idx"]))
+                keep = grp_sorted[0]
+                resolved.append(keep)
+                seen_ids.add(sw)
+                for drop in grp_sorted[1:]:
+                    dropped_duplicates.append({
+                        "basin_index": basin["index"],
+                        "structure_type": skey,
+                        "swmm_id": sw,
+                        "kept_source_row": keep["row_idx"],
+                        "dropped_source_row": drop["row_idx"],
+                        "reason": "duplicate_id_lower_completeness_or_later_row",
+                    })
+            basin[key_name] = sorted(resolved, key=lambda r: r["row_idx"])
+
+    # duplicate/conflict map (post-dedup awareness)
+    id_counts = defaultdict(int)
+    for rec in all_structures:
+        rid = rec["jct_id"] if rec["structure_type"] == "junction" else rec["inlet_id"]
+        id_counts[(rec["structure_type"], str(rid))] += 1
     # duplicate/conflict map
     id_counts = defaultdict(int)
     for rec in all_structures:
@@ -860,6 +911,58 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
             for fld,key in [("DI_G","up_inv"),("DI_H","dn_inv"),("DI_I","length")]:
                 if di_rec.get(key) is None: req_missing.append(fld)
                 else: req_present.append(fld)
+            decision = "TOPOLOGY_AMBIGUITY" if not recv_sw else ("MISSING_DATA" if req_missing else "MISSING_DATA")
+            rec_fix = "resolve receiving junction" if not recv_sw else "DI TABLE missing length/invert; apply min-slope"
+            missing_rows.append({
+                "source_tab":"HYDROLOGY",
+                "source_row":inlet["row_idx"],
+                "basin_index":basin["index"],
+                "structure_type":"inlet",
+                "source_id":inlet["inlet_id"],
+                "swmm_id":sw,
+                "receiving_junction_swmm_id":recv_sw,
+                "downstream_junction_swmm_id":"",
+                "required_fields_missing":";".join(req_missing),
+                "required_fields_present":";".join(req_present),
+                "decision_class":decision,
+                "recommended_fix":rec_fix,
+            })
+
+    # flag duplicates/conflicts
+    for r in missing_rows:
+        k = (r["structure_type"], str(r["source_id"]))
+        if id_counts.get(k, 0) > 1:
+            r["decision_class"] = "DUPLICATE_OR_CONFLICT"
+            r["recommended_fix"] = "deduplicate conflicting IDs/rows"
+
+    for d in dropped_duplicates:
+        missing_rows.append({
+            "source_tab": "HYDROLOGY",
+            "source_row": d["dropped_source_row"],
+            "basin_index": d["basin_index"],
+            "structure_type": d["structure_type"],
+            "source_id": d["swmm_id"].replace("J_", "").replace("IN_", "").replace("_", "."),
+            "swmm_id": d["swmm_id"],
+            "receiving_junction_swmm_id": "",
+            "downstream_junction_swmm_id": "",
+            "required_fields_missing": "",
+            "required_fields_present": "",
+            "decision_class": "DUPLICATE_OR_CONFLICT",
+            "recommended_fix": f"drop duplicate row {d['dropped_source_row']}; keep row {d['kept_source_row']}",
+        })
+
+            })
+        for inlet in basin.get("inlet_rows", []):
+            sw = in_name(inlet["inlet_id"])
+            if sw in base_node_ids:
+                continue
+            recv = next((jr for jr in reversed(jrows) if jr["row_idx"] < inlet["row_idx"]), None)
+            recv_sw = j_name(recv["jct_id"]) if recv else ""
+            di_rec = di_geom.get(inlet["inlet_id"], {})
+            req_missing=[]; req_present=[]
+            for fld,key in [("DI_G","up_inv"),("DI_H","dn_inv"),("DI_I","length")]:
+                if di_rec.get(key) is None: req_missing.append(fld)
+                else: req_present.append(fld)
             decision = "MISSING_DATA" if req_missing else "TOPOLOGY_AMBIGUITY"
             rec_fix = "DI TABLE missing length/invert; apply min-slope" if req_missing else "resolve receiving junction"
             missing_rows.append({
@@ -917,6 +1020,10 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
     # summary markdown
     lines = ["# Missing Data Summary", ""]
     if not md_df.empty:
+        lines.append("## Counts by basin + structure type + decision class")
+        grp = md_df.groupby(["basin_index", "structure_type", "decision_class"]).size().reset_index(name="count")
+        for _, r in grp.iterrows():
+            lines.append(f"- Basin {int(r['basin_index'])} | {r['structure_type']} | {r['decision_class']}: {int(r['count'])}")
         lines.append("## Counts by basin and structure type")
         grp = md_df.groupby(["basin_index", "structure_type"]).size().reset_index(name="count")
         for _, r in grp.iterrows():
@@ -926,6 +1033,14 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
         pat = md_df["required_fields_missing"].fillna("").replace("", "none").value_counts().head(10)
         for p, c in pat.items():
             lines.append(f"- {p}: {int(c)}")
+        lines.append("")
+        lines.append("## 'none' missing-field pattern by decision class")
+        none_df = md_df[md_df["required_fields_missing"].fillna("") == ""]
+        if none_df.empty:
+            lines.append("- none: 0")
+        else:
+            for cls, c in none_df["decision_class"].value_counts().items():
+                lines.append(f"- none | {cls}: {int(c)}")
         lines.append("")
         lines.append("## Terminal outfall failures (pre-assumption)")
         for basin in basins:
@@ -1088,6 +1203,41 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
     pd.DataFrame(assumption_apps).to_csv(ROOT / "outputs/review/assumption_applications.csv", index=False)
 
     modeled_nodes = set(nodes.keys())
+    assumption_swmm_ids = {str(a.get("swmm_object_id")) for a in assumption_apps}
+    dropped_swmm_ids = {d["swmm_id"] for d in dropped_duplicates}
+    by_swmm: dict[str, dict] = {}
+    for rec in all_structures:
+        sid = rec["jct_id"] if rec["structure_type"] == "junction" else rec["inlet_id"]
+        swmm_id = j_name(sid) if rec["structure_type"] == "junction" else in_name(sid)
+        prev = by_swmm.get(swmm_id)
+        if prev is None or rec["row_idx"] < prev["source_row"]:
+            by_swmm[swmm_id] = {
+                "source_tab": "HYDROLOGY",
+                "source_row": rec["row_idx"],
+                "basin_index": rec["basin_index"],
+                "structure_type": rec["structure_type"],
+                "source_id": sid,
+                "swmm_id": swmm_id,
+            }
+
+    unaccounted_rows = []
+    for swmm_id, row in sorted(by_swmm.items(), key=lambda kv: kv[0]):
+        modeled = swmm_id in modeled_nodes
+        if modeled:
+            modeled_reason = "MODELED_WITH_ASSUMPTION" if swmm_id in assumption_swmm_ids else "MODELED_FROM_SOURCE"
+        else:
+            if swmm_id in dropped_swmm_ids:
+                modeled_reason = "NOT_MODELED_DUPLICATE_CONFLICT"
+            elif row["structure_type"] == "inlet":
+                basin = next((b for b in basins if b["index"] == row["basin_index"]), None)
+                recv = None
+                if basin:
+                    recv = next((jr for jr in reversed(basin.get("junction_rows", [])) if jr["row_idx"] < row["source_row"]), None)
+                modeled_reason = "NOT_MODELED_MISSING_RECEIVING_JUNCTION" if recv is None else "NOT_MODELED_DUPLICATE_CONFLICT"
+            else:
+                modeled_reason = "NOT_MODELED_DUPLICATE_CONFLICT"
+        unaccounted_rows.append({**row, "modeled": modeled, "modeled_reason": modeled_reason, "assumptions_used": swmm_id in assumption_swmm_ids})
+
     unaccounted_rows = []
     for rec in all_structures:
         sid = rec["jct_id"] if rec["structure_type"] == "junction" else rec["inlet_id"]
@@ -1171,7 +1321,6 @@ def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
         encoding="utf-8",
     )
 
-    # model sections
     junction_rows = sorted(nodes.items(), key=lambda kv: kv[0])
     outfall_rows = sorted(outfalls.items(), key=lambda kv: kv[0])
     inflow_rows = sorted([(k, v) for k, v in inflow_by_node.items() if v > 0], key=lambda t: t[0])

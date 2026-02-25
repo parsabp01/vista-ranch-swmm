@@ -7,6 +7,7 @@
 - Outfalls: 9
 - Conduits: 550
 - Inflow nodes: 285
+- QA findings (HIGH): 16
 - QA findings (HIGH): 17
 - Junction nodes: 356
 - Outfalls: 4

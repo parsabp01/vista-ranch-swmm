@@ -1,4 +1,57 @@
 {
+  "generated_at_utc": "2026-02-25T22:21:10.358659+00:00",
+  "current_stage": "qa",
+  "status": "blocked",
+  "message": "QA complete",
+  "inputs_used": [
+    {
+      "path": "models/model.inp",
+      "exists": true,
+      "sha256": "bb282a3511b1de49df187e76b08b46cd5a8646f8c0db76adaae6a0b6a184d8c0"
+    },
+    {
+      "path": "data/processed/nodes.csv",
+      "exists": true,
+      "sha256": "ead6006c94d96e087f5f8a52a566f8e17737f31d754d83ef3b0ec5373697e2ec"
+    },
+    {
+      "path": "data/processed/links.csv",
+      "exists": true,
+      "sha256": "b9861144e184b6a7fa156b73b471b0ef0ac322797eca09652eb2d57ebbcfddb9"
+    }
+  ],
+  "outputs_produced": [
+    "outputs/qa/qa_findings.csv",
+    "outputs/qa/qa_summary.json"
+  ],
+  "key_counts": {
+    "data/interim/nodes_raw.csv": 89,
+    "data/interim/links_raw.csv": 252,
+    "data/interim/rational_raw.csv": 786,
+    "data/processed/nodes.csv": 89,
+    "data/processed/links.csv": 252,
+    "data/processed/rational_data.csv": 786,
+    "data/processed/subcatchment_defaults.csv": 786,
+    "outputs/qa/qa_findings.csv": 5,
+    "models/model.inp_lines": 3095
+  },
+  "assumptions_used": {
+    "synthetic_fallback_allowed": true,
+    "default_config": "configs/defaults.yaml",
+    "build_assumptions": {
+      "topology_mode": "inlet_aware_hydraulic_baseline",
+      "outfall_mode": "basin_segmented",
+      "subcatchments_included": false,
+      "inflow_mode": "static_known_flows_at_inlets",
+      "inlet_nodes_modeled_as": "junctions",
+      "coordinates_mode": "orthogonal_schematic_from_lengths",
+      "column_d_used_as_inlet_id_count": 0,
+      "assumptions_enabled": true,
+      "min_slope_assumed": 0.002,
+      "interpolation_enabled": true
+    }
+  },
+  "next_action": "resolve blocking issues"
   "generated_at_utc": "2026-02-25T21:49:08.559466+00:00",
   "generated_at_utc": "2026-02-25T20:56:37.642258+00:00",
   "current_stage": "phase2_runtime_qaqc",
