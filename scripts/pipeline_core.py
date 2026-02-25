@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Iterable, List, Tuple
+from collections import defaultdict
 
 import openpyxl
 import yaml
@@ -418,186 +419,377 @@ def run_transform(ctx: PipelineContext) -> StageResult:
 def _build_runnable_model(ctx: PipelineContext) -> Tuple[str, dict]:
     import pandas as pd
 
-    processed = ROOT / "data/processed"
-    rational_path = processed / "rational_data.csv"
-    subs_path = processed / "subcatchment_defaults.csv"
-    links_path = processed / "links.csv"
+    workbook_path = ROOT / "data/raw/Copy of BX-HH-Vista Ranch_10-30-2025.xlsm"
+    if not workbook_path.exists():
+        raise FileNotFoundError("Workbook missing")
 
-    if not rational_path.exists() or not subs_path.exists() or not links_path.exists():
-        raise FileNotFoundError("Missing processed inputs; run transform first")
+    wb = openpyxl.load_workbook(workbook_path, data_only=True, read_only=True)
+    hyd = wb["HYDROLOGY"]
+    di = wb["DI TABLE"]
 
-    rational = pd.read_csv(rational_path) if rational_path.stat().st_size > 0 else pd.DataFrame()
-    subs = pd.read_csv(subs_path) if subs_path.stat().st_size > 0 else pd.DataFrame()
-    links = pd.read_csv(links_path) if links_path.stat().st_size > 0 else pd.DataFrame()
+    roughness = float(ctx.defaults_cfg["hydraulics"].get("manning_n_pipe_default", 0.013))
 
-    roughness = float(ctx.defaults_cfg["hydraulics"]["manning_n_pipe_default"])
-    def_len = float(ctx.defaults_cfg["hydraulics"]["conduit_length_default_ft"])
+    def norm_id(v: object) -> str | None:
+        if v is None:
+            return None
+        t = str(v).strip()
+        if not t or t.lower() in {"nan", "none"}:
+            return None
+        m = re.search(r"[-+]?\d+(?:\.\d+)?", t)
+        if not m:
+            return None
+        x = float(m.group(0))
+        return str(int(x)) if x.is_integer() else str(x).rstrip("0").rstrip(".")
 
-    required_cols = {"upstream_node", "downstream_node"}
-    topology_mode = "extracted_links"
-    if links.empty or not required_cols.issubset(set(links.columns)):
-        topology_mode = "synthetic_chain"
+    def as_float(v: object) -> float | None:
+        try:
+            f = float(str(v).strip())
+            return f if math.isfinite(f) else None
+        except Exception:
+            return None
 
-    conduits = []
-    xsections = []
-    node_ids: List[str] = []
-    outfall_id = "OUT1"
+    def j_name(v: str) -> str:
+        return f"J_{v.replace('.', '_')}"
 
-    if topology_mode == "extracted_links":
-        ldf = links.copy()
-        ldf = ldf[ldf["upstream_node"].astype(str).str.len() > 0]
-        ldf = ldf[ldf["downstream_node"].astype(str).str.len() > 0]
-        ldf = ldf.dropna(subset=["upstream_node", "downstream_node"])
-        ldf = ldf.head(250).reset_index(drop=True)
+    def in_name(v: str) -> str:
+        return f"IN_{v.replace('.', '_')}"
 
-        for i, row in ldf.iterrows():
-            us = f"J{int(float(row['upstream_node'])):03d}" if _to_float(row['upstream_node']) is not None else f"J{i+1:03d}"
-            ds = f"J{int(float(row['downstream_node'])):03d}" if _to_float(row['downstream_node']) is not None else f"J{i+2:03d}"
-            length = _to_float(row.get("length"))
-            diameter_in = _to_float(row.get("dia"))
-            if length is None or not math.isfinite(length):
-                length = def_len
-            if diameter_in is None or not math.isfinite(diameter_in):
-                diameter_in = 18.0
-            length = max(length, 10.0)
-            diameter_in = max(diameter_in, 6.0)
-            geom_ft = diameter_in / 12.0
-            cid = f"C{i+1:03d}"
-            conduits.append((cid, us, ds, length, roughness, 0.0, 0.0, 0.0, 0.0))
-            xsections.append((cid, "CIRCULAR", round(geom_ft, 3), 0.0, 0.0, 0.0, 1))
-            node_ids.extend([us, ds])
+    def out_name(v: str) -> str:
+        return f"O_{v.replace('.', '_')}"
 
-        node_ids = sorted(set(node_ids))
-        out_candidates = sorted({c[2] for c in conduits} - {c[1] for c in conduits})
-        if out_candidates:
-            outfall_id = out_candidates[0]
-            conduits = [c if c[2] != outfall_id else (c[0], c[1], "OUT1", c[3], c[4], c[5], c[6], c[7], c[8]) for c in conduits]
-            node_ids = [n for n in node_ids if n != outfall_id]
-    else:
-        q_vals = rational["q"].apply(_to_float) if "q" in rational.columns else pd.Series(dtype=float)
-        q_rows = rational[q_vals.fillna(0) > 0].copy() if not q_vals.empty else rational.head(0).copy()
-        if q_rows.empty:
-            q_rows = rational.head(min(len(rational), 25)).copy()
-            if q_rows.empty:
-                q_rows = pd.DataFrame([{"source_row": 1, "source_sheet": "synthetic"}])
-        q_rows = q_rows.head(min(len(q_rows), 120)).reset_index(drop=True)
-        node_ids = [f"J{i+1:03d}" for i in range(len(q_rows))]
-        for i, nid in enumerate(node_ids):
-            to_node = "OUT1" if i == len(node_ids) - 1 else node_ids[i + 1]
-            cid = f"C{i+1:03d}"
-            conduits.append((cid, nid, to_node, def_len, roughness, 0.0, 0.0, 0.0, 0.0))
-            xsections.append((cid, "CIRCULAR", 1.5, 0.0, 0.0, 0.0, 1))
+    # DI TABLE geometry for inlet->junction pipes (B=inlet id, G/H invert, I length)
+    di_geom: dict[str, dict] = {}
+    for r in di.iter_rows(min_row=1, max_col=9, values_only=True):
+        inlet_id = norm_id(r[1] if len(r) > 1 else None)
+        if not inlet_id:
+            continue
+        up_inv = as_float(r[6] if len(r) > 6 else None)
+        dn_inv = as_float(r[7] if len(r) > 7 else None)
+        length = as_float(r[8] if len(r) > 8 else None)
+        di_geom[inlet_id] = {"up_inv": up_inv, "dn_inv": dn_inv, "length": length}
 
-    node_ids = sorted(set(node_ids))
-    junctions = []
-    coordinates = []
-    for i, nid in enumerate(node_ids):
-        base_elev = 100.0 - (0.2 * i)
-        junctions.append((nid, base_elev, 8.0, 0.0, 0.0, 0.0))
-        coordinates.append((nid, float(i) * 100.0, 1000.0 - float(i) * 8.0))
-    coordinates.append(("OUT1", float(len(node_ids)) * 100.0 + 50.0, 900.0 - float(len(node_ids)) * 8.0))
+    # Parse HYDROLOGY with BASIN segmentation
+    basins: list[dict] = []
+    cur = {"index": 1, "junction_rows": [], "inlet_rows": []}
+    for row_idx, row in enumerate(hyd.iter_rows(min_row=1, max_col=29, values_only=True), start=1):
+        b = row[1] if len(row) > 1 else None  # col B
+        c = row[2] if len(row) > 2 else None  # col C
+        d = row[3] if len(row) > 3 else None  # col D
+        r = row[17] if len(row) > 17 else None  # col R
+        s_col = row[18] if len(row) > 18 else None  # col S
+        v_col = row[21] if len(row) > 21 else None  # col V
+        aa = row[26] if len(row) > 26 else None  # col AA
+        ac = row[28] if len(row) > 28 else None  # col AC
 
-    # map inflows/subcatchments to nodes using rational Q-positive rows
-    q_vals = rational["q"].apply(_to_float) if "q" in rational.columns else pd.Series(dtype=float)
-    q_rows = rational[q_vals.fillna(0) > 0].reset_index(drop=True) if not q_vals.empty else pd.DataFrame()
-    if q_rows.empty:
-        q_rows = rational.head(len(node_ids)).reset_index(drop=True)
+        b_text = str(b).strip() if b is not None else ""
+        if b_text.upper() == "BASIN":
+            if cur["junction_rows"] or cur["inlet_rows"]:
+                cur["basin_break_row"] = row_idx
+                basins.append(cur)
+            cur = {"index": cur["index"] + 1, "junction_rows": [], "inlet_rows": []}
+            continue
 
-    subcatchments = []
-    subareas = []
-    infiltration = []
+        jct_id = norm_id(b)
+        inlet_id = norm_id(c)  # parser guard: only col C for inlet IDs
+        known_q = as_float(r)
+        dia_in = as_float(s_col)
+        length_ft = as_float(v_col)
+        rim = as_float(aa)
+        soffit = as_float(ac)
+        invert = soffit - (dia_in / 12.0) if soffit is not None and dia_in is not None else None
 
-    for i, nid in enumerate(node_ids):
-        src = q_rows.iloc[i] if i < len(q_rows) else pd.Series(dtype=object)
-        area_ac = _to_float(subs.iloc[i]["area_ac"]) if i < len(subs) and "area_ac" in subs.columns else 0.25
-        width = _to_float(subs.iloc[i]["width_ft"]) if i < len(subs) and "width_ft" in subs.columns else 150.0
-        slope_pct = _to_float(subs.iloc[i]["slope_percent"]) if i < len(subs) and "slope_percent" in subs.columns else 1.0
-        imperv = _to_float(subs.iloc[i]["percent_impervious"]) if i < len(subs) and "percent_impervious" in subs.columns else 55.0
+        rec = {
+            "row_idx": row_idx,
+            "jct_id": jct_id,
+            "inlet_id": inlet_id,
+            "known_q_cfs": known_q,
+            "dia_in": dia_in,
+            "length_ft": length_ft,
+            "rim": rim,
+            "soffit": soffit,
+            "invert": invert,
+            "col_d_value": d,
+        }
 
-        area_ac = max(area_ac or 0.25, 0.01)
-        width = max(width or 10.0, 10.0)
-        slope_pct = max(slope_pct or 1.0, 0.1)
-        imperv = max(min(imperv or 55.0, 100.0), 0.0)
+        is_junction_candidate = bool(jct_id) and any(v is not None for v in (dia_in, length_ft, rim, soffit))
+        is_inlet_candidate = bool(inlet_id) and not bool(jct_id)
 
-        sc_id = f"S{i+1:03d}"
-        subcatchments.append((sc_id, "RG1", nid, area_ac, imperv, width, slope_pct, 0.0, ""))
-        subareas.append((sc_id, 0.05, 0.10, 0.01, 0.1, 25.0, "OUTLET", ""))
-        infiltration.append((sc_id, 3.0, 0.5, 4.0, 7.0, 0.0))
+        if is_junction_candidate:
+            cur["junction_rows"].append(rec)
+        elif is_inlet_candidate:
+            cur["inlet_rows"].append(rec)
+    if cur["junction_rows"] or cur["inlet_rows"]:
+        basins.append(cur)
 
-    inflows = []
-    inflow_map_path = processed / "id_map_inflows.csv"
-    if inflow_map_path.exists() and inflow_map_path.stat().st_size > 0:
-        inflow_df = pd.read_csv(inflow_map_path)
-        if "canonical_swmm_node_id" in inflow_df.columns:
-            inflow_df = inflow_df[inflow_df["canonical_swmm_node_id"].astype(str).str.len() > 0]
-            inflow_df = inflow_df[inflow_df["canonical_swmm_node_id"].isin(node_ids)]
-            for nid, grp in inflow_df.groupby("canonical_swmm_node_id"):
-                q_vals = grp["q_cfs"].apply(_to_float) if "q_cfs" in grp.columns else pd.Series(dtype=float)
-                q_total = float(q_vals.fillna(0.0).sum()) if not q_vals.empty else 0.0
-                inflows.append((nid, "FLOW", "", "", "", round(q_total, 4), "", ""))
+    # Build nodes / conduits / inflows with source-traceable IDs
+    nodes: dict[str, dict] = {}
+    outfalls: dict[str, dict] = {}
+    conduits: list[dict] = []
+    inflow_by_node: defaultdict[str, float] = defaultdict(float)
+    findings: list[dict] = []
+    crosswalk: list[dict] = []
 
-    if not inflows:
-        for i, nid in enumerate(node_ids):
-            src = q_rows.iloc[i] if i < len(q_rows) else pd.Series(dtype=object)
-            q = _to_float(src.get("q")) if not src.empty else None
-            inflows.append((nid, "FLOW", "", "", "", round(q or 0.0, 4), "", ""))
+    def add_finding(sev: str, check: str, msg: str, source_row: int | None, entity: str) -> None:
+        findings.append({
+            "severity": sev,
+            "check_name": check,
+            "message": msg,
+            "source_row": source_row,
+            "entity": entity,
+        })
 
-    model_text = []
-    model_text.append("[TITLE]\n;; Auto-generated SWMM model (pipeline build stage)")
-    model_text.append("\n[OPTIONS]\nFLOW_UNITS           CFS\nINFILTRATION         HORTON\nFLOW_ROUTING         DYNWAVE\nSTART_DATE           01/01/2025\nSTART_TIME           00:00:00\nREPORT_START_DATE    01/01/2025\nREPORT_START_TIME    00:00:00\nEND_DATE             01/01/2025\nEND_TIME             06:00:00\nWET_STEP             00:05:00\nDRY_STEP             01:00:00\nROUTING_STEP         00:00:30\nALLOW_PONDING        NO")
-    model_text.append("\n[RAINGAGES]\n;;Name  Format  Interval  SCF  Source\nRG1    INTENSITY  0:05    1.0  TIMESERIES TS1")
-    model_text.append("\n[TIMESERIES]\n;;Name Date Time Value\nTS1 01/01/2025 00:00 0.00\nTS1 01/01/2025 00:30 0.25\nTS1 01/01/2025 01:00 0.50\nTS1 01/01/2025 01:30 0.25\nTS1 01/01/2025 02:00 0.00")
+    seen_cids: set[str] = set()
 
-    model_text.append("\n[JUNCTIONS]\n;;Name  Elevation  MaxDepth  InitDepth  SurDepth  Aponded")
-    for r in junctions:
-        model_text.append(f"{r[0]}  {r[1]:.3f}  {r[2]:.3f}  {r[3]:.3f}  {r[4]:.3f}  {r[5]:.3f}")
+    for basin in basins:
+        jrows = basin["junction_rows"]
+        if not jrows:
+            continue
 
-    model_text.append("\n[OUTFALLS]\n;;Name  Elevation  Type  Stage Data  Gated  Route To\nOUT1  95.000  FREE  ")
+        # create junction nodes
+        for jr in jrows:
+            jid = j_name(jr["jct_id"])
+            if jid in nodes:
+                continue
+            if jr["invert"] is None or jr["rim"] is None:
+                add_finding("HIGH", "junction_missing_elevation", "Missing junction invert/rim from HYDROLOGY AC/AA.", jr["row_idx"], jid)
+                continue
+            max_depth = max(jr["rim"] - jr["invert"], 0.01)
+            nodes[jid] = {
+                "elev": jr["invert"],
+                "max_depth": max_depth,
+                "source_type": "junction",
+                "source_row": jr["row_idx"],
+                "source_id": jr["jct_id"],
+                "rim": jr["rim"],
+            }
+            crosswalk.append({"object_type": "node", "swmm_id": jid, "source_tab": "HYDROLOGY", "source_row": jr["row_idx"], "source_id": jr["jct_id"], "notes": "junction from HYDROLOGY B"})
 
-    model_text.append("\n[CONDUITS]\n;;Name  FromNode  ToNode  Length  Roughness  InOffset  OutOffset  InitFlow  MaxFlow")
-    for r in conduits:
-        model_text.append(f"{r[0]}  {r[1]}  {r[2]}  {r[3]:.2f}  {r[4]:.3f}  {r[5]:.2f}  {r[6]:.2f}  {r[7]:.2f}  {r[8]:.2f}")
+        # inlet rows are attached to next downstream junction in same basin
+        pending_inlets = list(basin["inlet_rows"])
+        for inlet in pending_inlets:
+            recv = None
+            for jr in jrows:
+                if jr["row_idx"] > inlet["row_idx"]:
+                    recv = jr
+                    break
+            if recv is None:
+                recv = jrows[-1]
+            inlet_swmm = in_name(inlet["inlet_id"])
+            recv_swmm = j_name(recv["jct_id"])
+            recv_node = nodes.get(recv_swmm)
+            if recv_node is None:
+                add_finding("HIGH", "inlet_receiving_junction_missing", "Receiving junction missing for inlet row.", inlet["row_idx"], inlet_swmm)
+                continue
 
-    model_text.append("\n[XSECTIONS]\n;;Link  Shape  Geom1  Geom2  Geom3  Geom4  Barrels")
-    for r in xsections:
-        model_text.append(f"{r[0]}  {r[1]}  {r[2]:.3f}  {r[3]:.3f}  {r[4]:.3f}  {r[5]:.3f}  {r[6]}")
+            di_rec = di_geom.get(inlet["inlet_id"])
+            up_inv = di_rec.get("up_inv") if di_rec else None
+            dn_inv = di_rec.get("dn_inv") if di_rec else None
+            length_ft = di_rec.get("length") if di_rec else None
+            if up_inv is None or dn_inv is None or length_ft is None:
+                add_finding("HIGH", "inlet_di_geometry_missing", "Missing DI TABLE geometry for inlet->junction conduit.", inlet["row_idx"], inlet_swmm)
+                continue
+            if inlet_swmm not in nodes:
+                rim_assumed = recv_node["rim"]
+                max_depth = max(rim_assumed - up_inv, 0.01)
+                nodes[inlet_swmm] = {
+                    "elev": up_inv,
+                    "max_depth": max_depth,
+                    "source_type": "inlet",
+                    "source_row": inlet["row_idx"],
+                    "source_id": inlet["inlet_id"],
+                    "rim": rim_assumed,
+                }
+                crosswalk.append({"object_type": "node", "swmm_id": inlet_swmm, "source_tab": "HYDROLOGY/DI TABLE", "source_row": inlet["row_idx"], "source_id": inlet["inlet_id"], "notes": "inlet node; rim assumed equal to receiving junction rim"})
 
-    model_text.append("\n[LOSSES]\n;;Link  Kentry  Kexit  Kavg  FlapGate  Seepage")
-    for r in conduits:
-        model_text.append(f"{r[0]}  0.0  0.0  0.0  NO  0.0")
+            cid = f"L_{inlet_swmm}__{recv_swmm}"
+            if cid not in seen_cids:
+                seen_cids.add(cid)
+                conduits.append({
+                    "cid": cid,
+                    "us": inlet_swmm,
+                    "ds": recv_swmm,
+                    "length": max(length_ft, 0.1),
+                    "dia_ft": max((12.0 / 12.0), 0.5),
+                    "source_row": inlet["row_idx"],
+                    "source_tab": "DI TABLE",
+                })
+                crosswalk.append({"object_type": "conduit", "swmm_id": cid, "source_tab": "DI TABLE", "source_row": inlet["row_idx"], "source_id": inlet["inlet_id"], "notes": "inlet->junction conduit"})
 
-    model_text.append("\n[SUBCATCHMENTS]\n;;Name  RainGage  Outlet  Area  %Imperv  Width  Slope  CurbLen  SnowPack")
-    for r in subcatchments:
-        model_text.append(f"{r[0]}  {r[1]}  {r[2]}  {r[3]:.4f}  {r[4]:.2f}  {r[5]:.2f}  {r[6]:.2f}  {r[7]:.2f}  {r[8]}")
+            if inlet.get("known_q_cfs") is not None and inlet["known_q_cfs"] > 0:
+                inflow_by_node[inlet_swmm] += inlet["known_q_cfs"]
+                crosswalk.append({"object_type": "inflow", "swmm_id": inlet_swmm, "source_tab": "HYDROLOGY", "source_row": inlet["row_idx"], "source_id": inlet["inlet_id"], "notes": f"known flow cfs={inlet['known_q_cfs']}"})
+            elif inlet.get("known_q_cfs") is None:
+                add_finding("HIGH", "inlet_known_flow_missing", "Inlet known flow missing/invalid in HYDROLOGY col R.", inlet["row_idx"], inlet_swmm)
 
-    model_text.append("\n[SUBAREAS]\n;;Subcatchment  N-Imperv  N-Perv  S-Imperv  S-Perv  PctZero  RouteTo  PctRouted")
-    for r in subareas:
-        model_text.append(f"{r[0]}  {r[1]:.3f}  {r[2]:.3f}  {r[3]:.3f}  {r[4]:.3f}  {r[5]:.1f}  {r[6]}  {r[7]}")
+        # junction->downstream junction conduits from current row attributes
+        for i, jr in enumerate(jrows[:-1]):
+            dn = jrows[i + 1]
+            us_swmm = j_name(jr["jct_id"])
+            dn_swmm = j_name(dn["jct_id"])
+            if us_swmm == dn_swmm:
+                add_finding("HIGH", "junction_self_loop_candidate", "Self-loop prevented during build.", jr["row_idx"], us_swmm)
+                continue
+            if us_swmm not in nodes or dn_swmm not in nodes:
+                add_finding("HIGH", "junction_conduit_endpoint_missing_node", "Skipped conduit because endpoint node missing due incomplete junction geometry.", jr["row_idx"], f"{us_swmm}->{dn_swmm}")
+                continue
+            if jr["length_ft"] is None or jr["dia_in"] is None:
+                add_finding("HIGH", "junction_pipe_geometry_missing", "Missing S/V geometry for junction downstream conduit.", jr["row_idx"], us_swmm)
+                continue
+            cid = f"L_{us_swmm}__{dn_swmm}"
+            if cid in seen_cids:
+                continue
+            seen_cids.add(cid)
+            conduits.append({
+                "cid": cid,
+                "us": us_swmm,
+                "ds": dn_swmm,
+                "length": max(jr["length_ft"], 0.1),
+                "dia_ft": max(jr["dia_in"] / 12.0, 0.5),
+                "source_row": jr["row_idx"],
+                "source_tab": "HYDROLOGY",
+            })
+            crosswalk.append({"object_type": "conduit", "swmm_id": cid, "source_tab": "HYDROLOGY", "source_row": jr["row_idx"], "source_id": jr["jct_id"], "notes": "junction->junction downstream conduit"})
 
-    model_text.append("\n[INFILTRATION]\n;;Subcatchment  MaxRate  MinRate  Decay  DryTime  MaxInfil")
-    for r in infiltration:
-        model_text.append(f"{r[0]}  {r[1]:.3f}  {r[2]:.3f}  {r[3]:.3f}  {r[4]:.3f}  {r[5]:.3f}")
+        # terminal junction to basin-specific outfall
+        terminal = jrows[-1]
+        term_swmm = j_name(terminal["jct_id"])
+        of_swmm = out_name(terminal["jct_id"])
+        if term_swmm not in nodes:
+            add_finding("HIGH", "terminal_junction_missing_node", "Skipped basin outfall link because terminal junction node missing geometry.", terminal["row_idx"], term_swmm)
+            continue
+        outfalls[of_swmm] = {"elev": nodes[term_swmm]["elev"], "source_row": terminal["row_idx"], "terminal": term_swmm}
+        cid = f"L_{term_swmm}__{of_swmm}"
+        if cid not in seen_cids:
+            seen_cids.add(cid)
+            conduits.append({
+                "cid": cid,
+                "us": term_swmm,
+                "ds": of_swmm,
+                "length": max((terminal.get("length_ft") or 1.0), 0.1),
+                "dia_ft": max(((terminal.get("dia_in") or 18.0) / 12.0), 0.5),
+                "source_row": terminal["row_idx"],
+                "source_tab": "HYDROLOGY",
+            })
+            crosswalk.append({"object_type": "conduit", "swmm_id": cid, "source_tab": "HYDROLOGY", "source_row": terminal["row_idx"], "source_id": terminal["jct_id"], "notes": "terminal junction->outfall per BASIN rule"})
 
-    model_text.append("\n[INFLOWS]\n;;Node  Constituent  TimeSeries  Type  Mfactor  Sfactor  Baseline  Pattern")
-    for r in inflows:
-        model_text.append(f"{r[0]}  {r[1]}  {r[2]}  {r[3]}  {r[4]}  {r[5]}  {r[6]}  {r[7]}")
+    # remove any self-loops defensively
+    conduits = [c for c in conduits if c["us"] != c["ds"]]
 
-    model_text.append("\n[COORDINATES]\n;;Node  X-Coord  Y-Coord")
-    for r in coordinates:
-        model_text.append(f"{r[0]}  {r[1]:.2f}  {r[2]:.2f}")
+    # deterministic synthetic coordinates per basin chain
+    coords: dict[str, tuple[float, float]] = {}
+    ix = 0
+    for b_idx, basin in enumerate(basins, start=1):
+        y = float(-1000 * (b_idx - 1))
+        x = 0.0
+        for jr in basin.get("junction_rows", []):
+            jid = j_name(jr["jct_id"])
+            if jid in nodes:
+                coords[jid] = (x, y)
+                x += 200.0
+        for ir in basin.get("inlet_rows", []):
+            iid = in_name(ir["inlet_id"])
+            if iid in nodes and iid not in coords:
+                coords[iid] = (max(0.0, x - 150.0), y + (50.0 if (ix % 2 == 0) else -50.0))
+                ix += 1
+        if basin.get("junction_rows"):
+            term = j_name(basin["junction_rows"][-1]["jct_id"])
+            of = out_name(basin["junction_rows"][-1]["jct_id"])
+            if term in coords:
+                coords[of] = (coords[term][0] + 150.0, coords[term][1])
+
+    # write traceability artifacts
+    pd.DataFrame(crosswalk).to_csv(ROOT / "outputs/review/source_traceability_crosswalk.csv", index=False)
+    pd.DataFrame(findings).to_csv(ROOT / "outputs/qa/inlet_knownflow_hydraulic_baseline_findings.csv", index=False)
+
+    # model sections
+    junction_rows = sorted(nodes.items(), key=lambda kv: kv[0])
+    outfall_rows = sorted(outfalls.items(), key=lambda kv: kv[0])
+    inflow_rows = sorted([(k, v) for k, v in inflow_by_node.items() if v > 0], key=lambda t: t[0])
+
+    text: list[str] = []
+    text.append("[TITLE]\n;; Inlet-known-flow hydraulic routing baseline")
+    text.append(
+        "\n[OPTIONS]\n"
+        "FLOW_UNITS           CFS\n"
+        "INFILTRATION         HORTON\n"
+        "FLOW_ROUTING         DYNWAVE\n"
+        "START_DATE           01/01/2025\n"
+        "START_TIME           00:00:00\n"
+        "REPORT_START_DATE    01/01/2025\n"
+        "REPORT_START_TIME    00:00:00\n"
+        "END_DATE             01/01/2025\n"
+        "END_TIME             06:00:00\n"
+        "WET_STEP             00:05:00\n"
+        "DRY_STEP             01:00:00\n"
+        "ROUTING_STEP         00:00:30\n"
+        "ALLOW_PONDING        NO"
+    )
+
+    text.append("\n[JUNCTIONS]\n;;Name  Elevation  MaxDepth  InitDepth  SurDepth  Aponded")
+    for nid, d in junction_rows:
+        text.append(f"{nid}  {d['elev']:.3f}  {d['max_depth']:.3f}  0.000  0.000  0.000")
+
+    text.append("\n[OUTFALLS]\n;;Name  Elevation  Type  Stage Data  Gated  Route To")
+    for oid, d in outfall_rows:
+        text.append(f"{oid}  {d['elev']:.3f}  FREE")
+
+    text.append("\n[CONDUITS]\n;;Name  FromNode  ToNode  Length  Roughness  InOffset  OutOffset  InitFlow  MaxFlow")
+    for c in conduits:
+        text.append(f"{c['cid']}  {c['us']}  {c['ds']}  {c['length']:.2f}  {roughness:.3f}  0.00  0.00  0.00  0.00")
+
+    text.append("\n[XSECTIONS]\n;;Link  Shape  Geom1  Geom2  Geom3  Geom4  Barrels")
+    for c in conduits:
+        text.append(f"{c['cid']}  CIRCULAR  {c['dia_ft']:.3f}  0.000  0.000  0.000  1")
+
+    text.append("\n[LOSSES]\n;;Link  Kentry  Kexit  Kavg  FlapGate  Seepage")
+    for c in conduits:
+        text.append(f"{c['cid']}  0.0  0.0  0.0  NO  0.0")
+
+    text.append("\n[INFLOWS]\n;;Node  Constituent  TimeSeries  Type  Mfactor  Sfactor  Baseline  Pattern")
+    for n, q in inflow_rows:
+        text.append(f'{n}  FLOW  ""  FLOW  1.0  1.0  {q:.4f}  ""')
+
+    text.append("\n[COORDINATES]\n;;Node  X-Coord  Y-Coord")
+    for nid, _d in junction_rows:
+        x, y = coords.get(nid, (0.0, 0.0))
+        text.append(f"{nid}  {x:.2f}  {y:.2f}")
+    for oid, _d in outfall_rows:
+        x, y = coords.get(oid, (0.0, 0.0))
+        text.append(f"{oid}  {x:.2f}  {y:.2f}")
+
+    # summary markdown requested
+    summary_lines = [
+        "# Inlet Known-Flow Hydraulic Baseline QA/QC Summary",
+        "",
+        "- Phase scope: hydraulic routing only (no subcatchments, no rational runoff).",
+        "- Inflows sourced from HYDROLOGY Column R and applied only at inlet nodes.",
+        "- Inlet rim elevation assumption: inlet rim = receiving junction rim (HYDROLOGY AA).",
+        f"- Junction nodes: {len(junction_rows)}",
+        f"- Outfalls: {len(outfall_rows)}",
+        f"- Conduits: {len(conduits)}",
+        f"- Inflow nodes: {len(inflow_rows)}",
+        f"- QA findings (HIGH): {sum(1 for f in findings if f['severity']=='HIGH')}",
+        f"- QA findings (MEDIUM/LOW): {sum(1 for f in findings if f['severity']!='HIGH')}",
+    ]
+    (ROOT / "outputs/qa/inlet_knownflow_hydraulic_baseline_qaqc_summary.md").write_text("\n".join(summary_lines) + "\n", encoding="utf-8")
 
     metadata = {
-        "junction_count": len(junctions),
+        "junction_count": len(junction_rows),
+        "outfall_count": len(outfall_rows),
         "conduit_count": len(conduits),
-        "subcatchment_count": len(subcatchments),
-        "inflow_count": len(inflows),
+        "subcatchment_count": 0,
+        "inflow_count": len(inflow_rows),
         "assumptions": {
-            "topology_mode": topology_mode,
-            "single_outfall": "OUT1",
-            "rainfall_timeseries": "TS1 design storm placeholder",
+            "topology_mode": "inlet_aware_hydraulic_baseline",
+            "outfall_mode": "basin_segmented",
+            "subcatchments_included": False,
+            "inflow_mode": "static_known_flows_at_inlets",
+            "inlet_nodes_modeled_as": "junctions",
+            "coordinates_mode": "deterministic_synthetic",
+            "column_d_used_as_inlet_id_count": 0,
         },
     }
-    return "\n".join(model_text) + "\n", metadata
+    return "\n".join(text) + "\n", metadata
 
 
 def run_build(ctx: PipelineContext) -> StageResult:
