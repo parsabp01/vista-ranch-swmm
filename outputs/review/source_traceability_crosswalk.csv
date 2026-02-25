@@ -38,6 +38,7 @@ node,J_32,HYDROLOGY,96,32,junction from HYDROLOGY B
 node,J_33,HYDROLOGY,99,33,junction from HYDROLOGY B
 node,J_34,HYDROLOGY,100,34,junction from HYDROLOGY B
 node,J_35,HYDROLOGY,102,35,junction from HYDROLOGY B
+node,J_36,HYDROLOGY,105,36,junction from HYDROLOGY B
 node,J_37,HYDROLOGY,106,37,junction from HYDROLOGY B
 node,J_38,HYDROLOGY,110,38,junction from HYDROLOGY B
 node,J_39,HYDROLOGY,111,39,junction from HYDROLOGY B
@@ -56,12 +57,18 @@ node,J_51,HYDROLOGY,138,51,junction from HYDROLOGY B
 node,J_52,HYDROLOGY,143,52,junction from HYDROLOGY B
 node,J_53,HYDROLOGY,144,53,junction from HYDROLOGY B
 node,J_54,HYDROLOGY,147,54,junction from HYDROLOGY B
+node,J_55,HYDROLOGY,151,55,junction from HYDROLOGY B
 node,J_57,HYDROLOGY,153,57,junction from HYDROLOGY B
 node,J_61,HYDROLOGY,157,61,junction from HYDROLOGY B
 node,J_62,HYDROLOGY,158,62,junction from HYDROLOGY B
 node,J_63,HYDROLOGY,161,63,junction from HYDROLOGY B
 node,J_65,HYDROLOGY,164,65,junction from HYDROLOGY B
 node,J_65_1,HYDROLOGY,167,65.1,junction from HYDROLOGY B
+node,J_65_2,HYDROLOGY,171,65.2,junction from HYDROLOGY B
+node,J_65_25,HYDROLOGY,173,65.25,junction from HYDROLOGY B
+node,J_65_3,HYDROLOGY,174,65.3,junction from HYDROLOGY B
+node,J_68,HYDROLOGY,178,68,junction from HYDROLOGY B
+node,J_68_05,HYDROLOGY,179,68.05,junction from HYDROLOGY B
 node,J_68_1,HYDROLOGY,183,68.1,junction from HYDROLOGY B
 node,J_69,HYDROLOGY,184,69,junction from HYDROLOGY B
 node,J_70,HYDROLOGY,188,70,junction from HYDROLOGY B
@@ -72,6 +79,9 @@ node,J_70_3,HYDROLOGY,197,70.3,junction from HYDROLOGY B
 node,J_70_4,HYDROLOGY,199,70.4,junction from HYDROLOGY B
 node,J_71,HYDROLOGY,200,71,junction from HYDROLOGY B
 node,J_71_1,HYDROLOGY,202,71.1,junction from HYDROLOGY B
+node,J_71_2,HYDROLOGY,206,71.2,junction from HYDROLOGY B
+node,J_71_3,HYDROLOGY,209,71.3,junction from HYDROLOGY B
+node,J_71_4,HYDROLOGY,210,71.4,junction from HYDROLOGY B
 node,J_71_5,HYDROLOGY,214,71.5,junction from HYDROLOGY B
 node,J_71_6,HYDROLOGY,216,71.6,junction from HYDROLOGY B
 node,J_71_7,HYDROLOGY,217,71.7,junction from HYDROLOGY B
@@ -82,251 +92,287 @@ node,J_74,HYDROLOGY,222,74,junction from HYDROLOGY B
 node,J_75,HYDROLOGY,226,75,junction from HYDROLOGY B
 node,J_76,HYDROLOGY,229,76,junction from HYDROLOGY B
 node,J_77,HYDROLOGY,230,77,junction from HYDROLOGY B
+node,IN_1,HYDROLOGY/DI TABLE,11,1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_1__J_1,DI TABLE,11,1,inlet->junction conduit
+inflow,IN_1,HYDROLOGY,11,1,known flow cfs=5.06415
 node,IN_2,HYDROLOGY/DI TABLE,12,2,inlet node; rim assumed equal to receiving junction rim
 conduit,L_IN_2__J_1,DI TABLE,12,2,inlet->junction conduit
 inflow,IN_2,HYDROLOGY,12,2,known flow cfs=4.1623129978363425
 node,IN_3,HYDROLOGY/DI TABLE,15,3,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_3__J_2,DI TABLE,15,3,inlet->junction conduit
+conduit,L_IN_3__J_1,DI TABLE,15,3,inlet->junction conduit
 inflow,IN_3,HYDROLOGY,15,3,known flow cfs=7.744274051182544
 node,IN_5,HYDROLOGY/DI TABLE,17,5,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_5__J_3,DI TABLE,17,5,inlet->junction conduit
+conduit,L_IN_5__J_2,DI TABLE,17,5,inlet->junction conduit
 inflow,IN_5,HYDROLOGY,17,5,known flow cfs=1.7244844492880644
 node,IN_6,HYDROLOGY/DI TABLE,20,6,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_6__J_4,DI TABLE,20,6,inlet->junction conduit
+conduit,L_IN_6__J_3,DI TABLE,20,6,inlet->junction conduit
 inflow,IN_6,HYDROLOGY,20,6,known flow cfs=0.30273685961289243
 node,IN_6_1,HYDROLOGY/DI TABLE,21,6.1,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_6_1__J_4,DI TABLE,21,6.1,inlet->junction conduit
+conduit,L_IN_6_1__J_3,DI TABLE,21,6.1,inlet->junction conduit
 inflow,IN_6_1,HYDROLOGY,21,6.1,known flow cfs=0.6956752657724388
 node,IN_7,HYDROLOGY/DI TABLE,22,7,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_7__J_4,DI TABLE,22,7,inlet->junction conduit
+conduit,L_IN_7__J_3,DI TABLE,22,7,inlet->junction conduit
 inflow,IN_7,HYDROLOGY,22,7,known flow cfs=1.525194147684378
 node,IN_8,HYDROLOGY/DI TABLE,25,8,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_8__J_5,DI TABLE,25,8,inlet->junction conduit
+conduit,L_IN_8__J_4_1,DI TABLE,25,8,inlet->junction conduit
 inflow,IN_8,HYDROLOGY,25,8,known flow cfs=3.143511937193623
 node,IN_9,HYDROLOGY/DI TABLE,27,9,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_9__J_6,DI TABLE,27,9,inlet->junction conduit
+conduit,L_IN_9__J_5,DI TABLE,27,9,inlet->junction conduit
 inflow,IN_9,HYDROLOGY,27,9,known flow cfs=1.267685759412265
 node,IN_10,HYDROLOGY/DI TABLE,29,10,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_10__J_6_1,DI TABLE,29,10,inlet->junction conduit
+conduit,L_IN_10__J_6,DI TABLE,29,10,inlet->junction conduit
 inflow,IN_10,HYDROLOGY,29,10,known flow cfs=1.5191476039918381
 node,IN_11,HYDROLOGY/DI TABLE,32,11,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_11__J_7,DI TABLE,32,11,inlet->junction conduit
+conduit,L_IN_11__J_6_1,DI TABLE,32,11,inlet->junction conduit
 inflow,IN_11,HYDROLOGY,32,11,known flow cfs=1.1653070302667903
 node,IN_12,HYDROLOGY/DI TABLE,36,12,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_12__J_8,DI TABLE,36,12,inlet->junction conduit
+conduit,L_IN_12__J_7_1,DI TABLE,36,12,inlet->junction conduit
 inflow,IN_12,HYDROLOGY,36,12,known flow cfs=0.44732516665285776
 node,IN_13,HYDROLOGY/DI TABLE,37,13,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_13__J_8,DI TABLE,37,13,inlet->junction conduit
+conduit,L_IN_13__J_7_1,DI TABLE,37,13,inlet->junction conduit
 inflow,IN_13,HYDROLOGY,37,13,known flow cfs=0.8749701342901313
 node,IN_15,HYDROLOGY/DI TABLE,40,15,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_15__J_11,DI TABLE,40,15,inlet->junction conduit
+conduit,L_IN_15__J_9,DI TABLE,40,15,inlet->junction conduit
 inflow,IN_15,HYDROLOGY,40,15,known flow cfs=1.5483829151967672
 node,IN_16,HYDROLOGY/DI TABLE,43,16,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_16__J_12,DI TABLE,43,16,inlet->junction conduit
+conduit,L_IN_16__J_11,DI TABLE,43,16,inlet->junction conduit
 inflow,IN_16,HYDROLOGY,43,16,known flow cfs=0.8132867064221618
 node,IN_17,HYDROLOGY/DI TABLE,45,17,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_17__J_13,DI TABLE,45,17,inlet->junction conduit
+conduit,L_IN_17__J_12,DI TABLE,45,17,inlet->junction conduit
 inflow,IN_17,HYDROLOGY,45,17,known flow cfs=0.6324456503683936
 node,IN_18,HYDROLOGY/DI TABLE,48,18,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_18__J_14,DI TABLE,48,18,inlet->junction conduit
+conduit,L_IN_18__J_13,DI TABLE,48,18,inlet->junction conduit
 inflow,IN_18,HYDROLOGY,48,18,known flow cfs=0.8165285246647667
 node,IN_19,HYDROLOGY/DI TABLE,52,19,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_19__J_16,DI TABLE,52,19,inlet->junction conduit
+conduit,L_IN_19__J_15,DI TABLE,52,19,inlet->junction conduit
 inflow,IN_19,HYDROLOGY,52,19,known flow cfs=3.3100805540796805
 node,IN_20,HYDROLOGY/DI TABLE,53,20,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_20__J_16,DI TABLE,53,20,inlet->junction conduit
+conduit,L_IN_20__J_15,DI TABLE,53,20,inlet->junction conduit
 inflow,IN_20,HYDROLOGY,53,20,known flow cfs=2.0733253248022447
 node,IN_21,HYDROLOGY/DI TABLE,56,21,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_21__J_17,DI TABLE,56,21,inlet->junction conduit
+conduit,L_IN_21__J_16,DI TABLE,56,21,inlet->junction conduit
 inflow,IN_21,HYDROLOGY,56,21,known flow cfs=1.735009898310502
 node,IN_22,HYDROLOGY/DI TABLE,57,22,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_22__J_17,DI TABLE,57,22,inlet->junction conduit
+conduit,L_IN_22__J_16,DI TABLE,57,22,inlet->junction conduit
 inflow,IN_22,HYDROLOGY,57,22,known flow cfs=1.5299632739647155
 node,IN_23,HYDROLOGY/DI TABLE,61,23,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_23__J_19,DI TABLE,61,23,inlet->junction conduit
+conduit,L_IN_23__J_18,DI TABLE,61,23,inlet->junction conduit
 inflow,IN_23,HYDROLOGY,61,23,known flow cfs=1.7268514007252302
 node,IN_24,HYDROLOGY/DI TABLE,62,24,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_24__J_19,DI TABLE,62,24,inlet->junction conduit
+conduit,L_IN_24__J_18,DI TABLE,62,24,inlet->junction conduit
 inflow,IN_24,HYDROLOGY,62,24,known flow cfs=0.6746511577273973
 node,IN_25,HYDROLOGY/DI TABLE,65,25,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_25__J_21,DI TABLE,65,25,inlet->junction conduit
+conduit,L_IN_25__J_20,DI TABLE,65,25,inlet->junction conduit
 inflow,IN_25,HYDROLOGY,65,25,known flow cfs=1.3899754378809268
 node,IN_26,HYDROLOGY/DI TABLE,68,26,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_26__J_22,DI TABLE,68,26,inlet->junction conduit
+conduit,L_IN_26__J_21,DI TABLE,68,26,inlet->junction conduit
 inflow,IN_26,HYDROLOGY,68,26,known flow cfs=0.7217708647318279
 node,IN_27,HYDROLOGY/DI TABLE,69,27,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_27__J_22,DI TABLE,69,27,inlet->junction conduit
+conduit,L_IN_27__J_21,DI TABLE,69,27,inlet->junction conduit
 inflow,IN_27,HYDROLOGY,69,27,known flow cfs=1.3586144104053792
 node,IN_28,HYDROLOGY/DI TABLE,73,28,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_28__J_24,DI TABLE,73,28,inlet->junction conduit
+conduit,L_IN_28__J_23,DI TABLE,73,28,inlet->junction conduit
 inflow,IN_28,HYDROLOGY,73,28,known flow cfs=0.3100157335225202
 node,IN_29,HYDROLOGY/DI TABLE,74,29,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_29__J_24,DI TABLE,74,29,inlet->junction conduit
+conduit,L_IN_29__J_23,DI TABLE,74,29,inlet->junction conduit
 inflow,IN_29,HYDROLOGY,74,29,known flow cfs=0.42601543529615793
 node,IN_30,HYDROLOGY/DI TABLE,77,30,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_30__J_26,DI TABLE,77,30,inlet->junction conduit
+conduit,L_IN_30__J_25,DI TABLE,77,30,inlet->junction conduit
 inflow,IN_30,HYDROLOGY,77,30,known flow cfs=1.3737475912504429
 node,IN_30_1,HYDROLOGY/DI TABLE,80,30.1,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_30_1__J_26_1,DI TABLE,80,30.1,inlet->junction conduit
+conduit,L_IN_30_1__J_26,DI TABLE,80,30.1,inlet->junction conduit
 inflow,IN_30_1,HYDROLOGY,80,30.1,known flow cfs=0.29034582905338635
 node,IN_31,HYDROLOGY/DI TABLE,82,31,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_31__J_27,DI TABLE,82,31,inlet->junction conduit
+conduit,L_IN_31__J_26_1,DI TABLE,82,31,inlet->junction conduit
 inflow,IN_31,HYDROLOGY,82,31,known flow cfs=4.29933900054389
 node,IN_32,HYDROLOGY/DI TABLE,84,32,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_32__J_27_1,DI TABLE,84,32,inlet->junction conduit
+conduit,L_IN_32__J_27,DI TABLE,84,32,inlet->junction conduit
 inflow,IN_32,HYDROLOGY,84,32,known flow cfs=3.5594847807229306
 node,IN_33,HYDROLOGY/DI TABLE,86,33,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_33__J_28,DI TABLE,86,33,inlet->junction conduit
+conduit,L_IN_33__J_27_1,DI TABLE,86,33,inlet->junction conduit
 inflow,IN_33,HYDROLOGY,86,33,known flow cfs=1.2969654339836414
 node,IN_34,HYDROLOGY/DI TABLE,90,34,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_34__J_30,DI TABLE,90,34,inlet->junction conduit
+conduit,L_IN_34__J_29,DI TABLE,90,34,inlet->junction conduit
 inflow,IN_34,HYDROLOGY,90,34,known flow cfs=1.8635910682297303
 node,IN_35,HYDROLOGY/DI TABLE,94,35,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_35__J_32,DI TABLE,94,35,inlet->junction conduit
+conduit,L_IN_35__J_31,DI TABLE,94,35,inlet->junction conduit
 inflow,IN_35,HYDROLOGY,94,35,known flow cfs=1.0729411516809486
 node,IN_36,HYDROLOGY/DI TABLE,95,36,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_36__J_32,DI TABLE,95,36,inlet->junction conduit
+conduit,L_IN_36__J_31,DI TABLE,95,36,inlet->junction conduit
 inflow,IN_36,HYDROLOGY,95,36,known flow cfs=0.583829421760585
 node,IN_37,HYDROLOGY/DI TABLE,98,37,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_37__J_33,DI TABLE,98,37,inlet->junction conduit
+conduit,L_IN_37__J_32,DI TABLE,98,37,inlet->junction conduit
 inflow,IN_37,HYDROLOGY,98,37,known flow cfs=1.525477929007616
 node,IN_38,HYDROLOGY/DI TABLE,101,38,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_38__J_35,DI TABLE,101,38,inlet->junction conduit
+conduit,L_IN_38__J_34,DI TABLE,101,38,inlet->junction conduit
 inflow,IN_38,HYDROLOGY,101,38,known flow cfs=0.5955215452504522
+node,IN_39,HYDROLOGY/DI TABLE,104,39,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_39__J_35,DI TABLE,104,39,inlet->junction conduit
+inflow,IN_39,HYDROLOGY,104,39,known flow cfs=2.4392117065135954
 node,IN_40,HYDROLOGY/DI TABLE,108,40,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_40__J_38,DI TABLE,108,40,inlet->junction conduit
+conduit,L_IN_40__J_37,DI TABLE,108,40,inlet->junction conduit
 inflow,IN_40,HYDROLOGY,108,40,known flow cfs=0.8210230500456258
 node,IN_41,HYDROLOGY/DI TABLE,109,41,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_41__J_38,DI TABLE,109,41,inlet->junction conduit
+conduit,L_IN_41__J_37,DI TABLE,109,41,inlet->junction conduit
 inflow,IN_41,HYDROLOGY,109,41,known flow cfs=1.0354229000290083
 node,IN_42,HYDROLOGY/DI TABLE,113,42,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_42__J_40,DI TABLE,113,42,inlet->junction conduit
+conduit,L_IN_42__J_39,DI TABLE,113,42,inlet->junction conduit
 inflow,IN_42,HYDROLOGY,113,42,known flow cfs=2.8622791851047085
 node,IN_43,HYDROLOGY/DI TABLE,115,43,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_43__J_41,DI TABLE,115,43,inlet->junction conduit
+conduit,L_IN_43__J_40,DI TABLE,115,43,inlet->junction conduit
 inflow,IN_43,HYDROLOGY,115,43,known flow cfs=1.541798301080851
 node,IN_43_1,HYDROLOGY/DI TABLE,116,43.1,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_43_1__J_41,DI TABLE,116,43.1,inlet->junction conduit
+conduit,L_IN_43_1__J_40,DI TABLE,116,43.1,inlet->junction conduit
 inflow,IN_43_1,HYDROLOGY,116,43.1,known flow cfs=0.5156856126775066
 node,IN_44,HYDROLOGY/DI TABLE,120,44,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_44__J_43,DI TABLE,120,44,inlet->junction conduit
+conduit,L_IN_44__J_42,DI TABLE,120,44,inlet->junction conduit
 inflow,IN_44,HYDROLOGY,120,44,known flow cfs=2.0194452474803106
 node,IN_45,HYDROLOGY/DI TABLE,122,45,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_45__J_44,DI TABLE,122,45,inlet->junction conduit
+conduit,L_IN_45__J_43,DI TABLE,122,45,inlet->junction conduit
 inflow,IN_45,HYDROLOGY,122,45,known flow cfs=1.683122349704686
 node,IN_46,HYDROLOGY/DI TABLE,124,46,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_46__J_45,DI TABLE,124,46,inlet->junction conduit
+conduit,L_IN_46__J_44,DI TABLE,124,46,inlet->junction conduit
 inflow,IN_46,HYDROLOGY,124,46,known flow cfs=1.6207943428780207
 node,IN_47,HYDROLOGY/DI TABLE,126,47,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_47__J_46,DI TABLE,126,47,inlet->junction conduit
+conduit,L_IN_47__J_45,DI TABLE,126,47,inlet->junction conduit
 inflow,IN_47,HYDROLOGY,126,47,known flow cfs=0.41107403101007545
 node,IN_48,HYDROLOGY/DI TABLE,129,48,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_48__J_47,DI TABLE,129,48,inlet->junction conduit
+conduit,L_IN_48__J_46,DI TABLE,129,48,inlet->junction conduit
 inflow,IN_48,HYDROLOGY,129,48,known flow cfs=5.892812894806455
 node,IN_49,HYDROLOGY/DI TABLE,130,49,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_49__J_47,DI TABLE,130,49,inlet->junction conduit
+conduit,L_IN_49__J_46,DI TABLE,130,49,inlet->junction conduit
 inflow,IN_49,HYDROLOGY,130,49,known flow cfs=2.3645939216976855
 node,IN_50,HYDROLOGY/DI TABLE,133,50,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_50__J_49,DI TABLE,133,50,inlet->junction conduit
+conduit,L_IN_50__J_48,DI TABLE,133,50,inlet->junction conduit
 inflow,IN_50,HYDROLOGY,133,50,known flow cfs=3.3438138821475194
 node,IN_51,HYDROLOGY/DI TABLE,136,51,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_51__J_50,DI TABLE,136,51,inlet->junction conduit
+conduit,L_IN_51__J_49,DI TABLE,136,51,inlet->junction conduit
 inflow,IN_51,HYDROLOGY,136,51,known flow cfs=4.518129366224517
 node,IN_52,HYDROLOGY/DI TABLE,140,52,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_52__J_52,DI TABLE,140,52,inlet->junction conduit
+conduit,L_IN_52__J_51,DI TABLE,140,52,inlet->junction conduit
 inflow,IN_52,HYDROLOGY,140,52,known flow cfs=2.9057228366575703
 node,IN_52_1,HYDROLOGY/DI TABLE,141,52.1,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_52_1__J_52,DI TABLE,141,52.1,inlet->junction conduit
+conduit,L_IN_52_1__J_51,DI TABLE,141,52.1,inlet->junction conduit
 inflow,IN_52_1,HYDROLOGY,141,52.1,known flow cfs=1.1018345814309094
 node,IN_53,HYDROLOGY/DI TABLE,142,53,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_53__J_52,DI TABLE,142,53,inlet->junction conduit
+conduit,L_IN_53__J_51,DI TABLE,142,53,inlet->junction conduit
 inflow,IN_53,HYDROLOGY,142,53,known flow cfs=1.0059747769003387
 node,IN_54,HYDROLOGY/DI TABLE,145,54,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_54__J_54,DI TABLE,145,54,inlet->junction conduit
+conduit,L_IN_54__J_53,DI TABLE,145,54,inlet->junction conduit
 inflow,IN_54,HYDROLOGY,145,54,known flow cfs=3.033616783722474
 node,IN_55,HYDROLOGY/DI TABLE,146,55,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_55__J_54,DI TABLE,146,55,inlet->junction conduit
+conduit,L_IN_55__J_53,DI TABLE,146,55,inlet->junction conduit
 inflow,IN_55,HYDROLOGY,146,55,known flow cfs=1.5273032609818076
+node,IN_56,HYDROLOGY/DI TABLE,149,56,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_56__J_54,DI TABLE,149,56,inlet->junction conduit
+inflow,IN_56,HYDROLOGY,149,56,known flow cfs=0.5633595205087099
+node,IN_56_1,HYDROLOGY/DI TABLE,150,56.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_56_1__J_54,DI TABLE,150,56.1,inlet->junction conduit
+inflow,IN_56_1,HYDROLOGY,150,56.1,known flow cfs=2.311515269032413
 node,IN_57,HYDROLOGY/DI TABLE,152,57,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_57__J_57,DI TABLE,152,57,inlet->junction conduit
+conduit,L_IN_57__J_55,DI TABLE,152,57,inlet->junction conduit
 inflow,IN_57,HYDROLOGY,152,57,known flow cfs=2.0546890350778435
 node,IN_60,HYDROLOGY/DI TABLE,155,60,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_60__J_61,DI TABLE,155,60,inlet->junction conduit
+conduit,L_IN_60__J_57,DI TABLE,155,60,inlet->junction conduit
 inflow,IN_60,HYDROLOGY,155,60,known flow cfs=3.331927996968019
 node,IN_61,HYDROLOGY/DI TABLE,156,61,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_61__J_61,DI TABLE,156,61,inlet->junction conduit
+conduit,L_IN_61__J_57,DI TABLE,156,61,inlet->junction conduit
 inflow,IN_61,HYDROLOGY,156,61,known flow cfs=9.200637380142668
 node,IN_62,HYDROLOGY/DI TABLE,159,62,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_62__J_63,DI TABLE,159,62,inlet->junction conduit
+conduit,L_IN_62__J_62,DI TABLE,159,62,inlet->junction conduit
 inflow,IN_62,HYDROLOGY,159,62,known flow cfs=1.5343735408320234
 node,IN_63,HYDROLOGY/DI TABLE,160,63,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_63__J_63,DI TABLE,160,63,inlet->junction conduit
+conduit,L_IN_63__J_62,DI TABLE,160,63,inlet->junction conduit
 inflow,IN_63,HYDROLOGY,160,63,known flow cfs=2.592860625971888
 node,IN_66,HYDROLOGY/DI TABLE,162,66,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_66__J_65,DI TABLE,162,66,inlet->junction conduit
+conduit,L_IN_66__J_63,DI TABLE,162,66,inlet->junction conduit
 inflow,IN_66,HYDROLOGY,162,66,known flow cfs=9.069634853467164
 node,IN_67,HYDROLOGY/DI TABLE,163,67,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_67__J_65,DI TABLE,163,67,inlet->junction conduit
+conduit,L_IN_67__J_63,DI TABLE,163,67,inlet->junction conduit
 inflow,IN_67,HYDROLOGY,163,67,known flow cfs=11.35342703384326
 node,IN_74,HYDROLOGY/DI TABLE,165,74,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_74__J_65_1,DI TABLE,165,74,inlet->junction conduit
+conduit,L_IN_74__J_65,DI TABLE,165,74,inlet->junction conduit
 inflow,IN_74,HYDROLOGY,165,74,known flow cfs=0.6759285369976619
 node,IN_75,HYDROLOGY/DI TABLE,166,75,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_75__J_65_1,DI TABLE,166,75,inlet->junction conduit
+conduit,L_IN_75__J_65,DI TABLE,166,75,inlet->junction conduit
 inflow,IN_75,HYDROLOGY,166,75,known flow cfs=1.9549318032725498
+node,IN_75_1,HYDROLOGY/DI TABLE,169,75.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_75_1__J_65_1,DI TABLE,169,75.1,inlet->junction conduit
+inflow,IN_75_1,HYDROLOGY,169,75.1,known flow cfs=2.96666103003574
+node,IN_75_2,HYDROLOGY/DI TABLE,170,75.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_75_2__J_65_1,DI TABLE,170,75.2,inlet->junction conduit
+inflow,IN_75_2,HYDROLOGY,170,75.2,known flow cfs=0.996263619555813
+node,IN_75_25,HYDROLOGY/DI TABLE,172,75.25,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_75_25__J_65_2,DI TABLE,172,75.25,inlet->junction conduit
+inflow,IN_75_25,HYDROLOGY,172,75.25,known flow cfs=3.1988517653305557
+node,IN_75_3,HYDROLOGY/DI TABLE,176,75.3,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_75_3__J_65_3,DI TABLE,176,75.3,inlet->junction conduit
+inflow,IN_75_3,HYDROLOGY,176,75.3,known flow cfs=2.460948763041774
+node,IN_75_4,HYDROLOGY/DI TABLE,177,75.4,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_75_4__J_65_3,DI TABLE,177,75.4,inlet->junction conduit
+inflow,IN_75_4,HYDROLOGY,177,75.4,known flow cfs=1.3383316352421686
 node,IN_75_5,HYDROLOGY/DI TABLE,181,75.5,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_75_5__J_68_1,DI TABLE,181,75.5,inlet->junction conduit
+conduit,L_IN_75_5__J_68_05,DI TABLE,181,75.5,inlet->junction conduit
 inflow,IN_75_5,HYDROLOGY,181,75.5,known flow cfs=1.1457541743890431
 node,IN_75_6,HYDROLOGY/DI TABLE,182,75.6,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_75_6__J_68_1,DI TABLE,182,75.6,inlet->junction conduit
+conduit,L_IN_75_6__J_68_05,DI TABLE,182,75.6,inlet->junction conduit
 inflow,IN_75_6,HYDROLOGY,182,75.6,known flow cfs=0.43708085015205317
 node,IN_76,HYDROLOGY/DI TABLE,186,76,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_76__J_70,DI TABLE,186,76,inlet->junction conduit
+conduit,L_IN_76__J_69,DI TABLE,186,76,inlet->junction conduit
 inflow,IN_76,HYDROLOGY,186,76,known flow cfs=2.058522293474026
 node,IN_76_2,HYDROLOGY/DI TABLE,187,76.2,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_76_2__J_70,DI TABLE,187,76.2,inlet->junction conduit
+conduit,L_IN_76_2__J_69,DI TABLE,187,76.2,inlet->junction conduit
 inflow,IN_76_2,HYDROLOGY,187,76.2,known flow cfs=0.2855009694720444
 node,IN_76_1,HYDROLOGY/DI TABLE,189,76.1,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_76_1__J_70_01,DI TABLE,189,76.1,inlet->junction conduit
+conduit,L_IN_76_1__J_70,DI TABLE,189,76.1,inlet->junction conduit
 inflow,IN_76_1,HYDROLOGY,189,76.1,known flow cfs=0.8638713915894948
 node,IN_76_3,HYDROLOGY/DI TABLE,192,76.3,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_76_3__J_70_1,DI TABLE,192,76.3,inlet->junction conduit
+conduit,L_IN_76_3__J_70_01,DI TABLE,192,76.3,inlet->junction conduit
 inflow,IN_76_3,HYDROLOGY,192,76.3,known flow cfs=0.730830974256652
 node,IN_76_41,HYDROLOGY/DI TABLE,195,76.41,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_76_41__J_70_3,DI TABLE,195,76.41,inlet->junction conduit
+conduit,L_IN_76_41__J_70_2,DI TABLE,195,76.41,inlet->junction conduit
 inflow,IN_76_41,HYDROLOGY,195,76.41,known flow cfs=0.602460951886546
 node,IN_76_42,HYDROLOGY/DI TABLE,196,76.42,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_76_42__J_70_3,DI TABLE,196,76.42,inlet->junction conduit
+conduit,L_IN_76_42__J_70_2,DI TABLE,196,76.42,inlet->junction conduit
 inflow,IN_76_42,HYDROLOGY,196,76.42,known flow cfs=2.1399941008626926
 node,IN_76_43,HYDROLOGY/DI TABLE,198,76.43,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_76_43__J_70_4,DI TABLE,198,76.43,inlet->junction conduit
+conduit,L_IN_76_43__J_70_3,DI TABLE,198,76.43,inlet->junction conduit
 inflow,IN_76_43,HYDROLOGY,198,76.43,known flow cfs=0.7130354749689496
 node,IN_76_5,HYDROLOGY/DI TABLE,201,76.5,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_76_5__J_71_1,DI TABLE,201,76.5,inlet->junction conduit
+conduit,L_IN_76_5__J_71,DI TABLE,201,76.5,inlet->junction conduit
 inflow,IN_76_5,HYDROLOGY,201,76.5,known flow cfs=3.6942576946988943
+node,IN_77,HYDROLOGY/DI TABLE,204,77,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_77__J_71_1,DI TABLE,204,77,inlet->junction conduit
+inflow,IN_77,HYDROLOGY,204,77,known flow cfs=1.1101931999305445
+node,IN_77_1,HYDROLOGY/DI TABLE,205,77.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_77_1__J_71_1,DI TABLE,205,77.1,inlet->junction conduit
+inflow,IN_77_1,HYDROLOGY,205,77.1,known flow cfs=0.8842803805754089
+node,IN_77_2,HYDROLOGY/DI TABLE,208,77.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_77_2__J_71_2,DI TABLE,208,77.2,inlet->junction conduit
+inflow,IN_77_2,HYDROLOGY,208,77.2,known flow cfs=1.0422228698709426
 node,IN_77_3,HYDROLOGY/DI TABLE,212,77.3,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_77_3__J_71_5,DI TABLE,212,77.3,inlet->junction conduit
+conduit,L_IN_77_3__J_71_4,DI TABLE,212,77.3,inlet->junction conduit
 inflow,IN_77_3,HYDROLOGY,212,77.3,known flow cfs=0.8077860457735805
 node,IN_77_4,HYDROLOGY/DI TABLE,213,77.4,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_77_4__J_71_5,DI TABLE,213,77.4,inlet->junction conduit
+conduit,L_IN_77_4__J_71_4,DI TABLE,213,77.4,inlet->junction conduit
 inflow,IN_77_4,HYDROLOGY,213,77.4,known flow cfs=1.7979133806403576
 node,IN_77_5,HYDROLOGY/DI TABLE,215,77.5,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_77_5__J_71_6,DI TABLE,215,77.5,inlet->junction conduit
+conduit,L_IN_77_5__J_71_5,DI TABLE,215,77.5,inlet->junction conduit
 inflow,IN_77_5,HYDROLOGY,215,77.5,known flow cfs=0.519103946008208
 node,IN_77_6,HYDROLOGY/DI TABLE,218,77.6,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_77_6__J_71_8,DI TABLE,218,77.6,inlet->junction conduit
+conduit,L_IN_77_6__J_71_7,DI TABLE,218,77.6,inlet->junction conduit
 inflow,IN_77_6,HYDROLOGY,218,77.6,known flow cfs=0.9529917897831529
 node,IN_79,HYDROLOGY/DI TABLE,223,79,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_79__J_75,DI TABLE,223,79,inlet->junction conduit
+conduit,L_IN_79__J_74,DI TABLE,223,79,inlet->junction conduit
 inflow,IN_79,HYDROLOGY,223,79,known flow cfs=1.5327021670167063
 node,IN_80,HYDROLOGY/DI TABLE,224,80,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_80__J_75,DI TABLE,224,80,inlet->junction conduit
+conduit,L_IN_80__J_74,DI TABLE,224,80,inlet->junction conduit
 inflow,IN_80,HYDROLOGY,224,80,known flow cfs=1.215933351548682
 node,IN_81,HYDROLOGY/DI TABLE,225,81,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_81__J_75,DI TABLE,225,81,inlet->junction conduit
+conduit,L_IN_81__J_74,DI TABLE,225,81,inlet->junction conduit
 inflow,IN_81,HYDROLOGY,225,81,known flow cfs=0.9122947254203086
 node,IN_82,HYDROLOGY/DI TABLE,228,82,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_82__J_76,DI TABLE,228,82,inlet->junction conduit
+conduit,L_IN_82__J_75,DI TABLE,228,82,inlet->junction conduit
 inflow,IN_82,HYDROLOGY,228,82,known flow cfs=0.736722116015266
 conduit,L_J_1__J_2,HYDROLOGY,13,1,junction->junction downstream conduit
 conduit,L_J_2__J_3,HYDROLOGY,16,2,junction->junction downstream conduit
@@ -366,6 +412,8 @@ conduit,L_J_31__J_32,HYDROLOGY,92,31,junction->junction downstream conduit
 conduit,L_J_32__J_33,HYDROLOGY,96,32,junction->junction downstream conduit
 conduit,L_J_33__J_34,HYDROLOGY,99,33,junction->junction downstream conduit
 conduit,L_J_34__J_35,HYDROLOGY,100,34,junction->junction downstream conduit
+conduit,L_J_35__J_36,HYDROLOGY,102,35,junction->junction downstream conduit
+conduit,L_J_36__J_37,HYDROLOGY,105,36,junction->junction downstream conduit
 conduit,L_J_37__J_38,HYDROLOGY,106,37,junction->junction downstream conduit
 conduit,L_J_38__J_39,HYDROLOGY,110,38,junction->junction downstream conduit
 conduit,L_J_39__J_40,HYDROLOGY,111,39,junction->junction downstream conduit
@@ -383,11 +431,19 @@ conduit,L_J_50__J_51,HYDROLOGY,137,50,junction->junction downstream conduit
 conduit,L_J_51__J_52,HYDROLOGY,138,51,junction->junction downstream conduit
 conduit,L_J_52__J_53,HYDROLOGY,143,52,junction->junction downstream conduit
 conduit,L_J_53__J_54,HYDROLOGY,144,53,junction->junction downstream conduit
+conduit,L_J_54__J_55,HYDROLOGY,147,54,junction->junction downstream conduit
+conduit,L_J_55__J_57,HYDROLOGY,151,55,junction->junction downstream conduit
 conduit,L_J_57__J_61,HYDROLOGY,153,57,junction->junction downstream conduit
 conduit,L_J_61__J_62,HYDROLOGY,157,61,junction->junction downstream conduit
 conduit,L_J_62__J_63,HYDROLOGY,158,62,junction->junction downstream conduit
 conduit,L_J_63__J_65,HYDROLOGY,161,63,junction->junction downstream conduit
 conduit,L_J_65__J_65_1,HYDROLOGY,164,65,junction->junction downstream conduit
+conduit,L_J_65_1__J_65_2,HYDROLOGY,167,65.1,junction->junction downstream conduit
+conduit,L_J_65_2__J_65_25,HYDROLOGY,171,65.2,junction->junction downstream conduit
+conduit,L_J_65_25__J_65_3,HYDROLOGY,173,65.25,junction->junction downstream conduit
+conduit,L_J_65_3__J_68,HYDROLOGY,174,65.3,junction->junction downstream conduit
+conduit,L_J_68__J_68_05,HYDROLOGY,178,68,junction->junction downstream conduit
+conduit,L_J_68_05__J_68_1,HYDROLOGY,179,68.05,junction->junction downstream conduit
 conduit,L_J_68_1__J_69,HYDROLOGY,183,68.1,junction->junction downstream conduit
 conduit,L_J_69__J_70,HYDROLOGY,184,69,junction->junction downstream conduit
 conduit,L_J_70__J_70_01,HYDROLOGY,188,70,junction->junction downstream conduit
@@ -397,6 +453,10 @@ conduit,L_J_70_2__J_70_3,HYDROLOGY,194,70.2,junction->junction downstream condui
 conduit,L_J_70_3__J_70_4,HYDROLOGY,197,70.3,junction->junction downstream conduit
 conduit,L_J_70_4__J_71,HYDROLOGY,199,70.4,junction->junction downstream conduit
 conduit,L_J_71__J_71_1,HYDROLOGY,200,71,junction->junction downstream conduit
+conduit,L_J_71_1__J_71_2,HYDROLOGY,202,71.1,junction->junction downstream conduit
+conduit,L_J_71_2__J_71_3,HYDROLOGY,206,71.2,junction->junction downstream conduit
+conduit,L_J_71_3__J_71_4,HYDROLOGY,209,71.3,junction->junction downstream conduit
+conduit,L_J_71_4__J_71_5,HYDROLOGY,210,71.4,junction->junction downstream conduit
 conduit,L_J_71_5__J_71_6,HYDROLOGY,214,71.5,junction->junction downstream conduit
 conduit,L_J_71_6__J_71_7,HYDROLOGY,216,71.6,junction->junction downstream conduit
 conduit,L_J_71_7__J_71_8,HYDROLOGY,217,71.7,junction->junction downstream conduit
@@ -416,13 +476,17 @@ node,J_81_1,HYDROLOGY,247,81.1,junction from HYDROLOGY B
 node,J_82,HYDROLOGY,250,82,junction from HYDROLOGY B
 node,J_83,HYDROLOGY,253,83,junction from HYDROLOGY B
 node,J_83_1,HYDROLOGY,255,83.1,junction from HYDROLOGY B
+node,J_84,HYDROLOGY,258,84,junction from HYDROLOGY B
+node,J_84_1,HYDROLOGY,260,84.1,junction from HYDROLOGY B
 node,J_85,HYDROLOGY,262,85,junction from HYDROLOGY B
 node,J_86,HYDROLOGY,266,86,junction from HYDROLOGY B
 node,J_87,HYDROLOGY,267,87,junction from HYDROLOGY B
 node,J_88,HYDROLOGY,270,88,junction from HYDROLOGY B
 node,J_88_1,HYDROLOGY,273,88.1,junction from HYDROLOGY B
+node,J_89,HYDROLOGY,275,89,junction from HYDROLOGY B
 node,J_90,HYDROLOGY,279,90,junction from HYDROLOGY B
 node,J_90_1,HYDROLOGY,281,90.1,junction from HYDROLOGY B
+node,J_91,HYDROLOGY,285,91,junction from HYDROLOGY B
 node,J_92,HYDROLOGY,286,92,junction from HYDROLOGY B
 node,J_93,HYDROLOGY,289,93,junction from HYDROLOGY B
 node,J_94,HYDROLOGY,291,94,junction from HYDROLOGY B
@@ -430,18 +494,61 @@ node,J_94_1,HYDROLOGY,292,94.1,junction from HYDROLOGY B
 node,J_94_2,HYDROLOGY,295,94.2,junction from HYDROLOGY B
 node,J_94_4,HYDROLOGY,296,94.4,junction from HYDROLOGY B
 node,J_95,HYDROLOGY,298,95,junction from HYDROLOGY B
+node,J_95_1,HYDROLOGY,301,95.1,junction from HYDROLOGY B
 node,J_95_15,HYDROLOGY,303,95.15,junction from HYDROLOGY B
 node,J_95_2,HYDROLOGY,306,95.2,junction from HYDROLOGY B
 node,J_95_3,HYDROLOGY,307,95.3,junction from HYDROLOGY B
 node,J_95_4,HYDROLOGY,308,95.4,junction from HYDROLOGY B
 node,J_96,HYDROLOGY,311,96,junction from HYDROLOGY B
+node,J_96_1,HYDROLOGY,314,96.1,junction from HYDROLOGY B
+node,J_97,HYDROLOGY,316,97,junction from HYDROLOGY B
+node,J_97_1,HYDROLOGY,319,97.1,junction from HYDROLOGY B
 node,J_98,HYDROLOGY,321,98,junction from HYDROLOGY B
+node,J_99,HYDROLOGY,326,99,junction from HYDROLOGY B
 node,J_100,HYDROLOGY,327,100,junction from HYDROLOGY B
+node,J_101,HYDROLOGY,332,101,junction from HYDROLOGY B
+node,J_101_1,HYDROLOGY,335,101.1,junction from HYDROLOGY B
+node,J_102,HYDROLOGY,339,102,junction from HYDROLOGY B
+node,J_102_1,HYDROLOGY,341,102.1,junction from HYDROLOGY B
+node,J_102_2,HYDROLOGY,344,102.2,junction from HYDROLOGY B
+node,J_102_3,HYDROLOGY,345,102.3,junction from HYDROLOGY B
+node,J_102_4,HYDROLOGY,347,102.4,junction from HYDROLOGY B
+node,J_103,HYDROLOGY,352,103,junction from HYDROLOGY B
+node,J_103_1,HYDROLOGY,356,103.1,junction from HYDROLOGY B
+node,J_103_2,HYDROLOGY,357,103.2,junction from HYDROLOGY B
+node,J_103_3,HYDROLOGY,358,103.3,junction from HYDROLOGY B
+node,J_103_4,HYDROLOGY,361,103.4,junction from HYDROLOGY B
+node,J_103_5,HYDROLOGY,364,103.5,junction from HYDROLOGY B
+node,J_104,HYDROLOGY,365,104,junction from HYDROLOGY B
+node,J_105,HYDROLOGY,369,105,junction from HYDROLOGY B
+node,J_105_1,HYDROLOGY,371,105.1,junction from HYDROLOGY B
+node,J_105_2,HYDROLOGY,375,105.2,junction from HYDROLOGY B
+node,J_105_3,HYDROLOGY,379,105.3,junction from HYDROLOGY B
+node,J_105_4,HYDROLOGY,380,105.4,junction from HYDROLOGY B
+node,J_106,HYDROLOGY,383,106,junction from HYDROLOGY B
+node,J_107,HYDROLOGY,384,107,junction from HYDROLOGY B
+node,J_108,HYDROLOGY,388,108,junction from HYDROLOGY B
+node,J_108_1,HYDROLOGY,390,108.1,junction from HYDROLOGY B
+node,J_108_2,HYDROLOGY,394,108.2,junction from HYDROLOGY B
+node,J_108_3,HYDROLOGY,396,108.3,junction from HYDROLOGY B
+node,J_108_4,HYDROLOGY,397,108.4,junction from HYDROLOGY B
+node,J_109,HYDROLOGY,401,109,junction from HYDROLOGY B
+node,J_109_1,HYDROLOGY,403,109.1,junction from HYDROLOGY B
+node,J_109_2,HYDROLOGY,406,109.2,junction from HYDROLOGY B
+node,J_110,HYDROLOGY,407,110,junction from HYDROLOGY B
+node,J_110_1,HYDROLOGY,411,110.1,junction from HYDROLOGY B
+node,J_110_2,HYDROLOGY,412,110.2,junction from HYDROLOGY B
+node,J_110_3,HYDROLOGY,415,110.3,junction from HYDROLOGY B
 node,J_111,HYDROLOGY,418,111,junction from HYDROLOGY B
 node,J_112,HYDROLOGY,422,112,junction from HYDROLOGY B
 node,J_113,HYDROLOGY,424,113,junction from HYDROLOGY B
 node,J_113_1,HYDROLOGY,426,113.1,junction from HYDROLOGY B
+node,J_113_2,HYDROLOGY,428,113.2,junction from HYDROLOGY B
+node,J_114,HYDROLOGY,432,114,junction from HYDROLOGY B
+node,J_114_1,HYDROLOGY,435,114.1,junction from HYDROLOGY B
+node,J_114_2,HYDROLOGY,437,114.2,junction from HYDROLOGY B
 node,J_115,HYDROLOGY,438,115,junction from HYDROLOGY B
+node,J_116,HYDROLOGY,441,116,junction from HYDROLOGY B
 node,J_117,HYDROLOGY,442,117,junction from HYDROLOGY B
 node,J_118,HYDROLOGY,447,118,junction from HYDROLOGY B
 node,J_119,HYDROLOGY,448,119,junction from HYDROLOGY B
@@ -460,167 +567,360 @@ node,J_131,HYDROLOGY,477,131,junction from HYDROLOGY B
 node,J_132,HYDROLOGY,478,132,junction from HYDROLOGY B
 node,J_132_1,HYDROLOGY,481,132.1,junction from HYDROLOGY B
 node,J_133,HYDROLOGY,482,133,junction from HYDROLOGY B
+node,J_134,HYDROLOGY,484,134,junction from HYDROLOGY B
 node,IN_83,HYDROLOGY/DI TABLE,234,83,inlet node; rim assumed equal to receiving junction rim
 conduit,L_IN_83__J_78,DI TABLE,234,83,inlet->junction conduit
 inflow,IN_83,HYDROLOGY,234,83,known flow cfs=2.989263724951318
 node,IN_84,HYDROLOGY/DI TABLE,236,84,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_84__J_78_1,DI TABLE,236,84,inlet->junction conduit
+conduit,L_IN_84__J_78,DI TABLE,236,84,inlet->junction conduit
 inflow,IN_84,HYDROLOGY,236,84,known flow cfs=2.1350414153554085
 node,IN_85,HYDROLOGY/DI TABLE,239,85,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_85__J_79,DI TABLE,239,85,inlet->junction conduit
+conduit,L_IN_85__J_78_1,DI TABLE,239,85,inlet->junction conduit
 inflow,IN_85,HYDROLOGY,239,85,known flow cfs=3.11859268781484
 node,IN_86,HYDROLOGY/DI TABLE,240,86,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_86__J_79,DI TABLE,240,86,inlet->junction conduit
+conduit,L_IN_86__J_78_1,DI TABLE,240,86,inlet->junction conduit
 inflow,IN_86,HYDROLOGY,240,86,known flow cfs=0.8309712548782374
 node,IN_87,HYDROLOGY/DI TABLE,243,87,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_87__J_81,DI TABLE,243,87,inlet->junction conduit
+conduit,L_IN_87__J_80,DI TABLE,243,87,inlet->junction conduit
 inflow,IN_87,HYDROLOGY,243,87,known flow cfs=1.8266384276856453
 node,IN_88,HYDROLOGY/DI TABLE,244,88,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_88__J_81,DI TABLE,244,88,inlet->junction conduit
+conduit,L_IN_88__J_80,DI TABLE,244,88,inlet->junction conduit
 inflow,IN_88,HYDROLOGY,244,88,known flow cfs=1.9434359625458868
 node,IN_89,HYDROLOGY/DI TABLE,246,89,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_89__J_81_1,DI TABLE,246,89,inlet->junction conduit
+conduit,L_IN_89__J_81,DI TABLE,246,89,inlet->junction conduit
 inflow,IN_89,HYDROLOGY,246,89,known flow cfs=2.683201623092343
 node,IN_90,HYDROLOGY/DI TABLE,248,90,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_90__J_82,DI TABLE,248,90,inlet->junction conduit
+conduit,L_IN_90__J_81_1,DI TABLE,248,90,inlet->junction conduit
 inflow,IN_90,HYDROLOGY,248,90,known flow cfs=0.3206182960293739
 node,IN_91,HYDROLOGY/DI TABLE,249,91,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_91__J_82,DI TABLE,249,91,inlet->junction conduit
+conduit,L_IN_91__J_81_1,DI TABLE,249,91,inlet->junction conduit
 inflow,IN_91,HYDROLOGY,249,91,known flow cfs=0.20669885692957043
 node,IN_92,HYDROLOGY/DI TABLE,251,92,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_92__J_83,DI TABLE,251,92,inlet->junction conduit
+conduit,L_IN_92__J_82,DI TABLE,251,92,inlet->junction conduit
 inflow,IN_92,HYDROLOGY,251,92,known flow cfs=1.3705751225348233
 node,IN_93,HYDROLOGY/DI TABLE,252,93,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_93__J_83,DI TABLE,252,93,inlet->junction conduit
+conduit,L_IN_93__J_82,DI TABLE,252,93,inlet->junction conduit
 inflow,IN_93,HYDROLOGY,252,93,known flow cfs=0.4408443021631194
 node,IN_94,HYDROLOGY/DI TABLE,254,94,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_94__J_83_1,DI TABLE,254,94,inlet->junction conduit
+conduit,L_IN_94__J_83,DI TABLE,254,94,inlet->junction conduit
 inflow,IN_94,HYDROLOGY,254,94,known flow cfs=1.1886620254501854
+node,IN_95,HYDROLOGY/DI TABLE,257,95,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_95__J_83_1,DI TABLE,257,95,inlet->junction conduit
+inflow,IN_95,HYDROLOGY,257,95,known flow cfs=2.411561031005961
+node,IN_96,HYDROLOGY/DI TABLE,259,96,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_96__J_84,DI TABLE,259,96,inlet->junction conduit
+inflow,IN_96,HYDROLOGY,259,96,known flow cfs=2.6280346374350567
 node,IN_97,HYDROLOGY/DI TABLE,261,97,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_97__J_85,DI TABLE,261,97,inlet->junction conduit
+conduit,L_IN_97__J_84_1,DI TABLE,261,97,inlet->junction conduit
 inflow,IN_97,HYDROLOGY,261,97,known flow cfs=2.3468108840590913
 node,IN_98,HYDROLOGY/DI TABLE,264,98,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_98__J_86,DI TABLE,264,98,inlet->junction conduit
+conduit,L_IN_98__J_85,DI TABLE,264,98,inlet->junction conduit
 inflow,IN_98,HYDROLOGY,264,98,known flow cfs=7.445870011315445
 node,IN_99,HYDROLOGY/DI TABLE,265,99,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_99__J_86,DI TABLE,265,99,inlet->junction conduit
+conduit,L_IN_99__J_85,DI TABLE,265,99,inlet->junction conduit
 inflow,IN_99,HYDROLOGY,265,99,known flow cfs=1.5095661163978313
 node,IN_100,HYDROLOGY/DI TABLE,269,100,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_100__J_88,DI TABLE,269,100,inlet->junction conduit
+conduit,L_IN_100__J_87,DI TABLE,269,100,inlet->junction conduit
 inflow,IN_100,HYDROLOGY,269,100,known flow cfs=0.2955725397286027
 node,IN_100_1,HYDROLOGY/DI TABLE,271,100.1,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_100_1__J_88_1,DI TABLE,271,100.1,inlet->junction conduit
+conduit,L_IN_100_1__J_88,DI TABLE,271,100.1,inlet->junction conduit
 inflow,IN_100_1,HYDROLOGY,271,100.1,known flow cfs=2.02914612758226
 node,IN_101,HYDROLOGY/DI TABLE,272,101,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_101__J_88_1,DI TABLE,272,101,inlet->junction conduit
+conduit,L_IN_101__J_88,DI TABLE,272,101,inlet->junction conduit
 inflow,IN_101,HYDROLOGY,272,101,known flow cfs=4.62429781901931
+node,IN_102,HYDROLOGY/DI TABLE,274,102,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_102__J_88_1,DI TABLE,274,102,inlet->junction conduit
+inflow,IN_102,HYDROLOGY,274,102,known flow cfs=3.384259516402501
 node,IN_103,HYDROLOGY/DI TABLE,277,103,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_103__J_90,DI TABLE,277,103,inlet->junction conduit
+conduit,L_IN_103__J_89,DI TABLE,277,103,inlet->junction conduit
 inflow,IN_103,HYDROLOGY,277,103,known flow cfs=2.2272735959656016
 node,IN_104,HYDROLOGY/DI TABLE,278,104,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_104__J_90,DI TABLE,278,104,inlet->junction conduit
+conduit,L_IN_104__J_89,DI TABLE,278,104,inlet->junction conduit
 inflow,IN_104,HYDROLOGY,278,104,known flow cfs=0.5450872226319937
 node,IN_105,HYDROLOGY/DI TABLE,280,105,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_105__J_90_1,DI TABLE,280,105,inlet->junction conduit
+conduit,L_IN_105__J_90,DI TABLE,280,105,inlet->junction conduit
 inflow,IN_105,HYDROLOGY,280,105,known flow cfs=1.724162583188669
+node,IN_106,HYDROLOGY/DI TABLE,283,106,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_106__J_90_1,DI TABLE,283,106,inlet->junction conduit
+inflow,IN_106,HYDROLOGY,283,106,known flow cfs=1.816865039403901
+node,IN_106_1,HYDROLOGY/DI TABLE,284,106.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_106_1__J_90_1,DI TABLE,284,106.1,inlet->junction conduit
+inflow,IN_106_1,HYDROLOGY,284,106.1,known flow cfs=1.151760240088633
 node,IN_107,HYDROLOGY/DI TABLE,287,107,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_107__J_93,DI TABLE,287,107,inlet->junction conduit
+conduit,L_IN_107__J_92,DI TABLE,287,107,inlet->junction conduit
 inflow,IN_107,HYDROLOGY,287,107,known flow cfs=3.8175086753690435
 node,IN_108,HYDROLOGY/DI TABLE,288,108,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_108__J_93,DI TABLE,288,108,inlet->junction conduit
+conduit,L_IN_108__J_92,DI TABLE,288,108,inlet->junction conduit
 inflow,IN_108,HYDROLOGY,288,108,known flow cfs=2.9709983560839612
 node,IN_109,HYDROLOGY/DI TABLE,290,109,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_109__J_94,DI TABLE,290,109,inlet->junction conduit
+conduit,L_IN_109__J_93,DI TABLE,290,109,inlet->junction conduit
 inflow,IN_109,HYDROLOGY,290,109,known flow cfs=0.8459199865464858
 node,IN_110_1,HYDROLOGY/DI TABLE,294,110.1,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_110_1__J_94_2,DI TABLE,294,110.1,inlet->junction conduit
+conduit,L_IN_110_1__J_94_1,DI TABLE,294,110.1,inlet->junction conduit
 inflow,IN_110_1,HYDROLOGY,294,110.1,known flow cfs=4.972461906317455
 node,IN_111,HYDROLOGY/DI TABLE,297,111,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_111__J_95,DI TABLE,297,111,inlet->junction conduit
+conduit,L_IN_111__J_94_4,DI TABLE,297,111,inlet->junction conduit
 inflow,IN_111,HYDROLOGY,297,111,known flow cfs=1.892337427846887
+node,IN_112,HYDROLOGY/DI TABLE,300,112,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_112__J_95,DI TABLE,300,112,inlet->junction conduit
+inflow,IN_112,HYDROLOGY,300,112,known flow cfs=2.591977287922787
 node,IN_112_1,HYDROLOGY/DI TABLE,302,112.1,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_112_1__J_95_15,DI TABLE,302,112.1,inlet->junction conduit
+conduit,L_IN_112_1__J_95_1,DI TABLE,302,112.1,inlet->junction conduit
 inflow,IN_112_1,HYDROLOGY,302,112.1,known flow cfs=0.92292856075784
 node,IN_112_2,HYDROLOGY/DI TABLE,304,112.2,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_112_2__J_95_2,DI TABLE,304,112.2,inlet->junction conduit
+conduit,L_IN_112_2__J_95_15,DI TABLE,304,112.2,inlet->junction conduit
 inflow,IN_112_2,HYDROLOGY,304,112.2,known flow cfs=0.763328681349788
 node,IN_113,HYDROLOGY/DI TABLE,305,113,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_113__J_95_2,DI TABLE,305,113,inlet->junction conduit
+conduit,L_IN_113__J_95_15,DI TABLE,305,113,inlet->junction conduit
 inflow,IN_113,HYDROLOGY,305,113,known flow cfs=1.6449200232810854
 node,IN_114,HYDROLOGY/DI TABLE,309,114,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_114__J_96,DI TABLE,309,114,inlet->junction conduit
+conduit,L_IN_114__J_95_4,DI TABLE,309,114,inlet->junction conduit
 inflow,IN_114,HYDROLOGY,309,114,known flow cfs=5.3899328049934265
 node,IN_115,HYDROLOGY/DI TABLE,310,115,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_115__J_96,DI TABLE,310,115,inlet->junction conduit
+conduit,L_IN_115__J_95_4,DI TABLE,310,115,inlet->junction conduit
 inflow,IN_115,HYDROLOGY,310,115,known flow cfs=2.660685938283288
+node,IN_115_1,HYDROLOGY/DI TABLE,313,115.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_115_1__J_96,DI TABLE,313,115.1,inlet->junction conduit
+inflow,IN_115_1,HYDROLOGY,313,115.1,known flow cfs=1.8205047056959742
+node,IN_116,HYDROLOGY/DI TABLE,315,116,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_116__J_96_1,DI TABLE,315,116,inlet->junction conduit
+inflow,IN_116,HYDROLOGY,315,116,known flow cfs=0.9591329842082281
+node,IN_116_01,HYDROLOGY/DI TABLE,317,116.01,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_116_01__J_97,DI TABLE,317,116.01,inlet->junction conduit
+inflow,IN_116_01,HYDROLOGY,317,116.01,known flow cfs=0.6719296982354694
+node,IN_116_02,HYDROLOGY/DI TABLE,318,116.02,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_116_02__J_97,DI TABLE,318,116.02,inlet->junction conduit
+inflow,IN_116_02,HYDROLOGY,318,116.02,known flow cfs=0.42981963882578694
 node,IN_116_1,HYDROLOGY/DI TABLE,320,116.1,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_116_1__J_98,DI TABLE,320,116.1,inlet->junction conduit
+conduit,L_IN_116_1__J_97_1,DI TABLE,320,116.1,inlet->junction conduit
 inflow,IN_116_1,HYDROLOGY,320,116.1,known flow cfs=3.2795393326177225
+node,IN_116_2,HYDROLOGY/DI TABLE,323,116.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_116_2__J_98,DI TABLE,323,116.2,inlet->junction conduit
+inflow,IN_116_2,HYDROLOGY,323,116.2,known flow cfs=0.31772677667238247
+node,IN_116_3,HYDROLOGY/DI TABLE,324,116.3,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_116_3__J_98,DI TABLE,324,116.3,inlet->junction conduit
+inflow,IN_116_3,HYDROLOGY,324,116.3,known flow cfs=0.8530749677040999
+node,IN_116_4,HYDROLOGY/DI TABLE,325,116.4,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_116_4__J_98,DI TABLE,325,116.4,inlet->junction conduit
+inflow,IN_116_4,HYDROLOGY,325,116.4,known flow cfs=0.44843648658279117
+node,IN_117,HYDROLOGY/DI TABLE,329,117,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_117__J_100,DI TABLE,329,117,inlet->junction conduit
+inflow,IN_117,HYDROLOGY,329,117,known flow cfs=2.4665094500723246
+node,IN_117_1,HYDROLOGY/DI TABLE,330,117.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_117_1__J_100,DI TABLE,330,117.1,inlet->junction conduit
+inflow,IN_117_1,HYDROLOGY,330,117.1,known flow cfs=0.8485332595815052
+node,IN_117_2,HYDROLOGY/DI TABLE,331,117.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_117_2__J_100,DI TABLE,331,117.2,inlet->junction conduit
+inflow,IN_117_2,HYDROLOGY,331,117.2,known flow cfs=0.8761506523696999
+node,IN_118,HYDROLOGY/DI TABLE,333,118,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_118__J_101,DI TABLE,333,118,inlet->junction conduit
+inflow,IN_118,HYDROLOGY,333,118,known flow cfs=2.9984816388410063
+node,IN_118_1,HYDROLOGY/DI TABLE,334,118.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_118_1__J_101,DI TABLE,334,118.1,inlet->junction conduit
+inflow,IN_118_1,HYDROLOGY,334,118.1,known flow cfs=2.766437269239633
+node,IN_119,HYDROLOGY/DI TABLE,337,119,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_119__J_101_1,DI TABLE,337,119,inlet->junction conduit
+inflow,IN_119,HYDROLOGY,337,119,known flow cfs=0.4066488453274558
+node,IN_119_1,HYDROLOGY/DI TABLE,338,119.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_119_1__J_101_1,DI TABLE,338,119.1,inlet->junction conduit
+inflow,IN_119_1,HYDROLOGY,338,119.1,known flow cfs=2.64033620728278
+node,IN_119_2,HYDROLOGY/DI TABLE,340,119.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_119_2__J_102,DI TABLE,340,119.2,inlet->junction conduit
+inflow,IN_119_2,HYDROLOGY,340,119.2,known flow cfs=1.6426097511599298
+node,IN_120,HYDROLOGY/DI TABLE,343,120,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_120__J_102_1,DI TABLE,343,120,inlet->junction conduit
+inflow,IN_120,HYDROLOGY,343,120,known flow cfs=0.3255223901676649
+node,IN_121,HYDROLOGY/DI TABLE,346,121,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_121__J_102_3,DI TABLE,346,121,inlet->junction conduit
+inflow,IN_121,HYDROLOGY,346,121,known flow cfs=1.1486637091303127
+node,IN_122,HYDROLOGY/DI TABLE,349,122,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_122__J_102_4,DI TABLE,349,122,inlet->junction conduit
+inflow,IN_122,HYDROLOGY,349,122,known flow cfs=7.24863956086581
+node,IN_122_1,HYDROLOGY/DI TABLE,350,122.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_122_1__J_102_4,DI TABLE,350,122.1,inlet->junction conduit
+inflow,IN_122_1,HYDROLOGY,350,122.1,known flow cfs=1.3725745787865444
+node,IN_122_2,HYDROLOGY/DI TABLE,351,122.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_122_2__J_102_4,DI TABLE,351,122.2,inlet->junction conduit
+inflow,IN_122_2,HYDROLOGY,351,122.2,known flow cfs=1.609975788955401
+node,IN_123,HYDROLOGY/DI TABLE,354,123,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_123__J_103,DI TABLE,354,123,inlet->junction conduit
+inflow,IN_123,HYDROLOGY,354,123,known flow cfs=1.93338149447613
+node,IN_123_1,HYDROLOGY/DI TABLE,355,123.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_123_1__J_103,DI TABLE,355,123.1,inlet->junction conduit
+inflow,IN_123_1,HYDROLOGY,355,123.1,known flow cfs=0.8187057871241463
+node,IN_123_2,HYDROLOGY/DI TABLE,359,123.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_123_2__J_103_3,DI TABLE,359,123.2,inlet->junction conduit
+inflow,IN_123_2,HYDROLOGY,359,123.2,known flow cfs=3.2513040533471047
+node,IN_123_3,HYDROLOGY/DI TABLE,360,123.3,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_123_3__J_103_3,DI TABLE,360,123.3,inlet->junction conduit
+inflow,IN_123_3,HYDROLOGY,360,123.3,known flow cfs=2.1105762796571046
+node,IN_123_4,HYDROLOGY/DI TABLE,363,123.4,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_123_4__J_103_4,DI TABLE,363,123.4,inlet->junction conduit
+inflow,IN_123_4,HYDROLOGY,363,123.4,known flow cfs=1.9761083831453266
+node,IN_124,HYDROLOGY/DI TABLE,367,124,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_124__J_104,DI TABLE,367,124,inlet->junction conduit
+inflow,IN_124,HYDROLOGY,367,124,known flow cfs=2.0131497581558224
+node,IN_124_1,HYDROLOGY/DI TABLE,368,124.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_124_1__J_104,DI TABLE,368,124.1,inlet->junction conduit
+inflow,IN_124_1,HYDROLOGY,368,124.1,known flow cfs=1.606356387199905
+node,IN_124_2,HYDROLOGY/DI TABLE,370,124.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_124_2__J_105,DI TABLE,370,124.2,inlet->junction conduit
+inflow,IN_124_2,HYDROLOGY,370,124.2,known flow cfs=1.2733641615583668
+node,IN_124_3,HYDROLOGY/DI TABLE,373,124.3,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_124_3__J_105_1,DI TABLE,373,124.3,inlet->junction conduit
+inflow,IN_124_3,HYDROLOGY,373,124.3,known flow cfs=1.3291698993643588
+node,IN_124_4,HYDROLOGY/DI TABLE,374,124.4,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_124_4__J_105_1,DI TABLE,374,124.4,inlet->junction conduit
+inflow,IN_124_4,HYDROLOGY,374,124.4,known flow cfs=4.995371646573514
+node,IN_124_5,HYDROLOGY/DI TABLE,377,124.5,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_124_5__J_105_2,DI TABLE,377,124.5,inlet->junction conduit
+inflow,IN_124_5,HYDROLOGY,377,124.5,known flow cfs=0.4769647831563018
+node,IN_124_6,HYDROLOGY/DI TABLE,378,124.6,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_124_6__J_105_2,DI TABLE,378,124.6,inlet->junction conduit
+inflow,IN_124_6,HYDROLOGY,378,124.6,known flow cfs=1.0259491847262532
+node,IN_125,HYDROLOGY/DI TABLE,381,125,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_125__J_105_4,DI TABLE,381,125,inlet->junction conduit
+inflow,IN_125,HYDROLOGY,381,125,known flow cfs=1.6315177828095704
+node,IN_126,HYDROLOGY/DI TABLE,382,126,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_126__J_105_4,DI TABLE,382,126,inlet->junction conduit
+inflow,IN_126,HYDROLOGY,382,126,known flow cfs=1.2577532867285344
+node,IN_127,HYDROLOGY/DI TABLE,386,127,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_127__J_107,DI TABLE,386,127,inlet->junction conduit
+inflow,IN_127,HYDROLOGY,386,127,known flow cfs=1.4187131260012653
+node,IN_127_1,HYDROLOGY/DI TABLE,387,127.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_127_1__J_107,DI TABLE,387,127.1,inlet->junction conduit
+inflow,IN_127_1,HYDROLOGY,387,127.1,known flow cfs=0.3739172986974579
+node,IN_127_2,HYDROLOGY/DI TABLE,389,127.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_127_2__J_108,DI TABLE,389,127.2,inlet->junction conduit
+inflow,IN_127_2,HYDROLOGY,389,127.2,known flow cfs=0.956403968143271
+node,IN_128,HYDROLOGY/DI TABLE,392,128,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_128__J_108_1,DI TABLE,392,128,inlet->junction conduit
+inflow,IN_128,HYDROLOGY,392,128,known flow cfs=1.57697945630536
+node,IN_128_1,HYDROLOGY/DI TABLE,393,128.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_128_1__J_108_1,DI TABLE,393,128.1,inlet->junction conduit
+inflow,IN_128_1,HYDROLOGY,393,128.1,known flow cfs=0.41428273314838654
+node,IN_128_2,HYDROLOGY/DI TABLE,395,128.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_128_2__J_108_2,DI TABLE,395,128.2,inlet->junction conduit
+inflow,IN_128_2,HYDROLOGY,395,128.2,known flow cfs=1.1584611445115678
+node,IN_129,HYDROLOGY/DI TABLE,399,129,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_129__J_108_4,DI TABLE,399,129,inlet->junction conduit
+inflow,IN_129,HYDROLOGY,399,129,known flow cfs=0.5713329291800812
+node,IN_129_1,HYDROLOGY/DI TABLE,400,129.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_129_1__J_108_4,DI TABLE,400,129.1,inlet->junction conduit
+inflow,IN_129_1,HYDROLOGY,400,129.1,known flow cfs=0.36067902126037443
+node,IN_129_2,HYDROLOGY/DI TABLE,402,129.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_129_2__J_109,DI TABLE,402,129.2,inlet->junction conduit
+inflow,IN_129_2,HYDROLOGY,402,129.2,known flow cfs=3.8543814730108745
+node,IN_130,HYDROLOGY/DI TABLE,404,130,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_130__J_109_1,DI TABLE,404,130,inlet->junction conduit
+inflow,IN_130,HYDROLOGY,404,130,known flow cfs=0.34944370782711276
+node,IN_130_1,HYDROLOGY/DI TABLE,405,130.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_130_1__J_109_1,DI TABLE,405,130.1,inlet->junction conduit
+inflow,IN_130_1,HYDROLOGY,405,130.1,known flow cfs=0.7378972201623684
+node,IN_130_2,HYDROLOGY/DI TABLE,409,130.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_130_2__J_110,DI TABLE,409,130.2,inlet->junction conduit
+inflow,IN_130_2,HYDROLOGY,409,130.2,known flow cfs=1.3658031208324004
+node,IN_130_3,HYDROLOGY/DI TABLE,410,130.3,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_130_3__J_110,DI TABLE,410,130.3,inlet->junction conduit
+inflow,IN_130_3,HYDROLOGY,410,130.3,known flow cfs=0.6117143532888725
+node,IN_130_4,HYDROLOGY/DI TABLE,413,130.4,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_130_4__J_110_2,DI TABLE,413,130.4,inlet->junction conduit
+inflow,IN_130_4,HYDROLOGY,413,130.4,known flow cfs=0.6942680181996882
+node,IN_130_5,HYDROLOGY/DI TABLE,414,130.5,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_130_5__J_110_2,DI TABLE,414,130.5,inlet->junction conduit
+inflow,IN_130_5,HYDROLOGY,414,130.5,known flow cfs=0.8676970690464261
 node,IN_131,HYDROLOGY/DI TABLE,416,131,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_131__J_111,DI TABLE,416,131,inlet->junction conduit
+conduit,L_IN_131__J_110_3,DI TABLE,416,131,inlet->junction conduit
 inflow,IN_131,HYDROLOGY,416,131,known flow cfs=7.65664091208228
 node,IN_132,HYDROLOGY/DI TABLE,417,132,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_132__J_111,DI TABLE,417,132,inlet->junction conduit
+conduit,L_IN_132__J_110_3,DI TABLE,417,132,inlet->junction conduit
 inflow,IN_132,HYDROLOGY,417,132,known flow cfs=8.533324184127533
 node,IN_133,HYDROLOGY/DI TABLE,420,133,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_133__J_112,DI TABLE,420,133,inlet->junction conduit
+conduit,L_IN_133__J_111,DI TABLE,420,133,inlet->junction conduit
 inflow,IN_133,HYDROLOGY,420,133,known flow cfs=0.9651845212239357
 node,IN_134,HYDROLOGY/DI TABLE,421,134,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_134__J_112,DI TABLE,421,134,inlet->junction conduit
+conduit,L_IN_134__J_111,DI TABLE,421,134,inlet->junction conduit
 inflow,IN_134,HYDROLOGY,421,134,known flow cfs=0.25208707915119605
 node,IN_135,HYDROLOGY/DI TABLE,423,135,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_135__J_113,DI TABLE,423,135,inlet->junction conduit
+conduit,L_IN_135__J_112,DI TABLE,423,135,inlet->junction conduit
 inflow,IN_135,HYDROLOGY,423,135,known flow cfs=0.4762538388643828
 node,IN_136,HYDROLOGY/DI TABLE,425,136,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_136__J_113_1,DI TABLE,425,136,inlet->junction conduit
+conduit,L_IN_136__J_113,DI TABLE,425,136,inlet->junction conduit
 inflow,IN_136,HYDROLOGY,425,136,known flow cfs=1.8230192526860718
+node,IN_140,HYDROLOGY/DI TABLE,427,140,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_140__J_113_1,DI TABLE,427,140,inlet->junction conduit
+inflow,IN_140,HYDROLOGY,427,140,known flow cfs=2.5974098348308905
+node,IN_137,HYDROLOGY/DI TABLE,430,137,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_137__J_113_2,DI TABLE,430,137,inlet->junction conduit
+inflow,IN_137,HYDROLOGY,430,137,known flow cfs=0.8750501764063501
+node,IN_137_1,HYDROLOGY/DI TABLE,431,137.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_137_1__J_113_2,DI TABLE,431,137.1,inlet->junction conduit
+inflow,IN_137_1,HYDROLOGY,431,137.1,known flow cfs=0.5986113120038645
+node,IN_138,HYDROLOGY/DI TABLE,434,138,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_138__J_114,DI TABLE,434,138,inlet->junction conduit
+inflow,IN_138,HYDROLOGY,434,138,known flow cfs=1.9617903873444142
+node,IN_139,HYDROLOGY/DI TABLE,436,139,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_139__J_114_1,DI TABLE,436,139,inlet->junction conduit
+inflow,IN_139,HYDROLOGY,436,139,known flow cfs=2.5542244097188487
+node,IN_141,HYDROLOGY/DI TABLE,440,141,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_141__J_115,DI TABLE,440,141,inlet->junction conduit
+inflow,IN_141,HYDROLOGY,440,141,known flow cfs=3.219089144196915
 node,IN_143,HYDROLOGY/DI TABLE,444,143,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_143__J_118,DI TABLE,444,143,inlet->junction conduit
+conduit,L_IN_143__J_117,DI TABLE,444,143,inlet->junction conduit
 inflow,IN_143,HYDROLOGY,444,143,known flow cfs=1.0376475889814438
 node,IN_144,HYDROLOGY/DI TABLE,445,144,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_144__J_118,DI TABLE,445,144,inlet->junction conduit
+conduit,L_IN_144__J_117,DI TABLE,445,144,inlet->junction conduit
 inflow,IN_144,HYDROLOGY,445,144,known flow cfs=1.0070165533597513
 node,IN_145,HYDROLOGY/DI TABLE,446,145,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_145__J_118,DI TABLE,446,145,inlet->junction conduit
+conduit,L_IN_145__J_117,DI TABLE,446,145,inlet->junction conduit
 inflow,IN_145,HYDROLOGY,446,145,known flow cfs=0.9140003134030443
 node,IN_146,HYDROLOGY/DI TABLE,450,146,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_146__J_120,DI TABLE,450,146,inlet->junction conduit
+conduit,L_IN_146__J_119,DI TABLE,450,146,inlet->junction conduit
 inflow,IN_146,HYDROLOGY,450,146,known flow cfs=1.6833809352680504
 node,IN_147,HYDROLOGY/DI TABLE,452,147,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_147__J_121,DI TABLE,452,147,inlet->junction conduit
+conduit,L_IN_147__J_120,DI TABLE,452,147,inlet->junction conduit
 inflow,IN_147,HYDROLOGY,452,147,known flow cfs=2.7305407293570196
 node,IN_148,HYDROLOGY/DI TABLE,455,148,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_148__J_122,DI TABLE,455,148,inlet->junction conduit
+conduit,L_IN_148__J_121,DI TABLE,455,148,inlet->junction conduit
+node,IN_149,HYDROLOGY/DI TABLE,456,149,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_149__J_121,DI TABLE,456,149,inlet->junction conduit
+inflow,IN_149,HYDROLOGY,456,149,known flow cfs=6.93768038398964
 node,IN_150,HYDROLOGY/DI TABLE,458,150,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_150__J_123,DI TABLE,458,150,inlet->junction conduit
+conduit,L_IN_150__J_122,DI TABLE,458,150,inlet->junction conduit
 inflow,IN_150,HYDROLOGY,458,150,known flow cfs=1.8219220724225729
 node,IN_151,HYDROLOGY/DI TABLE,460,151,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_151__J_124,DI TABLE,460,151,inlet->junction conduit
+conduit,L_IN_151__J_123,DI TABLE,460,151,inlet->junction conduit
 inflow,IN_151,HYDROLOGY,460,151,known flow cfs=0.9067460392306969
 node,IN_152,HYDROLOGY/DI TABLE,463,152,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_152__J_125,DI TABLE,463,152,inlet->junction conduit
+conduit,L_IN_152__J_124,DI TABLE,463,152,inlet->junction conduit
 inflow,IN_152,HYDROLOGY,463,152,known flow cfs=1.8648034521387458
 node,IN_153,HYDROLOGY/DI TABLE,465,153,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_153__J_126,DI TABLE,465,153,inlet->junction conduit
+conduit,L_IN_153__J_125,DI TABLE,465,153,inlet->junction conduit
 inflow,IN_153,HYDROLOGY,465,153,known flow cfs=4.649063981864076
 node,IN_154,HYDROLOGY/DI TABLE,466,154,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_154__J_126,DI TABLE,466,154,inlet->junction conduit
+conduit,L_IN_154__J_125,DI TABLE,466,154,inlet->junction conduit
 inflow,IN_154,HYDROLOGY,466,154,known flow cfs=0.8174744530324635
 node,IN_155,HYDROLOGY/DI TABLE,469,155,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_155__J_128,DI TABLE,469,155,inlet->junction conduit
+conduit,L_IN_155__J_127,DI TABLE,469,155,inlet->junction conduit
 inflow,IN_155,HYDROLOGY,469,155,known flow cfs=0.7278686689058472
+node,IN_156,HYDROLOGY/DI TABLE,470,156,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_156__J_127,DI TABLE,470,156,inlet->junction conduit
+inflow,IN_156,HYDROLOGY,470,156,known flow cfs=2.2980373214901535
 node,IN_157,HYDROLOGY/DI TABLE,472,157,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_157__J_129,DI TABLE,472,157,inlet->junction conduit
+conduit,L_IN_157__J_128,DI TABLE,472,157,inlet->junction conduit
 inflow,IN_157,HYDROLOGY,472,157,known flow cfs=2.0992183868415166
 node,IN_158,HYDROLOGY/DI TABLE,473,158,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_158__J_129,DI TABLE,473,158,inlet->junction conduit
+conduit,L_IN_158__J_128,DI TABLE,473,158,inlet->junction conduit
 inflow,IN_158,HYDROLOGY,473,158,known flow cfs=2.73819908653186
 node,IN_159,HYDROLOGY/DI TABLE,476,159,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_159__J_131,DI TABLE,476,159,inlet->junction conduit
+conduit,L_IN_159__J_130,DI TABLE,476,159,inlet->junction conduit
 inflow,IN_159,HYDROLOGY,476,159,known flow cfs=0.7505946548736029
 node,IN_160,HYDROLOGY/DI TABLE,480,160,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_160__J_132_1,DI TABLE,480,160,inlet->junction conduit
+conduit,L_IN_160__J_132,DI TABLE,480,160,inlet->junction conduit
 inflow,IN_160,HYDROLOGY,480,160,known flow cfs=3.972467095812928
+node,IN_162,HYDROLOGY/DI TABLE,483,162,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_162__J_133,DI TABLE,483,162,inlet->junction conduit
+inflow,IN_162,HYDROLOGY,483,162,known flow cfs=4.231421156889631
 conduit,L_J_78__J_78_1,HYDROLOGY,235,78,junction->junction downstream conduit
 conduit,L_J_78_1__J_79,HYDROLOGY,237,78.1,junction->junction downstream conduit
 conduit,L_J_79__J_80,HYDROLOGY,241,79,junction->junction downstream conduit
@@ -629,24 +929,80 @@ conduit,L_J_81__J_81_1,HYDROLOGY,245,81,junction->junction downstream conduit
 conduit,L_J_81_1__J_82,HYDROLOGY,247,81.1,junction->junction downstream conduit
 conduit,L_J_82__J_83,HYDROLOGY,250,82,junction->junction downstream conduit
 conduit,L_J_83__J_83_1,HYDROLOGY,253,83,junction->junction downstream conduit
+conduit,L_J_83_1__J_84,HYDROLOGY,255,83.1,junction->junction downstream conduit
+conduit,L_J_84__J_84_1,HYDROLOGY,258,84,junction->junction downstream conduit
+conduit,L_J_84_1__J_85,HYDROLOGY,260,84.1,junction->junction downstream conduit
 conduit,L_J_85__J_86,HYDROLOGY,262,85,junction->junction downstream conduit
 conduit,L_J_86__J_87,HYDROLOGY,266,86,junction->junction downstream conduit
 conduit,L_J_87__J_88,HYDROLOGY,267,87,junction->junction downstream conduit
 conduit,L_J_88__J_88_1,HYDROLOGY,270,88,junction->junction downstream conduit
+conduit,L_J_88_1__J_89,HYDROLOGY,273,88.1,junction->junction downstream conduit
+conduit,L_J_89__J_90,HYDROLOGY,275,89,junction->junction downstream conduit
 conduit,L_J_90__J_90_1,HYDROLOGY,279,90,junction->junction downstream conduit
+conduit,L_J_90_1__J_91,HYDROLOGY,281,90.1,junction->junction downstream conduit
+conduit,L_J_91__J_92,HYDROLOGY,285,91,junction->junction downstream conduit
 conduit,L_J_92__J_93,HYDROLOGY,286,92,junction->junction downstream conduit
 conduit,L_J_93__J_94,HYDROLOGY,289,93,junction->junction downstream conduit
 conduit,L_J_94__J_94_1,HYDROLOGY,291,94,junction->junction downstream conduit
 conduit,L_J_94_1__J_94_2,HYDROLOGY,292,94.1,junction->junction downstream conduit
 conduit,L_J_94_2__J_94_4,HYDROLOGY,295,94.2,junction->junction downstream conduit
 conduit,L_J_94_4__J_95,HYDROLOGY,296,94.4,junction->junction downstream conduit
+conduit,L_J_95__J_95_1,HYDROLOGY,298,95,junction->junction downstream conduit
+conduit,L_J_95_1__J_95_15,HYDROLOGY,301,95.1,junction->junction downstream conduit
 conduit,L_J_95_15__J_95_2,HYDROLOGY,303,95.15,junction->junction downstream conduit
 conduit,L_J_95_2__J_95_3,HYDROLOGY,306,95.2,junction->junction downstream conduit
 conduit,L_J_95_3__J_95_4,HYDROLOGY,307,95.3,junction->junction downstream conduit
 conduit,L_J_95_4__J_96,HYDROLOGY,308,95.4,junction->junction downstream conduit
+conduit,L_J_96__J_96_1,HYDROLOGY,311,96,junction->junction downstream conduit
+conduit,L_J_96_1__J_97,HYDROLOGY,314,96.1,junction->junction downstream conduit
+conduit,L_J_97__J_97_1,HYDROLOGY,316,97,junction->junction downstream conduit
+conduit,L_J_97_1__J_98,HYDROLOGY,319,97.1,junction->junction downstream conduit
+conduit,L_J_98__J_99,HYDROLOGY,321,98,junction->junction downstream conduit
+conduit,L_J_99__J_100,HYDROLOGY,326,99,junction->junction downstream conduit
+conduit,L_J_100__J_101,HYDROLOGY,327,100,junction->junction downstream conduit
+conduit,L_J_101__J_101_1,HYDROLOGY,332,101,junction->junction downstream conduit
+conduit,L_J_101_1__J_102,HYDROLOGY,335,101.1,junction->junction downstream conduit
+conduit,L_J_102__J_102_1,HYDROLOGY,339,102,junction->junction downstream conduit
+conduit,L_J_102_1__J_102_2,HYDROLOGY,341,102.1,junction->junction downstream conduit
+conduit,L_J_102_2__J_102_3,HYDROLOGY,344,102.2,junction->junction downstream conduit
+conduit,L_J_102_3__J_102_4,HYDROLOGY,345,102.3,junction->junction downstream conduit
+conduit,L_J_102_4__J_103,HYDROLOGY,347,102.4,junction->junction downstream conduit
+conduit,L_J_103__J_103_1,HYDROLOGY,352,103,junction->junction downstream conduit
+conduit,L_J_103_1__J_103_2,HYDROLOGY,356,103.1,junction->junction downstream conduit
+conduit,L_J_103_2__J_103_3,HYDROLOGY,357,103.2,junction->junction downstream conduit
+conduit,L_J_103_3__J_103_4,HYDROLOGY,358,103.3,junction->junction downstream conduit
+conduit,L_J_103_4__J_103_5,HYDROLOGY,361,103.4,junction->junction downstream conduit
+conduit,L_J_103_5__J_104,HYDROLOGY,364,103.5,junction->junction downstream conduit
+conduit,L_J_104__J_105,HYDROLOGY,365,104,junction->junction downstream conduit
+conduit,L_J_105__J_105_1,HYDROLOGY,369,105,junction->junction downstream conduit
+conduit,L_J_105_1__J_105_2,HYDROLOGY,371,105.1,junction->junction downstream conduit
+conduit,L_J_105_2__J_105_3,HYDROLOGY,375,105.2,junction->junction downstream conduit
+conduit,L_J_105_3__J_105_4,HYDROLOGY,379,105.3,junction->junction downstream conduit
+conduit,L_J_105_4__J_106,HYDROLOGY,380,105.4,junction->junction downstream conduit
+conduit,L_J_106__J_107,HYDROLOGY,383,106,junction->junction downstream conduit
+conduit,L_J_107__J_108,HYDROLOGY,384,107,junction->junction downstream conduit
+conduit,L_J_108__J_108_1,HYDROLOGY,388,108,junction->junction downstream conduit
+conduit,L_J_108_1__J_108_2,HYDROLOGY,390,108.1,junction->junction downstream conduit
+conduit,L_J_108_2__J_108_3,HYDROLOGY,394,108.2,junction->junction downstream conduit
+conduit,L_J_108_3__J_108_4,HYDROLOGY,396,108.3,junction->junction downstream conduit
+conduit,L_J_108_4__J_109,HYDROLOGY,397,108.4,junction->junction downstream conduit
+conduit,L_J_109__J_109_1,HYDROLOGY,401,109,junction->junction downstream conduit
+conduit,L_J_109_1__J_109_2,HYDROLOGY,403,109.1,junction->junction downstream conduit
+conduit,L_J_109_2__J_110,HYDROLOGY,406,109.2,junction->junction downstream conduit
+conduit,L_J_110__J_110_1,HYDROLOGY,407,110,junction->junction downstream conduit
+conduit,L_J_110_1__J_110_2,HYDROLOGY,411,110.1,junction->junction downstream conduit
+conduit,L_J_110_2__J_110_3,HYDROLOGY,412,110.2,junction->junction downstream conduit
+conduit,L_J_110_3__J_111,HYDROLOGY,415,110.3,junction->junction downstream conduit
 conduit,L_J_111__J_112,HYDROLOGY,418,111,junction->junction downstream conduit
 conduit,L_J_112__J_113,HYDROLOGY,422,112,junction->junction downstream conduit
 conduit,L_J_113__J_113_1,HYDROLOGY,424,113,junction->junction downstream conduit
+conduit,L_J_113_1__J_113_2,HYDROLOGY,426,113.1,junction->junction downstream conduit
+conduit,L_J_113_2__J_114,HYDROLOGY,428,113.2,junction->junction downstream conduit
+conduit,L_J_114__J_114_1,HYDROLOGY,432,114,junction->junction downstream conduit
+conduit,L_J_114_1__J_114_2,HYDROLOGY,435,114.1,junction->junction downstream conduit
+conduit,L_J_114_2__J_115,HYDROLOGY,437,114.2,junction->junction downstream conduit
+conduit,L_J_115__J_116,HYDROLOGY,438,115,junction->junction downstream conduit
+conduit,L_J_116__J_117,HYDROLOGY,441,116,junction->junction downstream conduit
 conduit,L_J_117__J_118,HYDROLOGY,442,117,junction->junction downstream conduit
 conduit,L_J_118__J_119,HYDROLOGY,447,118,junction->junction downstream conduit
 conduit,L_J_119__J_120,HYDROLOGY,448,119,junction->junction downstream conduit
@@ -664,6 +1020,8 @@ conduit,L_J_130__J_131,HYDROLOGY,475,130,junction->junction downstream conduit
 conduit,L_J_131__J_132,HYDROLOGY,477,131,junction->junction downstream conduit
 conduit,L_J_132__J_132_1,HYDROLOGY,478,132,junction->junction downstream conduit
 conduit,L_J_132_1__J_133,HYDROLOGY,481,132.1,junction->junction downstream conduit
+conduit,L_J_133__J_134,HYDROLOGY,482,133,junction->junction downstream conduit
+conduit,L_J_134__O_134,HYDROLOGY,484,134,terminal junction->outfall per BASIN rule
 node,J_134_1,HYDROLOGY,489,134.1,junction from HYDROLOGY B
 node,IN_161,HYDROLOGY/DI TABLE,488,161,inlet node; rim assumed equal to receiving junction rim
 conduit,L_IN_161__J_134_1,DI TABLE,488,161,inlet->junction conduit
@@ -674,6 +1032,19 @@ node,IN_163,HYDROLOGY/DI TABLE,493,163,inlet node; rim assumed equal to receivin
 conduit,L_IN_163__J_135,DI TABLE,493,163,inlet->junction conduit
 inflow,IN_163,HYDROLOGY,493,163,known flow cfs=2.9030708929392315
 conduit,L_J_135__O_135,HYDROLOGY,494,135,terminal junction->outfall per BASIN rule
+node,J_136,HYDROLOGY,500,136,junction from HYDROLOGY B
+node,J_136_1,HYDROLOGY,503,136.1,junction from HYDROLOGY B
+node,J_136_2,HYDROLOGY,505,136.2,junction from HYDROLOGY B
+node,J_136_3,HYDROLOGY,507,136.3,junction from HYDROLOGY B
+node,J_136_4,HYDROLOGY,509,136.4,junction from HYDROLOGY B
+node,J_136_5,HYDROLOGY,511,136.5,junction from HYDROLOGY B
+node,J_136_6,HYDROLOGY,512,136.6,junction from HYDROLOGY B
+node,J_136_7,HYDROLOGY,515,136.7,junction from HYDROLOGY B
+node,J_136_8,HYDROLOGY,519,136.8,junction from HYDROLOGY B
+node,J_136_9,HYDROLOGY,520,136.9,junction from HYDROLOGY B
+node,J_137,HYDROLOGY,524,137,junction from HYDROLOGY B
+node,J_137_1,HYDROLOGY,526,137.1,junction from HYDROLOGY B
+node,J_137_2,HYDROLOGY,527,137.2,junction from HYDROLOGY B
 node,J_138,HYDROLOGY,530,138,junction from HYDROLOGY B
 node,J_139,HYDROLOGY,534,139,junction from HYDROLOGY B
 node,J_140,HYDROLOGY,536,140,junction from HYDROLOGY B
@@ -694,87 +1065,142 @@ node,J_153_1,HYDROLOGY,572,153.1,junction from HYDROLOGY B
 node,J_154,HYDROLOGY,575,154,junction from HYDROLOGY B
 node,J_155,HYDROLOGY,577,155,junction from HYDROLOGY B
 node,J_156,HYDROLOGY,580,156,junction from HYDROLOGY B
+node,IN_164,HYDROLOGY/DI TABLE,498,164,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_164__J_136,DI TABLE,498,164,inlet->junction conduit
+inflow,IN_164,HYDROLOGY,498,164,known flow cfs=2.466020784235071
+node,IN_165,HYDROLOGY/DI TABLE,499,165,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_165__J_136,DI TABLE,499,165,inlet->junction conduit
+inflow,IN_165,HYDROLOGY,499,165,known flow cfs=0.44491252733499087
+node,IN_165_1,HYDROLOGY/DI TABLE,502,165.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_165_1__J_136,DI TABLE,502,165.1,inlet->junction conduit
+inflow,IN_165_1,HYDROLOGY,502,165.1,known flow cfs=1.8212520321959202
+node,IN_165_2,HYDROLOGY/DI TABLE,504,165.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_165_2__J_136_1,DI TABLE,504,165.2,inlet->junction conduit
+inflow,IN_165_2,HYDROLOGY,504,165.2,known flow cfs=0.6548849956121274
+node,IN_165_3,HYDROLOGY/DI TABLE,506,165.3,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_165_3__J_136_2,DI TABLE,506,165.3,inlet->junction conduit
+inflow,IN_165_3,HYDROLOGY,506,165.3,known flow cfs=1.2141913915747131
+node,IN_165_4,HYDROLOGY/DI TABLE,508,165.4,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_165_4__J_136_3,DI TABLE,508,165.4,inlet->junction conduit
+inflow,IN_165_4,HYDROLOGY,508,165.4,known flow cfs=2.2957328536579698
+node,IN_165_5,HYDROLOGY/DI TABLE,510,165.5,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_165_5__J_136_4,DI TABLE,510,165.5,inlet->junction conduit
+inflow,IN_165_5,HYDROLOGY,510,165.5,known flow cfs=1.020752892827949
+node,IN_165_6,HYDROLOGY/DI TABLE,513,165.6,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_165_6__J_136_6,DI TABLE,513,165.6,inlet->junction conduit
+inflow,IN_165_6,HYDROLOGY,513,165.6,known flow cfs=1.0008875418867056
+node,IN_165_7,HYDROLOGY/DI TABLE,514,165.7,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_165_7__J_136_6,DI TABLE,514,165.7,inlet->junction conduit
+inflow,IN_165_7,HYDROLOGY,514,165.7,known flow cfs=0.5964069111204582
+node,IN_165_8,HYDROLOGY/DI TABLE,517,165.8,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_165_8__J_136_7,DI TABLE,517,165.8,inlet->junction conduit
+inflow,IN_165_8,HYDROLOGY,517,165.8,known flow cfs=0.38907850364660623
+node,IN_165_9,HYDROLOGY/DI TABLE,518,165.9,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_165_9__J_136_7,DI TABLE,518,165.9,inlet->junction conduit
+inflow,IN_165_9,HYDROLOGY,518,165.9,known flow cfs=0.9111650467424932
+node,IN_166,HYDROLOGY/DI TABLE,522,166,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_166__J_136_9,DI TABLE,522,166,inlet->junction conduit
+inflow,IN_166,HYDROLOGY,522,166,known flow cfs=1.8364106357138823
+node,IN_166_1,HYDROLOGY/DI TABLE,523,166.1,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_166_1__J_136_9,DI TABLE,523,166.1,inlet->junction conduit
+inflow,IN_166_1,HYDROLOGY,523,166.1,known flow cfs=2.5427696603777856
+node,IN_166_2,HYDROLOGY/DI TABLE,525,166.2,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_166_2__J_137,DI TABLE,525,166.2,inlet->junction conduit
+inflow,IN_166_2,HYDROLOGY,525,166.2,known flow cfs=1.7932010327889938
 node,IN_167,HYDROLOGY/DI TABLE,528,167,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_167__J_138,DI TABLE,528,167,inlet->junction conduit
+conduit,L_IN_167__J_137_2,DI TABLE,528,167,inlet->junction conduit
 inflow,IN_167,HYDROLOGY,528,167,known flow cfs=1.7034949293823063
 node,IN_168,HYDROLOGY/DI TABLE,529,168,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_168__J_138,DI TABLE,529,168,inlet->junction conduit
+conduit,L_IN_168__J_137_2,DI TABLE,529,168,inlet->junction conduit
 inflow,IN_168,HYDROLOGY,529,168,known flow cfs=1.7791918779034674
 node,IN_169,HYDROLOGY/DI TABLE,532,169,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_169__J_139,DI TABLE,532,169,inlet->junction conduit
+conduit,L_IN_169__J_138,DI TABLE,532,169,inlet->junction conduit
 inflow,IN_169,HYDROLOGY,532,169,known flow cfs=0.7434562890195083
 node,IN_170,HYDROLOGY/DI TABLE,533,170,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_170__J_139,DI TABLE,533,170,inlet->junction conduit
+conduit,L_IN_170__J_138,DI TABLE,533,170,inlet->junction conduit
 inflow,IN_170,HYDROLOGY,533,170,known flow cfs=0.5388099919851327
 node,IN_171,HYDROLOGY/DI TABLE,535,171,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_171__J_140,DI TABLE,535,171,inlet->junction conduit
+conduit,L_IN_171__J_139,DI TABLE,535,171,inlet->junction conduit
 inflow,IN_171,HYDROLOGY,535,171,known flow cfs=0.2491205620774815
 node,IN_172,HYDROLOGY/DI TABLE,537,172,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_172__J_141,DI TABLE,537,172,inlet->junction conduit
+conduit,L_IN_172__J_140,DI TABLE,537,172,inlet->junction conduit
 inflow,IN_172,HYDROLOGY,537,172,known flow cfs=1.8708502963264813
 node,IN_173,HYDROLOGY/DI TABLE,538,173,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_173__J_141,DI TABLE,538,173,inlet->junction conduit
+conduit,L_IN_173__J_140,DI TABLE,538,173,inlet->junction conduit
 inflow,IN_173,HYDROLOGY,538,173,known flow cfs=3.789346786472382
 node,IN_174,HYDROLOGY/DI TABLE,541,174,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_174__J_142,DI TABLE,541,174,inlet->junction conduit
+conduit,L_IN_174__J_141,DI TABLE,541,174,inlet->junction conduit
 inflow,IN_174,HYDROLOGY,541,174,known flow cfs=1.426653779292424
 node,IN_175,HYDROLOGY/DI TABLE,545,175,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_175__J_144,DI TABLE,545,175,inlet->junction conduit
+conduit,L_IN_175__J_143,DI TABLE,545,175,inlet->junction conduit
 inflow,IN_175,HYDROLOGY,545,175,known flow cfs=2.0403361674368874
 node,IN_176,HYDROLOGY/DI TABLE,546,176,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_176__J_144,DI TABLE,546,176,inlet->junction conduit
+conduit,L_IN_176__J_143,DI TABLE,546,176,inlet->junction conduit
 inflow,IN_176,HYDROLOGY,546,176,known flow cfs=1.0276913883277645
 node,IN_177,HYDROLOGY/DI TABLE,548,177,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_177__J_145,DI TABLE,548,177,inlet->junction conduit
+conduit,L_IN_177__J_144,DI TABLE,548,177,inlet->junction conduit
 inflow,IN_177,HYDROLOGY,548,177,known flow cfs=0.48304544611077216
 node,IN_178,HYDROLOGY/DI TABLE,551,178,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_178__J_146,DI TABLE,551,178,inlet->junction conduit
+conduit,L_IN_178__J_145,DI TABLE,551,178,inlet->junction conduit
 inflow,IN_178,HYDROLOGY,551,178,known flow cfs=0.757821068228682
 node,IN_179,HYDROLOGY/DI TABLE,553,179,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_179__J_147,DI TABLE,553,179,inlet->junction conduit
+conduit,L_IN_179__J_146,DI TABLE,553,179,inlet->junction conduit
 inflow,IN_179,HYDROLOGY,553,179,known flow cfs=0.42983986411650027
 node,IN_180,HYDROLOGY/DI TABLE,556,180,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_180__J_148,DI TABLE,556,180,inlet->junction conduit
+conduit,L_IN_180__J_147,DI TABLE,556,180,inlet->junction conduit
 inflow,IN_180,HYDROLOGY,556,180,known flow cfs=0.4271219013622744
 node,IN_181,HYDROLOGY/DI TABLE,558,181,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_181__J_149,DI TABLE,558,181,inlet->junction conduit
+conduit,L_IN_181__J_148,DI TABLE,558,181,inlet->junction conduit
 inflow,IN_181,HYDROLOGY,558,181,known flow cfs=0.4298119574160483
 node,IN_182,HYDROLOGY/DI TABLE,560,182,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_182__J_150,DI TABLE,560,182,inlet->junction conduit
+conduit,L_IN_182__J_149,DI TABLE,560,182,inlet->junction conduit
 inflow,IN_182,HYDROLOGY,560,182,known flow cfs=2.5411807436016796
 node,IN_183,HYDROLOGY/DI TABLE,562,183,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_183__J_151,DI TABLE,562,183,inlet->junction conduit
+conduit,L_IN_183__J_150,DI TABLE,562,183,inlet->junction conduit
 inflow,IN_183,HYDROLOGY,562,183,known flow cfs=0.6913705586118372
 node,IN_184,HYDROLOGY/DI TABLE,563,184,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_184__J_151,DI TABLE,563,184,inlet->junction conduit
+conduit,L_IN_184__J_150,DI TABLE,563,184,inlet->junction conduit
 inflow,IN_184,HYDROLOGY,563,184,known flow cfs=0.7356003798477763
 node,IN_185,HYDROLOGY/DI TABLE,566,185,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_185__J_152,DI TABLE,566,185,inlet->junction conduit
+conduit,L_IN_185__J_151,DI TABLE,566,185,inlet->junction conduit
 inflow,IN_185,HYDROLOGY,566,185,known flow cfs=0.9946567602580566
 node,IN_186,HYDROLOGY/DI TABLE,567,186,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_186__J_152,DI TABLE,567,186,inlet->junction conduit
+conduit,L_IN_186__J_151,DI TABLE,567,186,inlet->junction conduit
 inflow,IN_186,HYDROLOGY,567,186,known flow cfs=1.1613241340464364
 node,IN_187,HYDROLOGY/DI TABLE,568,187,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_187__J_152,DI TABLE,568,187,inlet->junction conduit
+conduit,L_IN_187__J_151,DI TABLE,568,187,inlet->junction conduit
 inflow,IN_187,HYDROLOGY,568,187,known flow cfs=1.2986481043175941
 node,IN_188,HYDROLOGY/DI TABLE,570,188,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_188__J_153,DI TABLE,570,188,inlet->junction conduit
+conduit,L_IN_188__J_152,DI TABLE,570,188,inlet->junction conduit
 inflow,IN_188,HYDROLOGY,570,188,known flow cfs=1.3494959157235615
 node,IN_189,HYDROLOGY/DI TABLE,573,189,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_189__J_154,DI TABLE,573,189,inlet->junction conduit
+conduit,L_IN_189__J_153_1,DI TABLE,573,189,inlet->junction conduit
 inflow,IN_189,HYDROLOGY,573,189,known flow cfs=0.8782869050065322
 node,IN_190,HYDROLOGY/DI TABLE,574,190,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_190__J_154,DI TABLE,574,190,inlet->junction conduit
+conduit,L_IN_190__J_153_1,DI TABLE,574,190,inlet->junction conduit
 inflow,IN_190,HYDROLOGY,574,190,known flow cfs=0.7359294402543963
 node,IN_191,HYDROLOGY/DI TABLE,576,191,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_191__J_155,DI TABLE,576,191,inlet->junction conduit
+conduit,L_IN_191__J_154,DI TABLE,576,191,inlet->junction conduit
 inflow,IN_191,HYDROLOGY,576,191,known flow cfs=0.6360729487148405
 node,IN_192,HYDROLOGY/DI TABLE,578,192,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_192__J_156,DI TABLE,578,192,inlet->junction conduit
+conduit,L_IN_192__J_155,DI TABLE,578,192,inlet->junction conduit
 inflow,IN_192,HYDROLOGY,578,192,known flow cfs=0.7168799776786239
 node,IN_193,HYDROLOGY/DI TABLE,579,193,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_193__J_156,DI TABLE,579,193,inlet->junction conduit
+conduit,L_IN_193__J_155,DI TABLE,579,193,inlet->junction conduit
 inflow,IN_193,HYDROLOGY,579,193,known flow cfs=1.3661541539783952
+conduit,L_J_136__J_136_1,HYDROLOGY,500,136,junction->junction downstream conduit
+conduit,L_J_136_1__J_136_2,HYDROLOGY,503,136.1,junction->junction downstream conduit
+conduit,L_J_136_2__J_136_3,HYDROLOGY,505,136.2,junction->junction downstream conduit
+conduit,L_J_136_3__J_136_4,HYDROLOGY,507,136.3,junction->junction downstream conduit
+conduit,L_J_136_4__J_136_5,HYDROLOGY,509,136.4,junction->junction downstream conduit
+conduit,L_J_136_5__J_136_6,HYDROLOGY,511,136.5,junction->junction downstream conduit
+conduit,L_J_136_6__J_136_7,HYDROLOGY,512,136.6,junction->junction downstream conduit
+conduit,L_J_136_7__J_136_8,HYDROLOGY,515,136.7,junction->junction downstream conduit
+conduit,L_J_136_8__J_136_9,HYDROLOGY,519,136.8,junction->junction downstream conduit
+conduit,L_J_136_9__J_137,HYDROLOGY,520,136.9,junction->junction downstream conduit
+conduit,L_J_137__J_137_1,HYDROLOGY,524,137,junction->junction downstream conduit
+conduit,L_J_137_1__J_137_2,HYDROLOGY,526,137.1,junction->junction downstream conduit
+conduit,L_J_137_2__J_138,HYDROLOGY,527,137.2,junction->junction downstream conduit
 conduit,L_J_138__J_139,HYDROLOGY,530,138,junction->junction downstream conduit
 conduit,L_J_139__J_140,HYDROLOGY,534,139,junction->junction downstream conduit
 conduit,L_J_140__J_141,HYDROLOGY,536,140,junction->junction downstream conduit
@@ -795,82 +1221,192 @@ conduit,L_J_153_1__J_154,HYDROLOGY,572,153.1,junction->junction downstream condu
 conduit,L_J_154__J_155,HYDROLOGY,575,154,junction->junction downstream conduit
 conduit,L_J_155__J_156,HYDROLOGY,577,155,junction->junction downstream conduit
 conduit,L_J_156__O_156,HYDROLOGY,580,156,terminal junction->outfall per BASIN rule
+node,J_157,HYDROLOGY,585,157,junction from HYDROLOGY B
+node,J_158,HYDROLOGY,587,158,junction from HYDROLOGY B
+node,J_159,HYDROLOGY,589,159,junction from HYDROLOGY B
+node,J_159_1,HYDROLOGY,592,159.1,junction from HYDROLOGY B
+node,J_159_2,HYDROLOGY,593,159.2,junction from HYDROLOGY B
 node,J_160,HYDROLOGY,596,160,junction from HYDROLOGY B
 node,J_161,HYDROLOGY,599,161,junction from HYDROLOGY B
 node,J_162,HYDROLOGY,602,162,junction from HYDROLOGY B
+node,J_163,HYDROLOGY,605,163,junction from HYDROLOGY B
 node,J_164,HYDROLOGY,607,164,junction from HYDROLOGY B
 node,J_165,HYDROLOGY,608,165,junction from HYDROLOGY B
 node,J_166,HYDROLOGY,612,166,junction from HYDROLOGY B
 node,J_167,HYDROLOGY,616,167,junction from HYDROLOGY B
 node,J_168,HYDROLOGY,617,168,junction from HYDROLOGY B
 node,J_169,HYDROLOGY,620,169,junction from HYDROLOGY B
+node,J_170,HYDROLOGY,625,170,junction from HYDROLOGY B
+node,J_171,HYDROLOGY,627,171,junction from HYDROLOGY B
+node,J_172,HYDROLOGY,630,172,junction from HYDROLOGY B
+node,J_173,HYDROLOGY,633,173,junction from HYDROLOGY B
+node,J_174,HYDROLOGY,636,174,junction from HYDROLOGY B
+node,J_175,HYDROLOGY,640,175,junction from HYDROLOGY B
+node,J_176,HYDROLOGY,641,176,junction from HYDROLOGY B
+node,J_177,HYDROLOGY,645,177,junction from HYDROLOGY B
 node,J_178,HYDROLOGY,647,178,junction from HYDROLOGY B
 node,J_179,HYDROLOGY,651,179,junction from HYDROLOGY B
+node,J_180,HYDROLOGY,652,180,junction from HYDROLOGY B
 node,J_180_1,HYDROLOGY,653,180.1,junction from HYDROLOGY B
+node,J_180_2,HYDROLOGY,654,180.2,junction from HYDROLOGY B
 node,J_181,HYDROLOGY,659,181,junction from HYDROLOGY B
+node,J_182,HYDROLOGY,660,182,junction from HYDROLOGY B
+node,J_182_1,HYDROLOGY,661,182.1,junction from HYDROLOGY B
+node,J_182_2,HYDROLOGY,662,182.2,junction from HYDROLOGY B
+node,J_183,HYDROLOGY,666,183,junction from HYDROLOGY B
+node,J_184,HYDROLOGY,667,184,junction from HYDROLOGY B
+node,IN_194,HYDROLOGY/DI TABLE,584,194,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_194__J_157,DI TABLE,584,194,inlet->junction conduit
+inflow,IN_194,HYDROLOGY,584,194,known flow cfs=3.3412406413456757
+node,IN_195,HYDROLOGY/DI TABLE,586,195,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_195__J_157,DI TABLE,586,195,inlet->junction conduit
+inflow,IN_195,HYDROLOGY,586,195,known flow cfs=8.467163184283107
+node,IN_196,HYDROLOGY/DI TABLE,588,196,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_196__J_158,DI TABLE,588,196,inlet->junction conduit
+inflow,IN_196,HYDROLOGY,588,196,known flow cfs=8.57320201711092
+node,IN_197,HYDROLOGY/DI TABLE,590,197,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_197__J_159,DI TABLE,590,197,inlet->junction conduit
+inflow,IN_197,HYDROLOGY,590,197,known flow cfs=2.9095429389960343
 node,IN_198,HYDROLOGY/DI TABLE,594,198,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_198__J_160,DI TABLE,594,198,inlet->junction conduit
+conduit,L_IN_198__J_159_2,DI TABLE,594,198,inlet->junction conduit
 inflow,IN_198,HYDROLOGY,594,198,known flow cfs=0.6494190527863035
 node,IN_199,HYDROLOGY/DI TABLE,595,199,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_199__J_160,DI TABLE,595,199,inlet->junction conduit
+conduit,L_IN_199__J_159_2,DI TABLE,595,199,inlet->junction conduit
 inflow,IN_199,HYDROLOGY,595,199,known flow cfs=1.3446592149965402
 node,IN_200,HYDROLOGY/DI TABLE,597,200,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_200__J_161,DI TABLE,597,200,inlet->junction conduit
+conduit,L_IN_200__J_160,DI TABLE,597,200,inlet->junction conduit
 inflow,IN_200,HYDROLOGY,597,200,known flow cfs=1.7714134927930973
 node,IN_201,HYDROLOGY/DI TABLE,598,201,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_201__J_161,DI TABLE,598,201,inlet->junction conduit
+conduit,L_IN_201__J_160,DI TABLE,598,201,inlet->junction conduit
 inflow,IN_201,HYDROLOGY,598,201,known flow cfs=0.7588310240320393
 node,IN_202,HYDROLOGY/DI TABLE,600,202,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_202__J_162,DI TABLE,600,202,inlet->junction conduit
+conduit,L_IN_202__J_161,DI TABLE,600,202,inlet->junction conduit
 inflow,IN_202,HYDROLOGY,600,202,known flow cfs=0.9245080977714176
 node,IN_203,HYDROLOGY/DI TABLE,601,203,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_203__J_162,DI TABLE,601,203,inlet->junction conduit
+conduit,L_IN_203__J_161,DI TABLE,601,203,inlet->junction conduit
 inflow,IN_203,HYDROLOGY,601,203,known flow cfs=1.8835979856221026
+node,IN_204,HYDROLOGY/DI TABLE,604,204,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_204__J_162,DI TABLE,604,204,inlet->junction conduit
+inflow,IN_204,HYDROLOGY,604,204,known flow cfs=1.932451599701533
 node,IN_205,HYDROLOGY/DI TABLE,606,205,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_205__J_164,DI TABLE,606,205,inlet->junction conduit
+conduit,L_IN_205__J_163,DI TABLE,606,205,inlet->junction conduit
 inflow,IN_205,HYDROLOGY,606,205,known flow cfs=1.3303590875735638
 node,IN_206,HYDROLOGY/DI TABLE,610,206,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_206__J_166,DI TABLE,610,206,inlet->junction conduit
+conduit,L_IN_206__J_165,DI TABLE,610,206,inlet->junction conduit
 inflow,IN_206,HYDROLOGY,610,206,known flow cfs=1.3559790494160175
 node,IN_207,HYDROLOGY/DI TABLE,611,207,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_207__J_166,DI TABLE,611,207,inlet->junction conduit
+conduit,L_IN_207__J_165,DI TABLE,611,207,inlet->junction conduit
 inflow,IN_207,HYDROLOGY,611,207,known flow cfs=0.9493136935807981
 node,IN_208,HYDROLOGY/DI TABLE,614,208,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_208__J_167,DI TABLE,614,208,inlet->junction conduit
+conduit,L_IN_208__J_166,DI TABLE,614,208,inlet->junction conduit
 inflow,IN_208,HYDROLOGY,614,208,known flow cfs=1.8644679660288954
 node,IN_209,HYDROLOGY/DI TABLE,615,209,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_209__J_167,DI TABLE,615,209,inlet->junction conduit
+conduit,L_IN_209__J_166,DI TABLE,615,209,inlet->junction conduit
 inflow,IN_209,HYDROLOGY,615,209,known flow cfs=1.5412228919199178
 node,IN_210,HYDROLOGY/DI TABLE,618,210,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_210__J_169,DI TABLE,618,210,inlet->junction conduit
+conduit,L_IN_210__J_168,DI TABLE,618,210,inlet->junction conduit
 inflow,IN_210,HYDROLOGY,618,210,known flow cfs=9.413927175612116
 node,IN_211,HYDROLOGY/DI TABLE,619,211,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_211__J_169,DI TABLE,619,211,inlet->junction conduit
+conduit,L_IN_211__J_168,DI TABLE,619,211,inlet->junction conduit
 inflow,IN_211,HYDROLOGY,619,211,known flow cfs=1.8701438430051913
+node,IN_212,HYDROLOGY/DI TABLE,622,212,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_212__J_169,DI TABLE,622,212,inlet->junction conduit
+inflow,IN_212,HYDROLOGY,622,212,known flow cfs=4.213090405653792
+node,IN_213,HYDROLOGY/DI TABLE,623,213,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_213__J_169,DI TABLE,623,213,inlet->junction conduit
+inflow,IN_213,HYDROLOGY,623,213,known flow cfs=1.372264248329723
+node,IN_214,HYDROLOGY/DI TABLE,624,214,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_214__J_169,DI TABLE,624,214,inlet->junction conduit
+inflow,IN_214,HYDROLOGY,624,214,known flow cfs=5.160514186000996
+node,IN_215,HYDROLOGY/DI TABLE,626,215,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_215__J_170,DI TABLE,626,215,inlet->junction conduit
+inflow,IN_215,HYDROLOGY,626,215,known flow cfs=4.092072523739183
+node,IN_216,HYDROLOGY/DI TABLE,628,216,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_216__J_171,DI TABLE,628,216,inlet->junction conduit
+inflow,IN_216,HYDROLOGY,628,216,known flow cfs=0.6171075838371063
+node,IN_217,HYDROLOGY/DI TABLE,629,217,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_217__J_171,DI TABLE,629,217,inlet->junction conduit
+inflow,IN_217,HYDROLOGY,629,217,known flow cfs=6.020257635533279
+node,IN_218,HYDROLOGY/DI TABLE,631,218,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_218__J_172,DI TABLE,631,218,inlet->junction conduit
+inflow,IN_218,HYDROLOGY,631,218,known flow cfs=1.7931620279123393
+node,IN_219,HYDROLOGY/DI TABLE,632,219,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_219__J_172,DI TABLE,632,219,inlet->junction conduit
+inflow,IN_219,HYDROLOGY,632,219,known flow cfs=2.3551533772504003
+node,IN_220,HYDROLOGY/DI TABLE,635,220,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_220__J_173,DI TABLE,635,220,inlet->junction conduit
+inflow,IN_220,HYDROLOGY,635,220,known flow cfs=8.742478564297322
+node,IN_221,HYDROLOGY/DI TABLE,638,221,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_221__J_174,DI TABLE,638,221,inlet->junction conduit
+inflow,IN_221,HYDROLOGY,638,221,known flow cfs=4.400928419074051
+node,IN_222,HYDROLOGY/DI TABLE,639,222,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_222__J_174,DI TABLE,639,222,inlet->junction conduit
+inflow,IN_222,HYDROLOGY,639,222,known flow cfs=0.5039734218706361
+node,IN_223,HYDROLOGY/DI TABLE,643,223,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_223__J_176,DI TABLE,643,223,inlet->junction conduit
+inflow,IN_223,HYDROLOGY,643,223,known flow cfs=2.354490375325982
+node,IN_224,HYDROLOGY/DI TABLE,644,224,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_224__J_176,DI TABLE,644,224,inlet->junction conduit
+inflow,IN_224,HYDROLOGY,644,224,known flow cfs=1.7049592531757127
 node,IN_225,HYDROLOGY/DI TABLE,646,225,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_225__J_178,DI TABLE,646,225,inlet->junction conduit
+conduit,L_IN_225__J_177,DI TABLE,646,225,inlet->junction conduit
 inflow,IN_225,HYDROLOGY,646,225,known flow cfs=2.2977227954319948
 node,IN_226,HYDROLOGY/DI TABLE,649,226,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_226__J_179,DI TABLE,649,226,inlet->junction conduit
+conduit,L_IN_226__J_178,DI TABLE,649,226,inlet->junction conduit
 inflow,IN_226,HYDROLOGY,649,226,known flow cfs=4.894845270449344
 node,IN_227,HYDROLOGY/DI TABLE,650,227,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_227__J_179,DI TABLE,650,227,inlet->junction conduit
+conduit,L_IN_227__J_178,DI TABLE,650,227,inlet->junction conduit
 inflow,IN_227,HYDROLOGY,650,227,known flow cfs=1.6804434562557429
 node,IN_228,HYDROLOGY/DI TABLE,656,228,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_228__J_181,DI TABLE,656,228,inlet->junction conduit
+conduit,L_IN_228__J_180_2,DI TABLE,656,228,inlet->junction conduit
 inflow,IN_228,HYDROLOGY,656,228,known flow cfs=1.069571695388114
 node,IN_229,HYDROLOGY/DI TABLE,657,229,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_229__J_181,DI TABLE,657,229,inlet->junction conduit
+conduit,L_IN_229__J_180_2,DI TABLE,657,229,inlet->junction conduit
 inflow,IN_229,HYDROLOGY,657,229,known flow cfs=1.3663729040101695
 node,IN_230,HYDROLOGY/DI TABLE,658,230,inlet node; rim assumed equal to receiving junction rim
-conduit,L_IN_230__J_181,DI TABLE,658,230,inlet->junction conduit
+conduit,L_IN_230__J_180_2,DI TABLE,658,230,inlet->junction conduit
 inflow,IN_230,HYDROLOGY,658,230,known flow cfs=2.3886179822363687
+node,IN_231,HYDROLOGY/DI TABLE,664,231,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_231__J_182_2,DI TABLE,664,231,inlet->junction conduit
+inflow,IN_231,HYDROLOGY,664,231,known flow cfs=2.9200177497551296
+node,IN_232,HYDROLOGY/DI TABLE,665,232,inlet node; rim assumed equal to receiving junction rim
+conduit,L_IN_232__J_182_2,DI TABLE,665,232,inlet->junction conduit
+inflow,IN_232,HYDROLOGY,665,232,known flow cfs=0.3403561437342037
+conduit,L_J_157__J_158,HYDROLOGY,585,157,junction->junction downstream conduit
+conduit,L_J_158__J_159,HYDROLOGY,587,158,junction->junction downstream conduit
+conduit,L_J_159__J_159_1,HYDROLOGY,589,159,junction->junction downstream conduit
+conduit,L_J_159_1__J_159_2,HYDROLOGY,592,159.1,junction->junction downstream conduit
+conduit,L_J_159_2__J_160,HYDROLOGY,593,159.2,junction->junction downstream conduit
 conduit,L_J_160__J_161,HYDROLOGY,596,160,junction->junction downstream conduit
 conduit,L_J_161__J_162,HYDROLOGY,599,161,junction->junction downstream conduit
+conduit,L_J_162__J_163,HYDROLOGY,602,162,junction->junction downstream conduit
+conduit,L_J_163__J_164,HYDROLOGY,605,163,junction->junction downstream conduit
 conduit,L_J_164__J_165,HYDROLOGY,607,164,junction->junction downstream conduit
 conduit,L_J_165__J_166,HYDROLOGY,608,165,junction->junction downstream conduit
 conduit,L_J_166__J_167,HYDROLOGY,612,166,junction->junction downstream conduit
 conduit,L_J_167__J_168,HYDROLOGY,616,167,junction->junction downstream conduit
 conduit,L_J_168__J_169,HYDROLOGY,617,168,junction->junction downstream conduit
+conduit,L_J_169__J_170,HYDROLOGY,620,169,junction->junction downstream conduit
+conduit,L_J_170__J_171,HYDROLOGY,625,170,junction->junction downstream conduit
+conduit,L_J_171__J_172,HYDROLOGY,627,171,junction->junction downstream conduit
+conduit,L_J_172__J_173,HYDROLOGY,630,172,junction->junction downstream conduit
+conduit,L_J_173__J_174,HYDROLOGY,633,173,junction->junction downstream conduit
+conduit,L_J_174__J_175,HYDROLOGY,636,174,junction->junction downstream conduit
+conduit,L_J_175__J_176,HYDROLOGY,640,175,junction->junction downstream conduit
+conduit,L_J_176__J_177,HYDROLOGY,641,176,junction->junction downstream conduit
+conduit,L_J_177__J_178,HYDROLOGY,645,177,junction->junction downstream conduit
 conduit,L_J_178__J_179,HYDROLOGY,647,178,junction->junction downstream conduit
-conduit,L_J_179__J_180_1,HYDROLOGY,651,179,junction->junction downstream conduit
+conduit,L_J_179__J_180,HYDROLOGY,651,179,junction->junction downstream conduit
+conduit,L_J_180_1__J_180_2,HYDROLOGY,653,180.1,junction->junction downstream conduit
+conduit,L_J_180_2__J_181,HYDROLOGY,654,180.2,junction->junction downstream conduit
+conduit,L_J_181__J_182,HYDROLOGY,659,181,junction->junction downstream conduit
+conduit,L_J_182_1__J_182_2,HYDROLOGY,661,182.1,junction->junction downstream conduit
+conduit,L_J_182_2__J_183,HYDROLOGY,662,182.2,junction->junction downstream conduit
+conduit,L_J_183__J_184,HYDROLOGY,666,183,junction->junction downstream conduit
+conduit,L_J_184__O_184,HYDROLOGY,667,184,terminal junction->outfall per BASIN rule
+node,J_185,HYDROLOGY,672,185,junction assumed from default terminal fallback
+conduit,L_J_185__O_185,HYDROLOGY,672,185,terminal junction->outfall per BASIN rule
+node,J_186,HYDROLOGY,677,186,junction assumed from default terminal fallback
+conduit,L_J_186__O_186,HYDROLOGY,677,186,terminal junction->outfall per BASIN rule
+node,J_187,HYDROLOGY,682,187,junction assumed from default terminal fallback
+conduit,L_J_187__O_187,HYDROLOGY,682,187,terminal junction->outfall per BASIN rule

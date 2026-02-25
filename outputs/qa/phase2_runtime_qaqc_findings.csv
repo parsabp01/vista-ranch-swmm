@@ -1,6 +1,1 @@
 severity,check_name,entity_type,entity_id,message,source_dataset,provenance,recommended_action,runtime_classification
-MEDIUM,build_summary_count_mismatch,build_summary,inflow_count,build_summary inflow_count=134 but model section count=137.,outputs/logs/build_summary.json,inflow_count,Regenerate build summary from current model.,runtime_nonblocking_bookkeeping
-MEDIUM,default_heavy_junction_maxdepth,junction,JUNCTIONS,MaxDepth appears default-heavy: 100.00% at value 8.0.,models/model.inp,[JUNCTIONS],Validate representative junction depths in engineering review.,accepted_baseline_assumption
-MEDIUM,duplicate_ids_in_section,model_section,[INFLOWS],"Duplicate IDs present (3): J086, J101, J114.",models/model.inp,[INFLOWS],Ensure IDs are unique per section; consolidate duplicate inflow node lines.,runtime_nonblocking_bookkeeping
-LOW,dead_end_junctions,junction,dead_end_summary,50 degree-1 junctions found.,models/model.inp,[CONDUITS],Treat as acceptable where they represent starts/termini/outfalls.,accepted_baseline_assumption
-LOW,inflow_zero_baseline_concentration,inflow,INFLOWS,94.16% of inflow baseline values are zero.,models/model.inp,[INFLOWS],Expected in baseline build; confirm non-zero inflows match intended design points.,accepted_baseline_assumption

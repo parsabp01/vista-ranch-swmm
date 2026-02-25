@@ -1,565 +1,574 @@
-structure_type,source_id,excel_row,swmm_expected_id,modeled_in_inp,missing_reason
-inlet,1,11,IN_1,False,not built from current strict geometry/DI filter
-inlet,10,29,IN_10,True,
-inlet,100,269,IN_100,True,
-inlet,100.1,271,IN_100_1,True,
-inlet,101,272,IN_101,True,
-inlet,102,274,IN_102,False,not built from current strict geometry/DI filter
-inlet,103,277,IN_103,True,
-inlet,104,278,IN_104,True,
-inlet,105,280,IN_105,True,
-inlet,106,283,IN_106,False,not built from current strict geometry/DI filter
-inlet,106.1,284,IN_106_1,False,not built from current strict geometry/DI filter
-inlet,107,287,IN_107,True,
-inlet,108,288,IN_108,True,
-inlet,109,290,IN_109,True,
-inlet,11,32,IN_11,True,
-inlet,110.1,294,IN_110_1,True,
-inlet,111,297,IN_111,True,
-inlet,112,300,IN_112,False,not built from current strict geometry/DI filter
-inlet,112.1,302,IN_112_1,True,
-inlet,112.2,304,IN_112_2,True,
-inlet,113,305,IN_113,True,
-inlet,114,309,IN_114,True,
-inlet,115,310,IN_115,True,
-inlet,115.1,313,IN_115_1,False,not built from current strict geometry/DI filter
-inlet,116,315,IN_116,False,not built from current strict geometry/DI filter
-inlet,116.01,317,IN_116_01,False,not built from current strict geometry/DI filter
-inlet,116.02,318,IN_116_02,False,not built from current strict geometry/DI filter
-inlet,116.1,320,IN_116_1,True,
-inlet,116.2,323,IN_116_2,False,not built from current strict geometry/DI filter
-inlet,116.3,324,IN_116_3,False,not built from current strict geometry/DI filter
-inlet,116.4,325,IN_116_4,False,not built from current strict geometry/DI filter
-inlet,117,329,IN_117,False,not built from current strict geometry/DI filter
-inlet,117.1,330,IN_117_1,False,not built from current strict geometry/DI filter
-inlet,117.2,331,IN_117_2,False,not built from current strict geometry/DI filter
-inlet,118,333,IN_118,False,not built from current strict geometry/DI filter
-inlet,118.1,334,IN_118_1,False,not built from current strict geometry/DI filter
-inlet,119,337,IN_119,False,not built from current strict geometry/DI filter
-inlet,119.1,338,IN_119_1,False,not built from current strict geometry/DI filter
-inlet,119.2,340,IN_119_2,False,not built from current strict geometry/DI filter
-inlet,12,36,IN_12,True,
-inlet,120,343,IN_120,False,not built from current strict geometry/DI filter
-inlet,121,346,IN_121,False,not built from current strict geometry/DI filter
-inlet,122,349,IN_122,False,not built from current strict geometry/DI filter
-inlet,122.1,350,IN_122_1,False,not built from current strict geometry/DI filter
-inlet,122.2,351,IN_122_2,False,not built from current strict geometry/DI filter
-inlet,123,354,IN_123,False,not built from current strict geometry/DI filter
-inlet,123.1,355,IN_123_1,False,not built from current strict geometry/DI filter
-inlet,123.2,359,IN_123_2,False,not built from current strict geometry/DI filter
-inlet,123.3,360,IN_123_3,False,not built from current strict geometry/DI filter
-inlet,123.4,363,IN_123_4,False,not built from current strict geometry/DI filter
-inlet,124,367,IN_124,False,not built from current strict geometry/DI filter
-inlet,124.1,368,IN_124_1,False,not built from current strict geometry/DI filter
-inlet,124.2,370,IN_124_2,False,not built from current strict geometry/DI filter
-inlet,124.3,373,IN_124_3,False,not built from current strict geometry/DI filter
-inlet,124.4,374,IN_124_4,False,not built from current strict geometry/DI filter
-inlet,124.5,377,IN_124_5,False,not built from current strict geometry/DI filter
-inlet,124.6,378,IN_124_6,False,not built from current strict geometry/DI filter
-inlet,125,381,IN_125,False,not built from current strict geometry/DI filter
-inlet,126,382,IN_126,False,not built from current strict geometry/DI filter
-inlet,127,386,IN_127,False,not built from current strict geometry/DI filter
-inlet,127.1,387,IN_127_1,False,not built from current strict geometry/DI filter
-inlet,127.2,389,IN_127_2,False,not built from current strict geometry/DI filter
-inlet,128,392,IN_128,False,not built from current strict geometry/DI filter
-inlet,128.1,393,IN_128_1,False,not built from current strict geometry/DI filter
-inlet,128.2,395,IN_128_2,False,not built from current strict geometry/DI filter
-inlet,129,399,IN_129,False,not built from current strict geometry/DI filter
-inlet,129.1,400,IN_129_1,False,not built from current strict geometry/DI filter
-inlet,129.2,402,IN_129_2,False,not built from current strict geometry/DI filter
-inlet,13,37,IN_13,True,
-inlet,130,404,IN_130,False,not built from current strict geometry/DI filter
-inlet,130.1,405,IN_130_1,False,not built from current strict geometry/DI filter
-inlet,130.2,409,IN_130_2,False,not built from current strict geometry/DI filter
-inlet,130.3,410,IN_130_3,False,not built from current strict geometry/DI filter
-inlet,130.4,413,IN_130_4,False,not built from current strict geometry/DI filter
-inlet,130.5,414,IN_130_5,False,not built from current strict geometry/DI filter
-inlet,131,416,IN_131,True,
-inlet,132,417,IN_132,True,
-inlet,133,420,IN_133,True,
-inlet,134,421,IN_134,True,
-inlet,135,423,IN_135,True,
-inlet,136,425,IN_136,True,
-inlet,137,430,IN_137,False,not built from current strict geometry/DI filter
-inlet,137.1,431,IN_137_1,False,not built from current strict geometry/DI filter
-inlet,138,434,IN_138,False,not built from current strict geometry/DI filter
-inlet,139,436,IN_139,False,not built from current strict geometry/DI filter
-inlet,140,427,IN_140,False,not built from current strict geometry/DI filter
-inlet,141,440,IN_141,False,not built from current strict geometry/DI filter
-inlet,143,444,IN_143,True,
-inlet,144,445,IN_144,True,
-inlet,145,446,IN_145,True,
-inlet,146,450,IN_146,True,
-inlet,147,452,IN_147,True,
-inlet,148,455,IN_148,True,
-inlet,149,456,IN_149,False,not built from current strict geometry/DI filter
-inlet,15,40,IN_15,True,
-inlet,150,458,IN_150,True,
-inlet,151,460,IN_151,True,
-inlet,152,463,IN_152,True,
-inlet,153,465,IN_153,True,
-inlet,154,466,IN_154,True,
-inlet,155,469,IN_155,True,
-inlet,156,470,IN_156,False,not built from current strict geometry/DI filter
-inlet,157,472,IN_157,True,
-inlet,158,473,IN_158,True,
-inlet,159,476,IN_159,True,
-inlet,16,43,IN_16,True,
-inlet,160,480,IN_160,True,
-inlet,161,488,IN_161,True,
-inlet,162,483,IN_162,False,not built from current strict geometry/DI filter
-inlet,163,493,IN_163,True,
-inlet,164,498,IN_164,False,not built from current strict geometry/DI filter
-inlet,165,499,IN_165,False,not built from current strict geometry/DI filter
-inlet,165.1,502,IN_165_1,False,not built from current strict geometry/DI filter
-inlet,165.2,504,IN_165_2,False,not built from current strict geometry/DI filter
-inlet,165.3,506,IN_165_3,False,not built from current strict geometry/DI filter
-inlet,165.4,508,IN_165_4,False,not built from current strict geometry/DI filter
-inlet,165.5,510,IN_165_5,False,not built from current strict geometry/DI filter
-inlet,165.6,513,IN_165_6,False,not built from current strict geometry/DI filter
-inlet,165.7,514,IN_165_7,False,not built from current strict geometry/DI filter
-inlet,165.8,517,IN_165_8,False,not built from current strict geometry/DI filter
-inlet,165.9,518,IN_165_9,False,not built from current strict geometry/DI filter
-inlet,166,522,IN_166,False,not built from current strict geometry/DI filter
-inlet,166.1,523,IN_166_1,False,not built from current strict geometry/DI filter
-inlet,166.2,525,IN_166_2,False,not built from current strict geometry/DI filter
-inlet,167,528,IN_167,True,
-inlet,168,529,IN_168,True,
-inlet,169,532,IN_169,True,
-inlet,17,45,IN_17,True,
-inlet,170,533,IN_170,True,
-inlet,171,535,IN_171,True,
-inlet,172,537,IN_172,True,
-inlet,173,538,IN_173,True,
-inlet,174,541,IN_174,True,
-inlet,175,545,IN_175,True,
-inlet,176,546,IN_176,True,
-inlet,177,548,IN_177,True,
-inlet,178,551,IN_178,True,
-inlet,179,553,IN_179,True,
-inlet,18,48,IN_18,True,
-inlet,180,556,IN_180,True,
-inlet,181,558,IN_181,True,
-inlet,182,560,IN_182,True,
-inlet,183,562,IN_183,True,
-inlet,184,563,IN_184,True,
-inlet,185,566,IN_185,True,
-inlet,186,567,IN_186,True,
-inlet,187,568,IN_187,True,
-inlet,188,570,IN_188,True,
-inlet,189,573,IN_189,True,
-inlet,19,52,IN_19,True,
-inlet,190,574,IN_190,True,
-inlet,191,576,IN_191,True,
-inlet,192,578,IN_192,True,
-inlet,193,579,IN_193,True,
-inlet,194,584,IN_194,False,not built from current strict geometry/DI filter
-inlet,195,586,IN_195,False,not built from current strict geometry/DI filter
-inlet,196,588,IN_196,False,not built from current strict geometry/DI filter
-inlet,197,590,IN_197,False,not built from current strict geometry/DI filter
-inlet,198,594,IN_198,True,
-inlet,199,595,IN_199,True,
-inlet,2,12,IN_2,True,
-inlet,20,53,IN_20,True,
-inlet,200,597,IN_200,True,
-inlet,201,598,IN_201,True,
-inlet,202,600,IN_202,True,
-inlet,203,601,IN_203,True,
-inlet,204,604,IN_204,False,not built from current strict geometry/DI filter
-inlet,205,606,IN_205,True,
-inlet,206,610,IN_206,True,
-inlet,207,611,IN_207,True,
-inlet,208,614,IN_208,True,
-inlet,209,615,IN_209,True,
-inlet,21,56,IN_21,True,
-inlet,210,618,IN_210,True,
-inlet,211,619,IN_211,True,
-inlet,212,622,IN_212,False,not built from current strict geometry/DI filter
-inlet,213,623,IN_213,False,not built from current strict geometry/DI filter
-inlet,214,624,IN_214,False,not built from current strict geometry/DI filter
-inlet,215,626,IN_215,False,not built from current strict geometry/DI filter
-inlet,216,628,IN_216,False,not built from current strict geometry/DI filter
-inlet,217,629,IN_217,False,not built from current strict geometry/DI filter
-inlet,218,631,IN_218,False,not built from current strict geometry/DI filter
-inlet,219,632,IN_219,False,not built from current strict geometry/DI filter
-inlet,22,57,IN_22,True,
-inlet,220,635,IN_220,False,not built from current strict geometry/DI filter
-inlet,221,638,IN_221,False,not built from current strict geometry/DI filter
-inlet,222,639,IN_222,False,not built from current strict geometry/DI filter
-inlet,223,643,IN_223,False,not built from current strict geometry/DI filter
-inlet,224,644,IN_224,False,not built from current strict geometry/DI filter
-inlet,225,646,IN_225,True,
-inlet,226,649,IN_226,True,
-inlet,227,650,IN_227,True,
-inlet,228,656,IN_228,True,
-inlet,229,657,IN_229,True,
-inlet,23,61,IN_23,True,
-inlet,230,658,IN_230,True,
-inlet,231,664,IN_231,False,not built from current strict geometry/DI filter
-inlet,232,665,IN_232,False,not built from current strict geometry/DI filter
-inlet,233,671,IN_233,False,not built from current strict geometry/DI filter
-inlet,234,676,IN_234,False,not built from current strict geometry/DI filter
-inlet,235,681,IN_235,False,not built from current strict geometry/DI filter
-inlet,24,62,IN_24,True,
-inlet,25,65,IN_25,True,
-inlet,26,68,IN_26,True,
-inlet,27,69,IN_27,True,
-inlet,28,73,IN_28,True,
-inlet,29,74,IN_29,True,
-inlet,3,15,IN_3,True,
-inlet,30,77,IN_30,True,
-inlet,30.1,80,IN_30_1,True,
-inlet,31,82,IN_31,True,
-inlet,32,84,IN_32,True,
-inlet,33,86,IN_33,True,
-inlet,34,90,IN_34,True,
-inlet,35,94,IN_35,True,
-inlet,36,95,IN_36,True,
-inlet,37,98,IN_37,True,
-inlet,38,101,IN_38,True,
-inlet,39,104,IN_39,False,not built from current strict geometry/DI filter
-inlet,40,108,IN_40,True,
-inlet,41,109,IN_41,True,
-inlet,42,113,IN_42,True,
-inlet,43,115,IN_43,True,
-inlet,43.1,116,IN_43_1,True,
-inlet,44,120,IN_44,True,
-inlet,45,122,IN_45,True,
-inlet,46,124,IN_46,True,
-inlet,47,126,IN_47,True,
-inlet,48,129,IN_48,True,
-inlet,49,130,IN_49,True,
-inlet,5,17,IN_5,True,
-inlet,50,133,IN_50,True,
-inlet,51,136,IN_51,True,
-inlet,52,140,IN_52,True,
-inlet,52.1,141,IN_52_1,True,
-inlet,53,142,IN_53,True,
-inlet,54,145,IN_54,True,
-inlet,55,146,IN_55,True,
-inlet,56,149,IN_56,False,not built from current strict geometry/DI filter
-inlet,56.1,150,IN_56_1,False,not built from current strict geometry/DI filter
-inlet,57,152,IN_57,True,
-inlet,6,20,IN_6,True,
-inlet,6.1,21,IN_6_1,True,
-inlet,60,155,IN_60,True,
-inlet,61,156,IN_61,True,
-inlet,62,159,IN_62,True,
-inlet,63,160,IN_63,True,
-inlet,66,162,IN_66,True,
-inlet,67,163,IN_67,True,
-inlet,7,22,IN_7,True,
-inlet,74,165,IN_74,True,
-inlet,75,166,IN_75,True,
-inlet,75.1,169,IN_75_1,False,not built from current strict geometry/DI filter
-inlet,75.2,170,IN_75_2,False,not built from current strict geometry/DI filter
-inlet,75.25,172,IN_75_25,False,not built from current strict geometry/DI filter
-inlet,75.3,176,IN_75_3,False,not built from current strict geometry/DI filter
-inlet,75.4,177,IN_75_4,False,not built from current strict geometry/DI filter
-inlet,75.5,181,IN_75_5,True,
-inlet,75.6,182,IN_75_6,True,
-inlet,76,186,IN_76,True,
-inlet,76.1,189,IN_76_1,True,
-inlet,76.2,187,IN_76_2,True,
-inlet,76.3,192,IN_76_3,True,
-inlet,76.41,195,IN_76_41,True,
-inlet,76.42,196,IN_76_42,True,
-inlet,76.43,198,IN_76_43,True,
-inlet,76.5,201,IN_76_5,True,
-inlet,77,204,IN_77,False,not built from current strict geometry/DI filter
-inlet,77.1,205,IN_77_1,False,not built from current strict geometry/DI filter
-inlet,77.2,208,IN_77_2,False,not built from current strict geometry/DI filter
-inlet,77.3,212,IN_77_3,True,
-inlet,77.4,213,IN_77_4,True,
-inlet,77.5,215,IN_77_5,True,
-inlet,77.6,218,IN_77_6,True,
-inlet,79,223,IN_79,True,
-inlet,8,25,IN_8,True,
-inlet,80,224,IN_80,True,
-inlet,81,225,IN_81,True,
-inlet,82,228,IN_82,True,
-inlet,83,234,IN_83,True,
-inlet,84,236,IN_84,True,
-inlet,85,239,IN_85,True,
-inlet,86,240,IN_86,True,
-inlet,87,243,IN_87,True,
-inlet,88,244,IN_88,True,
-inlet,89,246,IN_89,True,
-inlet,9,27,IN_9,True,
-inlet,90,248,IN_90,True,
-inlet,91,249,IN_91,True,
-inlet,92,251,IN_92,True,
-inlet,93,252,IN_93,True,
-inlet,94,254,IN_94,True,
-inlet,95,257,IN_95,False,not built from current strict geometry/DI filter
-inlet,96,259,IN_96,False,not built from current strict geometry/DI filter
-inlet,97,261,IN_97,True,
-inlet,98,264,IN_98,True,
-inlet,99,265,IN_99,True,
-junction,1,13,J_1,True,
-junction,100,327,J_100,True,
-junction,101,332,J_101,False,not built from current strict geometry filter
-junction,101.1,335,J_101_1,False,not built from current strict geometry filter
-junction,102,339,J_102,False,not built from current strict geometry filter
-junction,102.1,341,J_102_1,False,not built from current strict geometry filter
-junction,102.2,344,J_102_2,False,not built from current strict geometry filter
-junction,102.3,345,J_102_3,False,not built from current strict geometry filter
-junction,102.4,347,J_102_4,False,not built from current strict geometry filter
-junction,103,352,J_103,False,not built from current strict geometry filter
-junction,103.1,356,J_103_1,False,not built from current strict geometry filter
-junction,103.2,357,J_103_2,False,not built from current strict geometry filter
-junction,103.3,358,J_103_3,False,not built from current strict geometry filter
-junction,103.4,361,J_103_4,False,not built from current strict geometry filter
-junction,103.5,364,J_103_5,False,not built from current strict geometry filter
-junction,104,365,J_104,False,not built from current strict geometry filter
-junction,105,369,J_105,False,not built from current strict geometry filter
-junction,105.1,371,J_105_1,False,not built from current strict geometry filter
-junction,105.2,375,J_105_2,False,not built from current strict geometry filter
-junction,105.3,379,J_105_3,False,not built from current strict geometry filter
-junction,105.4,380,J_105_4,False,not built from current strict geometry filter
-junction,106,383,J_106,False,not built from current strict geometry filter
-junction,107,384,J_107,False,not built from current strict geometry filter
-junction,108,388,J_108,False,not built from current strict geometry filter
-junction,108.1,390,J_108_1,False,not built from current strict geometry filter
-junction,108.2,394,J_108_2,False,not built from current strict geometry filter
-junction,108.3,396,J_108_3,False,not built from current strict geometry filter
-junction,108.4,397,J_108_4,False,not built from current strict geometry filter
-junction,109,401,J_109,False,not built from current strict geometry filter
-junction,109.1,403,J_109_1,False,not built from current strict geometry filter
-junction,109.2,406,J_109_2,False,not built from current strict geometry filter
-junction,11,41,J_11,True,
-junction,110,407,J_110,False,not built from current strict geometry filter
-junction,110.1,411,J_110_1,False,not built from current strict geometry filter
-junction,110.2,412,J_110_2,False,not built from current strict geometry filter
-junction,110.3,415,J_110_3,False,not built from current strict geometry filter
-junction,111,418,J_111,True,
-junction,112,422,J_112,True,
-junction,113,424,J_113,True,
-junction,113.1,426,J_113_1,True,
-junction,113.2,428,J_113_2,False,not built from current strict geometry filter
-junction,114,432,J_114,False,not built from current strict geometry filter
-junction,114.1,435,J_114_1,False,not built from current strict geometry filter
-junction,114.2,437,J_114_2,False,not built from current strict geometry filter
-junction,115,438,J_115,True,
-junction,116,441,J_116,False,not built from current strict geometry filter
-junction,117,442,J_117,True,
-junction,118,447,J_118,True,
-junction,119,448,J_119,True,
-junction,12,44,J_12,True,
-junction,120,451,J_120,True,
-junction,121,453,J_121,True,
-junction,122,457,J_122,True,
-junction,123,459,J_123,True,
-junction,124,461,J_124,True,
-junction,125,464,J_125,True,
-junction,126,467,J_126,True,
-junction,127,468,J_127,True,
-junction,128,471,J_128,True,
-junction,129,474,J_129,True,
-junction,13,46,J_13,True,
-junction,130,475,J_130,True,
-junction,131,477,J_131,True,
-junction,132,478,J_132,True,
-junction,132.1,481,J_132_1,True,
-junction,133,482,J_133,True,
-junction,134,484,J_134,False,not built from current strict geometry filter
-junction,134.1,489,J_134_1,True,
-junction,135,494,J_135,True,
-junction,136,500,J_136,False,not built from current strict geometry filter
-junction,136.1,503,J_136_1,False,not built from current strict geometry filter
-junction,136.2,505,J_136_2,False,not built from current strict geometry filter
-junction,136.3,507,J_136_3,False,not built from current strict geometry filter
-junction,136.4,509,J_136_4,False,not built from current strict geometry filter
-junction,136.5,511,J_136_5,False,not built from current strict geometry filter
-junction,136.6,512,J_136_6,False,not built from current strict geometry filter
-junction,136.7,515,J_136_7,False,not built from current strict geometry filter
-junction,136.8,519,J_136_8,False,not built from current strict geometry filter
-junction,136.9,520,J_136_9,False,not built from current strict geometry filter
-junction,137,524,J_137,False,not built from current strict geometry filter
-junction,137.1,526,J_137_1,False,not built from current strict geometry filter
-junction,137.2,527,J_137_2,False,not built from current strict geometry filter
-junction,138,530,J_138,True,
-junction,139,534,J_139,True,
-junction,14,49,J_14,True,
-junction,140,536,J_140,True,
-junction,141,539,J_141,True,
-junction,142,542,J_142,True,
-junction,143,543,J_143,True,
-junction,144,547,J_144,True,
-junction,145,549,J_145,True,
-junction,146,552,J_146,True,
-junction,147,554,J_147,True,
-junction,148,557,J_148,True,
-junction,149,559,J_149,True,
-junction,15,50,J_15,True,
-junction,150,561,J_150,True,
-junction,151,564,J_151,True,
-junction,152,569,J_152,True,
-junction,153,571,J_153,True,
-junction,153.1,572,J_153_1,True,
-junction,154,575,J_154,True,
-junction,155,577,J_155,True,
-junction,156,580,J_156,True,
-junction,157,585,J_157,False,not built from current strict geometry filter
-junction,158,587,J_158,False,not built from current strict geometry filter
-junction,159,589,J_159,False,not built from current strict geometry filter
-junction,159.1,591,J_159_1,False,not built from current strict geometry filter
-junction,159.1,592,J_159_1,False,not built from current strict geometry filter
-junction,159.2,593,J_159_2,False,not built from current strict geometry filter
-junction,16,54,J_16,True,
-junction,160,596,J_160,True,
-junction,161,599,J_161,True,
-junction,162,602,J_162,True,
-junction,163,605,J_163,False,not built from current strict geometry filter
-junction,164,607,J_164,True,
-junction,165,608,J_165,True,
-junction,166,612,J_166,True,
-junction,167,616,J_167,True,
-junction,168,617,J_168,True,
-junction,169,620,J_169,True,
-junction,17,58,J_17,True,
-junction,170,625,J_170,False,not built from current strict geometry filter
-junction,171,627,J_171,False,not built from current strict geometry filter
-junction,172,630,J_172,False,not built from current strict geometry filter
-junction,173,633,J_173,False,not built from current strict geometry filter
-junction,174,636,J_174,False,not built from current strict geometry filter
-junction,175,640,J_175,False,not built from current strict geometry filter
-junction,176,641,J_176,False,not built from current strict geometry filter
-junction,177,645,J_177,False,not built from current strict geometry filter
-junction,178,647,J_178,True,
-junction,179,651,J_179,True,
-junction,18,59,J_18,True,
-junction,180,652,J_180,False,not built from current strict geometry filter
-junction,180.1,653,J_180_1,True,
-junction,180.2,654,J_180_2,False,not built from current strict geometry filter
-junction,181,659,J_181,True,
-junction,182,660,J_182,False,not built from current strict geometry filter
-junction,182.1,661,J_182_1,False,not built from current strict geometry filter
-junction,182.2,662,J_182_2,False,not built from current strict geometry filter
-junction,183,666,J_183,False,not built from current strict geometry filter
-junction,184,667,J_184,False,not built from current strict geometry filter
-junction,185,672,J_185,False,not built from current strict geometry filter
-junction,186,677,J_186,False,not built from current strict geometry filter
-junction,187,682,J_187,False,not built from current strict geometry filter
-junction,19,63,J_19,True,
-junction,2,16,J_2,True,
-junction,20,64,J_20,True,
-junction,21,66,J_21,True,
-junction,22,70,J_22,True,
-junction,23,71,J_23,True,
-junction,24,75,J_24,True,
-junction,25,76,J_25,True,
-junction,26,78,J_26,True,
-junction,26.1,81,J_26_1,True,
-junction,27,83,J_27,True,
-junction,27.1,85,J_27_1,True,
-junction,28,87,J_28,True,
-junction,29,88,J_29,True,
-junction,3,18,J_3,True,
-junction,30,91,J_30,True,
-junction,31,92,J_31,True,
-junction,32,96,J_32,True,
-junction,33,99,J_33,True,
-junction,34,100,J_34,True,
-junction,35,102,J_35,True,
-junction,36,105,J_36,False,not built from current strict geometry filter
-junction,37,106,J_37,True,
-junction,38,110,J_38,True,
-junction,39,111,J_39,True,
-junction,4,23,J_4,True,
-junction,4.1,24,J_4_1,True,
-junction,40,114,J_40,True,
-junction,41,117,J_41,True,
-junction,42,118,J_42,True,
-junction,43,121,J_43,True,
-junction,44,123,J_44,True,
-junction,45,125,J_45,True,
-junction,46,127,J_46,True,
-junction,47,131,J_47,True,
-junction,48,132,J_48,True,
-junction,49,134,J_49,True,
-junction,5,26,J_5,True,
-junction,50,137,J_50,True,
-junction,51,138,J_51,True,
-junction,52,143,J_52,True,
-junction,53,144,J_53,True,
-junction,54,147,J_54,True,
-junction,55,151,J_55,False,not built from current strict geometry filter
-junction,57,153,J_57,True,
-junction,6,28,J_6,True,
-junction,6.1,30,J_6_1,True,
-junction,61,157,J_61,True,
-junction,62,158,J_62,True,
-junction,63,161,J_63,True,
-junction,65,164,J_65,True,
-junction,65.1,167,J_65_1,True,
-junction,65.2,171,J_65_2,False,not built from current strict geometry filter
-junction,65.25,173,J_65_25,False,not built from current strict geometry filter
-junction,65.3,174,J_65_3,False,not built from current strict geometry filter
-junction,68,178,J_68,False,not built from current strict geometry filter
-junction,68.05,179,J_68_05,False,not built from current strict geometry filter
-junction,68.1,183,J_68_1,True,
-junction,69,184,J_69,True,
-junction,7,33,J_7,True,
-junction,7.1,34,J_7_1,True,
-junction,70,188,J_70,True,
-junction,70.01,190,J_70_01,True,
-junction,70.1,193,J_70_1,True,
-junction,70.2,194,J_70_2,True,
-junction,70.3,197,J_70_3,True,
-junction,70.4,199,J_70_4,True,
-junction,71,200,J_71,True,
-junction,71.1,202,J_71_1,True,
-junction,71.2,206,J_71_2,False,not built from current strict geometry filter
-junction,71.3,209,J_71_3,False,not built from current strict geometry filter
-junction,71.4,210,J_71_4,False,not built from current strict geometry filter
-junction,71.5,214,J_71_5,True,
-junction,71.6,216,J_71_6,True,
-junction,71.7,217,J_71_7,True,
-junction,71.8,219,J_71_8,True,
-junction,71.9,220,J_71_9,True,
-junction,72,221,J_72,True,
-junction,74,222,J_74,True,
-junction,75,226,J_75,True,
-junction,76,229,J_76,True,
-junction,77,230,J_77,True,
-junction,78,235,J_78,True,
-junction,78.1,237,J_78_1,True,
-junction,79,241,J_79,True,
-junction,8,38,J_8,True,
-junction,80,242,J_80,True,
-junction,81,245,J_81,True,
-junction,81.1,247,J_81_1,True,
-junction,82,250,J_82,True,
-junction,83,253,J_83,True,
-junction,83.1,255,J_83_1,True,
-junction,84,258,J_84,False,not built from current strict geometry filter
-junction,84.1,260,J_84_1,False,not built from current strict geometry filter
-junction,85,262,J_85,True,
-junction,86,266,J_86,True,
-junction,87,267,J_87,True,
-junction,88,270,J_88,True,
-junction,88.1,273,J_88_1,True,
-junction,89,275,J_89,False,not built from current strict geometry filter
-junction,9,39,J_9,True,
-junction,90,279,J_90,True,
-junction,90.1,281,J_90_1,True,
-junction,91,285,J_91,False,not built from current strict geometry filter
-junction,92,286,J_92,True,
-junction,93,289,J_93,True,
-junction,94,291,J_94,True,
-junction,94.1,292,J_94_1,True,
-junction,94.2,295,J_94_2,True,
-junction,94.4,296,J_94_4,True,
-junction,95,298,J_95,True,
-junction,95.1,301,J_95_1,False,not built from current strict geometry filter
-junction,95.15,303,J_95_15,True,
-junction,95.2,306,J_95_2,True,
-junction,95.3,307,J_95_3,True,
-junction,95.4,308,J_95_4,True,
-junction,96,311,J_96,True,
-junction,96.1,314,J_96_1,False,not built from current strict geometry filter
-junction,97,316,J_97,False,not built from current strict geometry filter
-junction,97.1,319,J_97_1,False,not built from current strict geometry filter
-junction,98,321,J_98,True,
-junction,99,326,J_99,False,not built from current strict geometry filter
+source_tab,source_row,basin_index,structure_type,source_id,swmm_id,modeled,modeled_reason,assumptions_used
+HYDROLOGY,11,1,inlet,1,IN_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,29,1,inlet,10,IN_10,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,269,2,inlet,100,IN_100,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,271,2,inlet,100.1,IN_100_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,272,2,inlet,101,IN_101,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,274,2,inlet,102,IN_102,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,277,2,inlet,103,IN_103,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,278,2,inlet,104,IN_104,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,280,2,inlet,105,IN_105,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,283,2,inlet,106,IN_106,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,284,2,inlet,106.1,IN_106_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,287,2,inlet,107,IN_107,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,288,2,inlet,108,IN_108,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,290,2,inlet,109,IN_109,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,32,1,inlet,11,IN_11,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,294,2,inlet,110.1,IN_110_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,297,2,inlet,111,IN_111,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,300,2,inlet,112,IN_112,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,302,2,inlet,112.1,IN_112_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,304,2,inlet,112.2,IN_112_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,305,2,inlet,113,IN_113,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,309,2,inlet,114,IN_114,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,310,2,inlet,115,IN_115,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,313,2,inlet,115.1,IN_115_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,315,2,inlet,116,IN_116,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,317,2,inlet,116.01,IN_116_01,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,318,2,inlet,116.02,IN_116_02,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,320,2,inlet,116.1,IN_116_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,323,2,inlet,116.2,IN_116_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,324,2,inlet,116.3,IN_116_3,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,325,2,inlet,116.4,IN_116_4,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,329,2,inlet,117,IN_117,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,330,2,inlet,117.1,IN_117_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,331,2,inlet,117.2,IN_117_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,333,2,inlet,118,IN_118,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,334,2,inlet,118.1,IN_118_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,337,2,inlet,119,IN_119,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,338,2,inlet,119.1,IN_119_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,340,2,inlet,119.2,IN_119_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,36,1,inlet,12,IN_12,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,343,2,inlet,120,IN_120,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,346,2,inlet,121,IN_121,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,349,2,inlet,122,IN_122,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,350,2,inlet,122.1,IN_122_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,351,2,inlet,122.2,IN_122_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,354,2,inlet,123,IN_123,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,355,2,inlet,123.1,IN_123_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,359,2,inlet,123.2,IN_123_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,360,2,inlet,123.3,IN_123_3,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,363,2,inlet,123.4,IN_123_4,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,367,2,inlet,124,IN_124,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,368,2,inlet,124.1,IN_124_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,370,2,inlet,124.2,IN_124_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,373,2,inlet,124.3,IN_124_3,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,374,2,inlet,124.4,IN_124_4,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,377,2,inlet,124.5,IN_124_5,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,378,2,inlet,124.6,IN_124_6,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,381,2,inlet,125,IN_125,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,382,2,inlet,126,IN_126,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,386,2,inlet,127,IN_127,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,387,2,inlet,127.1,IN_127_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,389,2,inlet,127.2,IN_127_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,392,2,inlet,128,IN_128,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,393,2,inlet,128.1,IN_128_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,395,2,inlet,128.2,IN_128_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,399,2,inlet,129,IN_129,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,400,2,inlet,129.1,IN_129_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,402,2,inlet,129.2,IN_129_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,37,1,inlet,13,IN_13,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,404,2,inlet,130,IN_130,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,405,2,inlet,130.1,IN_130_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,409,2,inlet,130.2,IN_130_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,410,2,inlet,130.3,IN_130_3,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,413,2,inlet,130.4,IN_130_4,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,414,2,inlet,130.5,IN_130_5,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,416,2,inlet,131,IN_131,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,417,2,inlet,132,IN_132,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,420,2,inlet,133,IN_133,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,421,2,inlet,134,IN_134,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,423,2,inlet,135,IN_135,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,425,2,inlet,136,IN_136,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,430,2,inlet,137,IN_137,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,431,2,inlet,137.1,IN_137_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,434,2,inlet,138,IN_138,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,436,2,inlet,139,IN_139,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,427,2,inlet,140,IN_140,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,440,2,inlet,141,IN_141,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,444,2,inlet,143,IN_143,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,445,2,inlet,144,IN_144,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,446,2,inlet,145,IN_145,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,450,2,inlet,146,IN_146,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,452,2,inlet,147,IN_147,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,455,2,inlet,148,IN_148,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,456,2,inlet,149,IN_149,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,40,1,inlet,15,IN_15,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,458,2,inlet,150,IN_150,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,460,2,inlet,151,IN_151,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,463,2,inlet,152,IN_152,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,465,2,inlet,153,IN_153,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,466,2,inlet,154,IN_154,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,469,2,inlet,155,IN_155,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,470,2,inlet,156,IN_156,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,472,2,inlet,157,IN_157,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,473,2,inlet,158,IN_158,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,476,2,inlet,159,IN_159,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,43,1,inlet,16,IN_16,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,480,2,inlet,160,IN_160,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,488,3,inlet,161,IN_161,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,483,2,inlet,162,IN_162,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,493,4,inlet,163,IN_163,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,498,5,inlet,164,IN_164,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,499,5,inlet,165,IN_165,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,502,5,inlet,165.1,IN_165_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,504,5,inlet,165.2,IN_165_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,506,5,inlet,165.3,IN_165_3,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,508,5,inlet,165.4,IN_165_4,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,510,5,inlet,165.5,IN_165_5,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,513,5,inlet,165.6,IN_165_6,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,514,5,inlet,165.7,IN_165_7,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,517,5,inlet,165.8,IN_165_8,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,518,5,inlet,165.9,IN_165_9,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,522,5,inlet,166,IN_166,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,523,5,inlet,166.1,IN_166_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,525,5,inlet,166.2,IN_166_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,528,5,inlet,167,IN_167,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,529,5,inlet,168,IN_168,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,532,5,inlet,169,IN_169,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,45,1,inlet,17,IN_17,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,533,5,inlet,170,IN_170,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,535,5,inlet,171,IN_171,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,537,5,inlet,172,IN_172,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,538,5,inlet,173,IN_173,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,541,5,inlet,174,IN_174,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,545,5,inlet,175,IN_175,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,546,5,inlet,176,IN_176,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,548,5,inlet,177,IN_177,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,551,5,inlet,178,IN_178,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,553,5,inlet,179,IN_179,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,48,1,inlet,18,IN_18,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,556,5,inlet,180,IN_180,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,558,5,inlet,181,IN_181,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,560,5,inlet,182,IN_182,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,562,5,inlet,183,IN_183,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,563,5,inlet,184,IN_184,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,566,5,inlet,185,IN_185,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,567,5,inlet,186,IN_186,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,568,5,inlet,187,IN_187,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,570,5,inlet,188,IN_188,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,573,5,inlet,189,IN_189,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,52,1,inlet,19,IN_19,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,574,5,inlet,190,IN_190,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,576,5,inlet,191,IN_191,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,578,5,inlet,192,IN_192,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,579,5,inlet,193,IN_193,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,584,6,inlet,194,IN_194,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,586,6,inlet,195,IN_195,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,588,6,inlet,196,IN_196,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,590,6,inlet,197,IN_197,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,594,6,inlet,198,IN_198,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,595,6,inlet,199,IN_199,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,12,1,inlet,2,IN_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,53,1,inlet,20,IN_20,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,597,6,inlet,200,IN_200,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,598,6,inlet,201,IN_201,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,600,6,inlet,202,IN_202,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,601,6,inlet,203,IN_203,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,604,6,inlet,204,IN_204,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,606,6,inlet,205,IN_205,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,610,6,inlet,206,IN_206,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,611,6,inlet,207,IN_207,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,614,6,inlet,208,IN_208,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,615,6,inlet,209,IN_209,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,56,1,inlet,21,IN_21,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,618,6,inlet,210,IN_210,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,619,6,inlet,211,IN_211,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,622,6,inlet,212,IN_212,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,623,6,inlet,213,IN_213,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,624,6,inlet,214,IN_214,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,626,6,inlet,215,IN_215,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,628,6,inlet,216,IN_216,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,629,6,inlet,217,IN_217,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,631,6,inlet,218,IN_218,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,632,6,inlet,219,IN_219,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,57,1,inlet,22,IN_22,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,635,6,inlet,220,IN_220,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,638,6,inlet,221,IN_221,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,639,6,inlet,222,IN_222,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,643,6,inlet,223,IN_223,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,644,6,inlet,224,IN_224,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,646,6,inlet,225,IN_225,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,649,6,inlet,226,IN_226,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,650,6,inlet,227,IN_227,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,656,6,inlet,228,IN_228,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,657,6,inlet,229,IN_229,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,61,1,inlet,23,IN_23,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,658,6,inlet,230,IN_230,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,664,6,inlet,231,IN_231,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,665,6,inlet,232,IN_232,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,671,7,inlet,233,IN_233,False,NOT_MODELED_MISSING_RECEIVING_JUNCTION,True
+HYDROLOGY,676,8,inlet,234,IN_234,False,NOT_MODELED_MISSING_RECEIVING_JUNCTION,True
+HYDROLOGY,681,9,inlet,235,IN_235,False,NOT_MODELED_MISSING_RECEIVING_JUNCTION,True
+HYDROLOGY,62,1,inlet,24,IN_24,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,65,1,inlet,25,IN_25,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,68,1,inlet,26,IN_26,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,69,1,inlet,27,IN_27,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,73,1,inlet,28,IN_28,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,74,1,inlet,29,IN_29,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,15,1,inlet,3,IN_3,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,77,1,inlet,30,IN_30,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,80,1,inlet,30.1,IN_30_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,82,1,inlet,31,IN_31,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,84,1,inlet,32,IN_32,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,86,1,inlet,33,IN_33,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,90,1,inlet,34,IN_34,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,94,1,inlet,35,IN_35,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,95,1,inlet,36,IN_36,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,98,1,inlet,37,IN_37,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,101,1,inlet,38,IN_38,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,104,1,inlet,39,IN_39,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,108,1,inlet,40,IN_40,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,109,1,inlet,41,IN_41,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,113,1,inlet,42,IN_42,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,115,1,inlet,43,IN_43,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,116,1,inlet,43.1,IN_43_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,120,1,inlet,44,IN_44,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,122,1,inlet,45,IN_45,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,124,1,inlet,46,IN_46,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,126,1,inlet,47,IN_47,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,129,1,inlet,48,IN_48,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,130,1,inlet,49,IN_49,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,17,1,inlet,5,IN_5,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,133,1,inlet,50,IN_50,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,136,1,inlet,51,IN_51,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,140,1,inlet,52,IN_52,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,141,1,inlet,52.1,IN_52_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,142,1,inlet,53,IN_53,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,145,1,inlet,54,IN_54,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,146,1,inlet,55,IN_55,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,149,1,inlet,56,IN_56,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,687,10,inlet,5613,IN_5613,False,NOT_MODELED_MISSING_RECEIVING_JUNCTION,False
+HYDROLOGY,150,1,inlet,56.1,IN_56_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,152,1,inlet,57,IN_57,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,20,1,inlet,6,IN_6,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,155,1,inlet,60,IN_60,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,688,10,inlet,6026,IN_6026,False,NOT_MODELED_MISSING_RECEIVING_JUNCTION,False
+HYDROLOGY,689,10,inlet,6072,IN_6072,False,NOT_MODELED_MISSING_RECEIVING_JUNCTION,False
+HYDROLOGY,156,1,inlet,61,IN_61,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,694,10,inlet,6109,IN_6109,False,NOT_MODELED_MISSING_RECEIVING_JUNCTION,False
+HYDROLOGY,692,10,inlet,6128,IN_6128,False,NOT_MODELED_MISSING_RECEIVING_JUNCTION,False
+HYDROLOGY,693,10,inlet,6134,IN_6134,False,NOT_MODELED_MISSING_RECEIVING_JUNCTION,False
+HYDROLOGY,690,10,inlet,6145,IN_6145,False,NOT_MODELED_MISSING_RECEIVING_JUNCTION,False
+HYDROLOGY,691,10,inlet,6180,IN_6180,False,NOT_MODELED_MISSING_RECEIVING_JUNCTION,False
+HYDROLOGY,695,10,inlet,6190,IN_6190,False,NOT_MODELED_MISSING_RECEIVING_JUNCTION,False
+HYDROLOGY,159,1,inlet,62,IN_62,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,696,10,inlet,6209,IN_6209,False,NOT_MODELED_MISSING_RECEIVING_JUNCTION,False
+HYDROLOGY,160,1,inlet,63,IN_63,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,162,1,inlet,66,IN_66,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,163,1,inlet,67,IN_67,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,21,1,inlet,6.1,IN_6_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,22,1,inlet,7,IN_7,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,165,1,inlet,74,IN_74,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,166,1,inlet,75,IN_75,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,169,1,inlet,75.1,IN_75_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,170,1,inlet,75.2,IN_75_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,172,1,inlet,75.25,IN_75_25,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,176,1,inlet,75.3,IN_75_3,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,177,1,inlet,75.4,IN_75_4,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,181,1,inlet,75.5,IN_75_5,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,182,1,inlet,75.6,IN_75_6,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,186,1,inlet,76,IN_76,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,189,1,inlet,76.1,IN_76_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,187,1,inlet,76.2,IN_76_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,192,1,inlet,76.3,IN_76_3,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,195,1,inlet,76.41,IN_76_41,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,196,1,inlet,76.42,IN_76_42,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,198,1,inlet,76.43,IN_76_43,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,201,1,inlet,76.5,IN_76_5,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,204,1,inlet,77,IN_77,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,205,1,inlet,77.1,IN_77_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,208,1,inlet,77.2,IN_77_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,212,1,inlet,77.3,IN_77_3,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,213,1,inlet,77.4,IN_77_4,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,215,1,inlet,77.5,IN_77_5,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,218,1,inlet,77.6,IN_77_6,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,223,1,inlet,79,IN_79,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,25,1,inlet,8,IN_8,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,224,1,inlet,80,IN_80,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,225,1,inlet,81,IN_81,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,228,1,inlet,82,IN_82,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,234,2,inlet,83,IN_83,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,236,2,inlet,84,IN_84,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,239,2,inlet,85,IN_85,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,240,2,inlet,86,IN_86,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,243,2,inlet,87,IN_87,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,244,2,inlet,88,IN_88,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,246,2,inlet,89,IN_89,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,27,1,inlet,9,IN_9,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,248,2,inlet,90,IN_90,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,249,2,inlet,91,IN_91,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,251,2,inlet,92,IN_92,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,252,2,inlet,93,IN_93,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,254,2,inlet,94,IN_94,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,257,2,inlet,95,IN_95,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,259,2,inlet,96,IN_96,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,261,2,inlet,97,IN_97,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,264,2,inlet,98,IN_98,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,265,2,inlet,99,IN_99,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,13,1,junction,1,J_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,327,2,junction,100,J_100,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,332,2,junction,101,J_101,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,335,2,junction,101.1,J_101_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,339,2,junction,102,J_102,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,341,2,junction,102.1,J_102_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,344,2,junction,102.2,J_102_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,345,2,junction,102.3,J_102_3,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,347,2,junction,102.4,J_102_4,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,352,2,junction,103,J_103,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,356,2,junction,103.1,J_103_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,357,2,junction,103.2,J_103_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,358,2,junction,103.3,J_103_3,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,361,2,junction,103.4,J_103_4,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,364,2,junction,103.5,J_103_5,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,365,2,junction,104,J_104,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,369,2,junction,105,J_105,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,371,2,junction,105.1,J_105_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,375,2,junction,105.2,J_105_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,379,2,junction,105.3,J_105_3,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,380,2,junction,105.4,J_105_4,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,383,2,junction,106,J_106,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,384,2,junction,107,J_107,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,388,2,junction,108,J_108,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,390,2,junction,108.1,J_108_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,394,2,junction,108.2,J_108_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,396,2,junction,108.3,J_108_3,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,397,2,junction,108.4,J_108_4,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,401,2,junction,109,J_109,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,403,2,junction,109.1,J_109_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,406,2,junction,109.2,J_109_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,41,1,junction,11,J_11,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,407,2,junction,110,J_110,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,411,2,junction,110.1,J_110_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,412,2,junction,110.2,J_110_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,415,2,junction,110.3,J_110_3,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,418,2,junction,111,J_111,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,422,2,junction,112,J_112,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,424,2,junction,113,J_113,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,426,2,junction,113.1,J_113_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,428,2,junction,113.2,J_113_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,432,2,junction,114,J_114,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,435,2,junction,114.1,J_114_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,437,2,junction,114.2,J_114_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,438,2,junction,115,J_115,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,441,2,junction,116,J_116,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,442,2,junction,117,J_117,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,447,2,junction,118,J_118,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,448,2,junction,119,J_119,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,44,1,junction,12,J_12,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,451,2,junction,120,J_120,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,453,2,junction,121,J_121,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,457,2,junction,122,J_122,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,459,2,junction,123,J_123,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,461,2,junction,124,J_124,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,464,2,junction,125,J_125,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,467,2,junction,126,J_126,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,468,2,junction,127,J_127,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,471,2,junction,128,J_128,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,474,2,junction,129,J_129,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,46,1,junction,13,J_13,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,475,2,junction,130,J_130,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,477,2,junction,131,J_131,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,478,2,junction,132,J_132,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,481,2,junction,132.1,J_132_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,482,2,junction,133,J_133,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,484,2,junction,134,J_134,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,489,3,junction,134.1,J_134_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,494,4,junction,135,J_135,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,500,5,junction,136,J_136,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,503,5,junction,136.1,J_136_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,505,5,junction,136.2,J_136_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,507,5,junction,136.3,J_136_3,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,509,5,junction,136.4,J_136_4,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,511,5,junction,136.5,J_136_5,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,512,5,junction,136.6,J_136_6,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,515,5,junction,136.7,J_136_7,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,519,5,junction,136.8,J_136_8,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,520,5,junction,136.9,J_136_9,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,524,5,junction,137,J_137,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,526,5,junction,137.1,J_137_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,527,5,junction,137.2,J_137_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,530,5,junction,138,J_138,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,534,5,junction,139,J_139,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,49,1,junction,14,J_14,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,536,5,junction,140,J_140,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,539,5,junction,141,J_141,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,542,5,junction,142,J_142,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,543,5,junction,143,J_143,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,547,5,junction,144,J_144,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,549,5,junction,145,J_145,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,552,5,junction,146,J_146,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,554,5,junction,147,J_147,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,557,5,junction,148,J_148,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,559,5,junction,149,J_149,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,50,1,junction,15,J_15,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,561,5,junction,150,J_150,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,564,5,junction,151,J_151,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,569,5,junction,152,J_152,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,571,5,junction,153,J_153,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,572,5,junction,153.1,J_153_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,575,5,junction,154,J_154,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,577,5,junction,155,J_155,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,580,5,junction,156,J_156,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,585,6,junction,157,J_157,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,587,6,junction,158,J_158,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,589,6,junction,159,J_159,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,591,6,junction,159.1,J_159_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,593,6,junction,159.2,J_159_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,54,1,junction,16,J_16,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,596,6,junction,160,J_160,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,599,6,junction,161,J_161,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,602,6,junction,162,J_162,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,605,6,junction,163,J_163,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,607,6,junction,164,J_164,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,608,6,junction,165,J_165,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,612,6,junction,166,J_166,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,616,6,junction,167,J_167,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,617,6,junction,168,J_168,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,620,6,junction,169,J_169,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,58,1,junction,17,J_17,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,625,6,junction,170,J_170,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,627,6,junction,171,J_171,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,630,6,junction,172,J_172,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,633,6,junction,173,J_173,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,636,6,junction,174,J_174,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,640,6,junction,175,J_175,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,641,6,junction,176,J_176,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,645,6,junction,177,J_177,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,647,6,junction,178,J_178,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,651,6,junction,179,J_179,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,59,1,junction,18,J_18,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,652,6,junction,180,J_180,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,653,6,junction,180.1,J_180_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,654,6,junction,180.2,J_180_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,659,6,junction,181,J_181,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,660,6,junction,182,J_182,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,661,6,junction,182.1,J_182_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,662,6,junction,182.2,J_182_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,666,6,junction,183,J_183,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,667,6,junction,184,J_184,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,672,7,junction,185,J_185,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,677,8,junction,186,J_186,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,682,9,junction,187,J_187,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,63,1,junction,19,J_19,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,16,1,junction,2,J_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,64,1,junction,20,J_20,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,66,1,junction,21,J_21,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,70,1,junction,22,J_22,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,71,1,junction,23,J_23,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,75,1,junction,24,J_24,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,76,1,junction,25,J_25,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,78,1,junction,26,J_26,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,81,1,junction,26.1,J_26_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,83,1,junction,27,J_27,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,85,1,junction,27.1,J_27_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,87,1,junction,28,J_28,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,88,1,junction,29,J_29,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,18,1,junction,3,J_3,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,91,1,junction,30,J_30,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,92,1,junction,31,J_31,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,96,1,junction,32,J_32,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,99,1,junction,33,J_33,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,100,1,junction,34,J_34,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,102,1,junction,35,J_35,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,105,1,junction,36,J_36,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,106,1,junction,37,J_37,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,110,1,junction,38,J_38,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,111,1,junction,39,J_39,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,23,1,junction,4,J_4,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,114,1,junction,40,J_40,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,117,1,junction,41,J_41,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,118,1,junction,42,J_42,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,121,1,junction,43,J_43,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,123,1,junction,44,J_44,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,125,1,junction,45,J_45,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,127,1,junction,46,J_46,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,131,1,junction,47,J_47,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,132,1,junction,48,J_48,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,134,1,junction,49,J_49,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,24,1,junction,4.1,J_4_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,26,1,junction,5,J_5,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,137,1,junction,50,J_50,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,138,1,junction,51,J_51,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,143,1,junction,52,J_52,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,144,1,junction,53,J_53,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,147,1,junction,54,J_54,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,151,1,junction,55,J_55,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,153,1,junction,57,J_57,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,28,1,junction,6,J_6,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,157,1,junction,61,J_61,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,158,1,junction,62,J_62,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,161,1,junction,63,J_63,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,164,1,junction,65,J_65,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,167,1,junction,65.1,J_65_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,171,1,junction,65.2,J_65_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,173,1,junction,65.25,J_65_25,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,174,1,junction,65.3,J_65_3,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,178,1,junction,68,J_68,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,179,1,junction,68.05,J_68_05,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,183,1,junction,68.1,J_68_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,184,1,junction,69,J_69,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,30,1,junction,6.1,J_6_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,33,1,junction,7,J_7,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,188,1,junction,70,J_70,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,190,1,junction,70.01,J_70_01,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,193,1,junction,70.1,J_70_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,194,1,junction,70.2,J_70_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,197,1,junction,70.3,J_70_3,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,199,1,junction,70.4,J_70_4,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,200,1,junction,71,J_71,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,202,1,junction,71.1,J_71_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,206,1,junction,71.2,J_71_2,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,209,1,junction,71.3,J_71_3,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,210,1,junction,71.4,J_71_4,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,214,1,junction,71.5,J_71_5,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,216,1,junction,71.6,J_71_6,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,217,1,junction,71.7,J_71_7,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,219,1,junction,71.8,J_71_8,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,220,1,junction,71.9,J_71_9,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,221,1,junction,72,J_72,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,222,1,junction,74,J_74,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,226,1,junction,75,J_75,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,229,1,junction,76,J_76,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,230,1,junction,77,J_77,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,235,2,junction,78,J_78,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,237,2,junction,78.1,J_78_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,241,2,junction,79,J_79,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,34,1,junction,7.1,J_7_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,38,1,junction,8,J_8,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,242,2,junction,80,J_80,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,245,2,junction,81,J_81,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,247,2,junction,81.1,J_81_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,250,2,junction,82,J_82,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,253,2,junction,83,J_83,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,255,2,junction,83.1,J_83_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,258,2,junction,84,J_84,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,260,2,junction,84.1,J_84_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,262,2,junction,85,J_85,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,266,2,junction,86,J_86,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,267,2,junction,87,J_87,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,270,2,junction,88,J_88,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,273,2,junction,88.1,J_88_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,275,2,junction,89,J_89,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,39,1,junction,9,J_9,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,279,2,junction,90,J_90,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,281,2,junction,90.1,J_90_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,285,2,junction,91,J_91,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,286,2,junction,92,J_92,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,289,2,junction,93,J_93,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,291,2,junction,94,J_94,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,292,2,junction,94.1,J_94_1,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,295,2,junction,94.2,J_94_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,296,2,junction,94.4,J_94_4,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,298,2,junction,95,J_95,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,301,2,junction,95.1,J_95_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,303,2,junction,95.15,J_95_15,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,306,2,junction,95.2,J_95_2,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,307,2,junction,95.3,J_95_3,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,308,2,junction,95.4,J_95_4,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,311,2,junction,96,J_96,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,314,2,junction,96.1,J_96_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,316,2,junction,97,J_97,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,319,2,junction,97.1,J_97_1,True,MODELED_WITH_ASSUMPTION,True
+HYDROLOGY,321,2,junction,98,J_98,True,MODELED_FROM_SOURCE,False
+HYDROLOGY,326,2,junction,99,J_99,True,MODELED_WITH_ASSUMPTION,True
