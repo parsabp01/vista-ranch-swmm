@@ -124,6 +124,26 @@ for idx, r in links.reset_index(drop=True).iterrows():
 
     if is_noise_candidate:
         excluded_noise_rows += 1
+        add_finding(
+            'link_row_exclusion_candidate',
+            'MEDIUM',
+            'link',
+            f'row_{processed_row}',
+            None,
+            'warn',
+            'Processed link row appears to be non-link worksheet noise and should be excluded from link QA denominator.',
+            'links',
+            src_tab,
+            f"excel_row={src_row};raw_extracted_row_index={processed_row}",
+            processed_row,
+            'pipe_id,upstream_node,downstream_node,source_sheet,source_row',
+            us_raw,
+            ds_raw,
+            pipe_id,
+            True,
+            'non_hydraulics_blank_link_row',
+            'Exclude this row from operational link QA denominator or hard-filter non-HYDRAULICS link rows upstream.',
+        )
         continue
 
     if not us or not ds:
@@ -321,6 +341,7 @@ if remaining.empty:
 else:
     for _, r in remaining.iterrows():
         packet_md.append(f"- [{r['severity']}] {r['check_name']} | {r['entity_type']} {r['entity_id']} | disposition={r['recommended_disposition']} | {r['plain_english_interpretation']} | source_dataset={r['source_dataset']} tab={r['source_tab']} row={r['source_row']}")
+        packet_md.append(f"- [{r['severity']}] {r['check_name']} | {r['entity_type']} {r['entity_id']} | {r['plain_english_interpretation']} | source_dataset={r['source_dataset']} tab={r['source_tab']} row={r['source_row']}")
 (OUT_QA / 'phase1_remaining_findings_packet.md').write_text('\n'.join(packet_md) + '\n', encoding='utf-8')
 
 high_count = int((findings_df['severity'] == 'HIGH').sum())
