@@ -1356,18 +1356,12 @@ def run_qa(ctx: PipelineContext) -> StageResult:
         if links_df.empty:
             findings.append({"severity": "medium", "check": "links_non_empty", "message": "links.csv is empty; build uses synthetic chaining"})
 
-    required_sections = [
-        "[OPTIONS]",
-        "[RAINGAGES]",
-        "[TIMESERIES]",
+    hydraulic_required_sections = [
         "[JUNCTIONS]",
         "[OUTFALLS]",
         "[CONDUITS]",
         "[XSECTIONS]",
         "[LOSSES]",
-        "[SUBCATCHMENTS]",
-        "[SUBAREAS]",
-        "[INFILTRATION]",
         "[INFLOWS]",
         "[COORDINATES]",
     ]
@@ -1376,11 +1370,37 @@ def run_qa(ctx: PipelineContext) -> StageResult:
         findings.append({"severity": "high", "check": "model_exists", "message": "models/model.inp is missing"})
     else:
         model_text = model_path.read_text(encoding="utf-8")
-        for section in required_sections:
+
+        build_assumptions = {}
+        build_summary_path = ROOT / "outputs/logs/build_summary.json"
+        if build_summary_path.exists():
+            try:
+                build_assumptions = json.loads(build_summary_path.read_text(encoding="utf-8")).get("assumptions", {})
+            except Exception:
+                build_assumptions = {}
+
+        hydraulic_only_mode = (
+            build_assumptions.get("subcatchments_included") is False
+            and build_assumptions.get("inflow_mode") == "static_known_flows_at_inlets"
+        )
+
+        for section in hydraulic_required_sections:
             if section not in model_text:
                 findings.append({"severity": "high", "check": "required_section", "message": f"Missing {section} in model.inp"})
 
-    status = "ready" if not any(f["severity"] == "high" for f in findings) else "blocked"
+        if "[OPTIONS]" not in model_text:
+            findings.append({
+                "severity": "low",
+                "check": "options_section_recommended",
+                "message": "[OPTIONS] section missing/minimal; set duration and run controls manually in SWMM GUI.",
+            })
+
+        if not hydraulic_only_mode:
+            for section in ["[RAINGAGES]", "[TIMESERIES]", "[SUBCATCHMENTS]", "[SUBAREAS]", "[INFILTRATION]"]:
+                if section not in model_text:
+                    findings.append({"severity": "high", "check": "required_section", "message": f"Missing {section} in model.inp"})
+
+    status = "ready_for_swmm_gui" if not any(f["severity"] == "high" for f in findings) else "blocked"
 
     qa_dir = ROOT / "outputs/qa"
     qa_dir.mkdir(parents=True, exist_ok=True)
