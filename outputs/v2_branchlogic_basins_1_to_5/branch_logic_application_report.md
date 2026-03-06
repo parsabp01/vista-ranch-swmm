@@ -1,0 +1,14 @@
+# Branch Logic Application Report
+- branch_logic_detected: no
+- parsed_row_count_basins_1_to_5: 0
+- built_edge_count: 0
+- skipped_edge_count: 0
+- skipped_edge_reasons:
+- normalization_events: 0
+- direction_parse_exceptions: 0
+- basin_edge_counts:
+  - basin_1: 0
+  - basin_2: 0
+  - basin_3: 0
+  - basin_4: 0
+  - basin_5: 0

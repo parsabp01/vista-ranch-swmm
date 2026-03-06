@@ -8,7 +8,7 @@ from pathlib import Path
 
 from pipeline_core import ROOT, now_utc, run_stage
 
-VALID_STAGES = ["preflight", "extract", "transform", "build", "qa"]
+VALID_STAGES = ["preflight", "extract", "transform", "build", "build_v2", "qa"]
 
 
 def _sha256(path: Path) -> str | None:
@@ -44,6 +44,10 @@ def _input_paths_for_stage(stage: str) -> list[Path]:
             ROOT / "data/processed/links.csv",
             ROOT / "data/processed/rational_data.csv",
             ROOT / "data/processed/subcatchment_defaults.csv",
+        ],
+        "build_v2": [
+            ROOT / "data/raw/Branch_Logic_GPT.xlsx",
+            ROOT / "data/raw/Copy of BX-HH-Vista Ranch_10-30-2025.xlsm",
         ],
         "qa": [
             ROOT / "models/model.inp",
