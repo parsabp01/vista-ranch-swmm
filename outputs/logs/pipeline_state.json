@@ -1,31 +1,29 @@
 {
-  "generated_at_utc": "2026-02-25T23:38:44.420838+00:00",
-  "generated_at_utc": "2026-02-25T23:29:29.623425+00:00",
-  "generated_at_utc": "2026-02-25T23:12:19.963565+00:00",
-  "current_stage": "qa",
-  "status": "ready",
-  "message": "QA complete",
+  "generated_at_utc": "2026-03-06T18:46:53.071382+00:00",
+  "current_stage": "build_v2",
+  "status": "blocked",
+  "message": "V2 branch-logic build complete",
   "inputs_used": [
     {
-      "path": "models/model.inp",
-      "exists": true,
-      "sha256": "32b30507ced0e19fc3859398ea6037ceebb44ea7c4ccb170b49998b6d8343dc5"
-      "sha256": "739891c16faa20ae95ab97acbe831b48097749f5ac8e37865d25fe1541930c1c"
+      "path": "data/raw/Branch_Logic_GPT.xlsx",
+      "exists": false,
+      "sha256": null
     },
     {
-      "path": "data/processed/nodes.csv",
+      "path": "data/raw/Copy of BX-HH-Vista Ranch_10-30-2025.xlsm",
       "exists": true,
-      "sha256": "ead6006c94d96e087f5f8a52a566f8e17737f31d754d83ef3b0ec5373697e2ec"
-    },
-    {
-      "path": "data/processed/links.csv",
-      "exists": true,
-      "sha256": "b9861144e184b6a7fa156b73b471b0ef0ac322797eca09652eb2d57ebbcfddb9"
+      "sha256": "7d366ad7b8edaac0d9d44dd209a1cd7ff73953a033119a3ef510f272b4b906e3"
     }
   ],
   "outputs_produced": [
-    "outputs/qa/qa_findings.csv",
-    "outputs/qa/qa_summary.json"
+    "models/model_v2_branchlogic_basins_1_to_5.inp",
+    "outputs/v2_branchlogic_basins_1_to_5/branch_logic_application_report.md",
+    "outputs/v2_branchlogic_basins_1_to_5/branch_logic_source_validation.csv",
+    "outputs/v2_branchlogic_basins_1_to_5/branch_logic_graph_qaqc.md",
+    "outputs/v2_branchlogic_basins_1_to_5/basin_layout_summary.md",
+    "outputs/v2_branchlogic_basins_1_to_5/inlet_flow_summary.md",
+    "outputs/v2_branchlogic_basins_1_to_5/build_summary.json",
+    "outputs/v2_branchlogic_basins_1_to_5/pipeline_state.json"
   ],
   "key_counts": {
     "data/interim/nodes_raw.csv": 89,
@@ -36,11 +34,10 @@
     "data/processed/rational_data.csv": 786,
     "data/processed/subcatchment_defaults.csv": 786,
     "outputs/qa/qa_findings.csv": 0,
-    "outputs/qa/qa_findings.csv": 5,
-    "models/model.inp_lines": 3161
+    "models/model.inp_lines": 3165
   },
   "assumptions_used": {
-    "synthetic_fallback_allowed": true,
+    "synthetic_fallback_allowed": false,
     "default_config": "configs/defaults.yaml",
     "build_assumptions": {
       "topology_mode": "inlet_aware_hydraulic_baseline",
@@ -57,14 +54,5 @@
       "hydrology_source_row_cutoff": 684
     }
   },
-  "next_action": "swmm_gui_manual_qaqc"
-  "next_action": "resolve blocking issues",
-  "blockers": [
-    "required_section: Missing [RAINGAGES] in model.inp",
-    "required_section: Missing [TIMESERIES] in model.inp",
-    "required_section: Missing [SUBCATCHMENTS] in model.inp",
-    "required_section: Missing [SUBAREAS] in model.inp",
-    "required_section: Missing [INFILTRATION] in model.inp"
-  ]
   "next_action": "resolve blocking issues"
 }

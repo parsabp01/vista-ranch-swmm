@@ -1,4 +1,5 @@
 {
+  "generated_at_utc": "2026-03-06T18:46:53.066267+00:00",
   "topology_source": "branch_logic",
   "basins_included": [
     1,
@@ -13,11 +14,19 @@
   "inlet_lateral_slope": 0.002,
   "inlet_lateral_diameter_in": 24,
   "branch_logic_authoritative": true,
+  "parsed_row_count": 0,
   "parsed_branch_logic_rows": 0,
   "built_nodes": 0,
   "built_edges": 0,
   "built_outfalls": 0,
   "blockers": [
+    "missing workbook: data/raw/Branch_Logic_GPT.xlsx"
+  ],
+  "non_blocking_assumptions": [
+    "shorthand ID normalization",
+    "inlet rim inherited from downstream junction",
+    "inlet lateral assumed 5 ft / 0.002 / 24 in",
+    "basin-square coordinate packing"
     "branch_logic workbook missing: data/raw/Branch_Logic_GPT.xlsx"
   ],
   "assumptions": [

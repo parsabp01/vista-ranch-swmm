@@ -1,4 +1,9 @@
 {
+  "generated_at_utc": "2026-03-06T18:46:53.066481+00:00",
+  "status": "blocked",
+  "blockers": [
+    "missing workbook: data/raw/Branch_Logic_GPT.xlsx"
+  ]
   "status": "blocked",
   "blockers": [
     "branch_logic workbook missing: data/raw/Branch_Logic_GPT.xlsx"

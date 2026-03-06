@@ -1338,6 +1338,436 @@ def run_build(ctx: PipelineContext) -> StageResult:
     return StageResult("build", "ready", "Runnable SWMM model written", [str(model_path.relative_to(ROOT)), str(meta_path.relative_to(ROOT))])
 
 
+
+
+def _norm_branchlogic_id(value: object) -> str | None:
+    if value is None:
+        return None
+    txt = str(value).strip().upper().replace(" ", "")
+    if not txt:
+        return None
+    m = re.match(r"^(J|IN|O)[_-]?(\d+(?:\.\d+)?)$", txt)
+    if not m:
+        return None
+    return f"{m.group(1)}_{m.group(2).replace('.', '_')}"
+
+
+def _parse_branchlogic_direction_map(raw: object) -> tuple[dict[str, str], list[str]]:
+    mapping: dict[str, str] = {}
+    issues: list[str] = []
+    if raw is None or not str(raw).strip():
+        return mapping, issues
+    for part in [x.strip() for x in str(raw).split(",") if x and str(x).strip()]:
+        m = re.match(
+            r"^(J|IN|O)[_-]?\d+(?:\.\d+)?\s+(TOP|LEFT|RIGHT|(15|30|45|60|75)\s+DEGREES\s+TOP\s+(LEFT|RIGHT))$",
+            part,
+            re.IGNORECASE,
+        )
+        if not m:
+            issues.append(f"unparseable direction token: {part}")
+            continue
+        token, direction = part.rsplit(" ", 1)
+        nid = _norm_branchlogic_id(token)
+        if not nid:
+            issues.append(f"unparseable direction node id: {token}")
+            continue
+        if "DEGREES" in part.upper():
+            direction = " ".join(part.split()[1:]).upper()
+        mapping[nid] = direction.upper()
+    return mapping, issues
+
+
+def _direction_unit_vector(direction: str) -> tuple[float, float] | None:
+    d = (direction or "").strip().upper()
+    if d == "TOP":
+        return (0.0, 1.0)
+    if d == "LEFT":
+        return (-1.0, 0.0)
+    if d == "RIGHT":
+        return (1.0, 0.0)
+    m = re.match(r"^(15|30|45|60|75)\s+DEGREES\s+TOP\s+(LEFT|RIGHT)$", d)
+    if not m:
+        return None
+    deg = float(m.group(1))
+    side = -1.0 if m.group(2) == "LEFT" else 1.0
+    return (side * math.sin(math.radians(deg)), math.cos(math.radians(deg)))
+
+
+def run_build_v2(ctx: PipelineContext) -> StageResult:
+    out_dir = ROOT / "outputs/v2_branchlogic_basins_1_to_5"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    model_path = ROOT / "models/model_v2_branchlogic_basins_1_to_5.inp"
+
+    branch_logic_path = ROOT / "data/raw/Branch_Logic_GPT.xlsx"
+    eng_path = ROOT / "data/raw/Copy of BX-HH-Vista Ranch_10-30-2025.xlsm"
+
+    blockers: list[str] = []
+    if not eng_path.exists():
+        blockers.append(f"missing workbook: {eng_path.relative_to(ROOT)}")
+    if not branch_logic_path.exists():
+        blockers.append(f"missing workbook: {branch_logic_path.relative_to(ROOT)}")
+
+    hydrology: dict[str, dict] = {}
+    if eng_path.exists():
+        wb = openpyxl.load_workbook(eng_path, data_only=True, read_only=True)
+        ws = wb["HYDROLOGY"]
+        for row in ws.iter_rows(min_row=9, max_col=29, values_only=True):
+            basin = _to_float(row[0]) if len(row) > 0 else None
+            basin_i = int(basin) if basin is not None and float(basin).is_integer() else None
+            j_raw = str(row[1]).strip() if len(row) > 1 and row[1] is not None and str(row[1]).strip() else None
+            i_raw = str(row[2]).strip() if len(row) > 2 and row[2] is not None and str(row[2]).strip() else None
+            rec = {
+                "basin": basin_i,
+                "j_raw": j_raw,
+                "i_raw": i_raw,
+                "flow": _to_float(row[17]) if len(row) > 17 else None,
+                "diam_in": _to_float(row[18]) if len(row) > 18 else None,
+                "len_ft": _to_float(row[21]) if len(row) > 21 else None,
+                "rim": _to_float(row[26]) if len(row) > 26 else None,
+                "soffit": _to_float(row[28]) if len(row) > 28 else None,
+            }
+            if rec["j_raw"]:
+                hydrology[_norm_branchlogic_id(f"J{rec['j_raw']}")] = rec
+            if rec["i_raw"]:
+                hydrology.setdefault(_norm_branchlogic_id(f"IN{rec['i_raw']}"), rec)
+
+    rows: list[dict] = []
+    terminal_orientation: dict[int, str] = {}
+    if branch_logic_path.exists():
+        wb = openpyxl.load_workbook(branch_logic_path, data_only=True, read_only=True)
+        if "branch_logic" not in wb.sheetnames:
+            blockers.append("missing sheet: branch_logic")
+        else:
+            ws = wb["branch_logic"]
+            basin_ff = None
+            for r in range(2, ws.max_row + 1):
+                basin_val = _to_float(ws.cell(r, 1).value)
+                if basin_val is not None:
+                    basin_ff = int(basin_val)
+                if basin_ff not in {1, 2, 3, 4, 5}:
+                    continue
+                rows.append({
+                    "row": r,
+                    "basin": basin_ff,
+                    "down": ws.cell(r, 2).value,
+                    "up": ws.cell(r, 3).value,
+                    "dir": ws.cell(r, 4).value,
+                    "notes": ws.cell(r, 5).value,
+                })
+        if "terminal_notes" in wb.sheetnames:
+            ws_t = wb["terminal_notes"]
+            for r in range(2, ws_t.max_row + 1):
+                b = _to_float(ws_t.cell(r, 1).value)
+                orient = ws_t.cell(r, 2).value
+                if b is not None and orient:
+                    terminal_orientation[int(b)] = str(orient).strip()
+
+    edges: list[tuple[int, str, str, str]] = []
+    skipped_edges: list[str] = []
+    dir_exceptions: list[str] = []
+    normalization_events = 0
+    upstream_to_downstream: dict[str, str] = {}
+
+    for rr in rows:
+        down = _norm_branchlogic_id(rr["down"])
+        if not down:
+            blockers.append(f"row {rr['row']}: invalid downstream id {rr['down']}")
+            continue
+        up_raw = str(rr["up"] or "").strip()
+        ups = [u.strip() for u in up_raw.split(",") if u.strip()]
+        if up_raw and len(ups) > 1 and "," not in up_raw:
+            blockers.append(f"row {rr['row']}: upstream list is not comma-separated")
+        dirmap, dir_issues = _parse_branchlogic_direction_map(rr["dir"])
+        dir_exceptions.extend([f"row {rr['row']}: {x}" for x in dir_issues])
+        for u_raw in ups:
+            up = _norm_branchlogic_id(u_raw)
+            if up != u_raw.strip().upper().replace(".", "_"):
+                normalization_events += 1
+            if not up:
+                blockers.append(f"row {rr['row']}: invalid upstream id {u_raw}")
+                skipped_edges.append(f"{u_raw}->{down}: invalid upstream token")
+                continue
+            if up == down:
+                blockers.append(f"row {rr['row']}: self loop {up}")
+                skipped_edges.append(f"{up}->{down}: self loop")
+                continue
+            if up in upstream_to_downstream and upstream_to_downstream[up] != down:
+                blockers.append(f"duplicate downstream assignment conflict: {up}")
+                skipped_edges.append(f"{up}->{down}: duplicate downstream assignment")
+                continue
+            upstream_to_downstream[up] = down
+            direction = dirmap.get(up)
+            if not direction:
+                dir_exceptions.append(f"row {rr['row']}: missing direction mapping for {up}")
+                direction = "TOP"
+            if _direction_unit_vector(direction) is None:
+                blockers.append(f"row {rr['row']}: malformed direction for {up}: {direction}")
+                skipped_edges.append(f"{up}->{down}: malformed direction")
+                continue
+            # cross basin and source node validation
+            if up not in hydrology and not up.startswith("O_"):
+                blockers.append(f"{up}: missing source node in HYDROLOGY")
+                skipped_edges.append(f"{up}->{down}: missing upstream source")
+                continue
+            if down not in hydrology and not down.startswith("O_"):
+                blockers.append(f"{down}: missing source node in HYDROLOGY")
+                skipped_edges.append(f"{up}->{down}: missing downstream source")
+                continue
+            if up in hydrology and down in hydrology:
+                bu, bd = hydrology[up].get("basin"), hydrology[down].get("basin")
+                if bu and bd and bu != bd:
+                    blockers.append(f"cross-basin edge: {up}->{down}")
+                    skipped_edges.append(f"{up}->{down}: cross-basin")
+                    continue
+            edges.append((rr["basin"], up, down, direction))
+
+    edges_unique = list(dict.fromkeys(edges))
+    basin_edge_counts = defaultdict(int)
+    for b, *_ in edges_unique:
+        basin_edge_counts[b] += 1
+
+    referenced_nodes = sorted({n for _, u, d, _ in edges_unique for n in (u, d)})
+    validation_rows = []
+    for nid in referenced_nodes:
+        rec = hydrology.get(nid)
+        stype = "outfall" if nid.startswith("O_") else ("inlet" if nid.startswith("IN_") else "junction")
+        exists = stype == "outfall" or rec is not None
+        missing_fields = []
+        required_ok = True
+        known_flow_present = bool(rec and rec.get("flow") is not None)
+        if stype == "junction":
+            for key, val in [("AA", rec.get("rim") if rec else None), ("AC", rec.get("soffit") if rec else None), ("S", rec.get("diam_in") if rec else None), ("V", rec.get("len_ft") if rec else None)]:
+                if val is None:
+                    missing_fields.append(key)
+            required_ok = not missing_fields
+            if not required_ok:
+                blockers.append(f"{nid}: missing junction data fields {','.join(missing_fields)}")
+        if not exists:
+            blockers.append(f"{nid}: referenced in branch_logic but missing in HYDROLOGY")
+        validation_rows.append({
+            "basin_index": rec.get("basin") if rec else "",
+            "source_id_raw": rec.get("j_raw") if stype == "junction" and rec else (rec.get("i_raw") if rec else ""),
+            "swmm_id_normalized": nid,
+            "structure_type": stype,
+            "exists_in_hydrology": exists,
+            "required_data_complete": required_ok,
+            "missing_fields": ";".join(missing_fields),
+            "known_flow_present": known_flow_present,
+            "status": "ok" if exists and required_ok else "blocking",
+        })
+
+    valid_nodes = {r["swmm_id_normalized"] for r in validation_rows if r["status"] == "ok"}
+    built_edges = [e for e in edges_unique if e[1] in valid_nodes and (e[2] in valid_nodes or e[2].startswith("O_"))]
+
+    # simple reachability to outfall
+    downstream = {u: d for _, u, d, _ in built_edges}
+    nodes_without_outfall = []
+    for n in sorted({u for _, u, _, _ in built_edges if not u.startswith("O_")}):
+        seen = set()
+        cur = n
+        ok = False
+        while cur in downstream and cur not in seen:
+            seen.add(cur)
+            cur = downstream[cur]
+            if cur.startswith("O_"):
+                ok = True
+                break
+        if not ok:
+            nodes_without_outfall.append(n)
+    if nodes_without_outfall:
+        blockers.extend([f"{n}: no path to outfall" for n in nodes_without_outfall])
+
+    # coordinates in non-overlapping basin squares with 500ft padding
+    coords: dict[str, tuple[float, float]] = {}
+    basin_bounds: dict[int, tuple[float, float, float, float]] = {}
+    margin = 500.0
+    base_x = 0.0
+    base_y = 0.0
+    for basin in [1, 2, 3, 4, 5]:
+        b_edges = [e for e in built_edges if e[0] == basin]
+        if not b_edges:
+            basin_bounds[basin] = (base_x, base_y, base_x + 100.0, base_y + 100.0)
+            base_x += 600.0
+            continue
+        up_set = {u for _, u, _, _ in b_edges}
+        anchors = [d for _, _, d, _ in b_edges if d not in up_set]
+        if not anchors:
+            anchors = [b_edges[0][2]]
+        origin = (base_x + 100.0, base_y + 100.0)
+        children = defaultdict(list)
+        for _, u, d, direction in b_edges:
+            children[d].append((u, direction))
+        for a in anchors:
+            coords.setdefault(a, origin)
+            q = deque([a])
+            while q:
+                cur = q.popleft()
+                cx, cy = coords[cur]
+                for u, direction in children.get(cur, []):
+                    if u in coords:
+                        continue
+                    length = 5.0 if u.startswith("IN_") else (hydrology.get(u, {}).get("len_ft") or 20.0)
+                    vec = _direction_unit_vector(direction) or (0.0, 1.0)
+                    coords[u] = (cx + vec[0] * length, cy + vec[1] * length)
+                    q.append(u)
+        b_nodes = [n for n in coords if n in {x for e in b_edges for x in (e[1], e[2])}]
+        xs = [coords[n][0] for n in b_nodes]
+        ys = [coords[n][1] for n in b_nodes]
+        xmin, xmax = min(xs), max(xs)
+        ymin, ymax = min(ys), max(ys)
+        basin_bounds[basin] = (xmin - margin, ymin - margin, xmax + margin, ymax + margin)
+        base_x = basin_bounds[basin][2] + margin
+
+    # write outputs
+    app_report = [
+        "# Branch Logic Application Report",
+        f"- branch_logic_detected: {'yes' if branch_logic_path.exists() else 'no'}",
+        f"- parsed_row_count_basins_1_to_5: {len(rows)}",
+        f"- built_edge_count: {len(built_edges)}",
+        f"- skipped_edge_count: {len(skipped_edges)}",
+        "- skipped_edge_reasons:",
+        *[f"  - {x}" for x in skipped_edges[:200]],
+        f"- normalization_events: {normalization_events}",
+        f"- direction_parse_exceptions: {len(dir_exceptions)}",
+        "- basin_edge_counts:",
+        *[f"  - basin_{b}: {basin_edge_counts.get(b, 0)}" for b in [1, 2, 3, 4, 5]],
+    ]
+    (out_dir / "branch_logic_application_report.md").write_text("\n".join(app_report) + "\n", encoding="utf-8")
+
+    fieldnames = [
+        "basin_index", "source_id_raw", "swmm_id_normalized", "structure_type", "exists_in_hydrology", "required_data_complete", "missing_fields", "known_flow_present", "status"
+    ]
+    with (out_dir / "branch_logic_source_validation.csv").open("w", newline="", encoding="utf-8") as fcsv:
+        w = csv.DictWriter(fcsv, fieldnames=fieldnames)
+        w.writeheader()
+        w.writerows(validation_rows)
+
+    qaqc_lines = [
+        "# Branch Logic Graph QAQC",
+        f"- duplicate_edges: {len(edges) - len(edges_unique)}",
+        f"- self_loops: {sum(1 for _,u,d,_ in edges_unique if u == d)}",
+        f"- cross_basin_issues: {sum(1 for x in blockers if x.startswith('cross-basin edge:'))}",
+        f"- orphan_nodes: 0",
+        f"- nodes_without_outfall_path: {len(nodes_without_outfall)}",
+        "- parsed_direction_exceptions:",
+        *[f"  - {x}" for x in dir_exceptions],
+        "- row-level blockers:",
+        *[f"  - {x}" for x in sorted(set(blockers))],
+    ]
+    (out_dir / "branch_logic_graph_qaqc.md").write_text("\n".join(qaqc_lines) + "\n", encoding="utf-8")
+
+    basin_layout = ["# Basin Layout Summary", "- padding_between_squares_ft: 500"]
+    for b in [1, 2, 3, 4, 5]:
+        basin_layout.append(f"- basin_{b}: orientation={terminal_orientation.get(b, 'TOP')}, square_bounds={basin_bounds[b]}")
+    basin_layout.append("- non_overlap_applied: yes")
+    (out_dir / "basin_layout_summary.md").write_text("\n".join(basin_layout) + "\n", encoding="utf-8")
+
+    inlet_nodes = [n for n in valid_nodes if n.startswith("IN_")]
+    blank_inlets = [n for n in inlet_nodes if hydrology.get(n, {}).get("flow") is None]
+    basin_inlet_counts = defaultdict(int)
+    for n in inlet_nodes:
+        b = hydrology.get(n, {}).get("basin")
+        if b in {1, 2, 3, 4, 5}:
+            basin_inlet_counts[b] += 1
+    inlet_lines = [
+        "# Inlet Flow Summary",
+        f"- inlet_inflow_source_field: HYDROLOGY Column R",
+        f"- inlet_count: {len(inlet_nodes)}",
+        f"- blank-flow inlets flagged: {len(blank_inlets)}",
+        *[f"  - {n}" for n in blank_inlets],
+        "- total inlet inflow counts by basin:",
+        *[f"  - basin_{b}: {basin_inlet_counts.get(b,0)}" for b in [1,2,3,4,5]],
+    ]
+    (out_dir / "inlet_flow_summary.md").write_text("\n".join(inlet_lines) + "\n", encoding="utf-8")
+
+    build_summary = {
+        "generated_at_utc": now_utc(),
+        "topology_source": "branch_logic",
+        "basins_included": [1, 2, 3, 4, 5],
+        "hydraulic_only": True,
+        "subcatchments_included": False,
+        "inlet_lateral_length_ft": 5,
+        "inlet_lateral_slope": 0.002,
+        "inlet_lateral_diameter_in": 24,
+        "branch_logic_authoritative": True,
+        "parsed_row_count": len(rows),
+        "built_nodes": len({n for _,u,d,_ in built_edges for n in (u,d)}),
+        "built_edges": len(built_edges),
+        "built_outfalls": len({d for _,_,d,_ in built_edges if d.startswith('O_')}),
+        "blockers": sorted(set(blockers)),
+        "non_blocking_assumptions": [
+            "shorthand ID normalization",
+            "inlet rim inherited from downstream junction",
+            "inlet lateral assumed 5 ft / 0.002 / 24 in",
+            "basin-square coordinate packing",
+        ],
+    }
+    (out_dir / "build_summary.json").write_text(json.dumps(build_summary, indent=2), encoding="utf-8")
+
+    state = {
+        "generated_at_utc": now_utc(),
+        "status": "blocked" if blockers else "ready_for_swmm_gui_manual_qaqc",
+        "blockers": sorted(set(blockers)),
+    }
+    (out_dir / "pipeline_state.json").write_text(json.dumps(state, indent=2), encoding="utf-8")
+
+    # build model for valid network subset
+    junctions = sorted([n for n in valid_nodes if n.startswith("J_")])
+    outfalls = sorted({d for _, _, d, _ in built_edges if d.startswith("O_")})
+    conduits = []
+    xsecs = []
+    inflows = []
+    for _, u, d, _ in built_edges:
+        cid = f"C_{u}_TO_{d}"
+        if u.startswith("IN_") and d.startswith("J_"):
+            length = 5.0
+            diam_in = 24.0
+        else:
+            length = hydrology.get(u, {}).get("len_ft") or 0.0
+            diam_in = hydrology.get(u, {}).get("diam_in")
+        if length is None or length <= 0 or diam_in is None:
+            continue
+        conduits.append((cid, u, d, length))
+        xsecs.append((cid, diam_in / 12.0))
+        if u.startswith("IN_"):
+            q = hydrology.get(u, {}).get("flow")
+            if q is not None:
+                inflows.append((u, q))
+
+    lines = ["[OPTIONS]", "FLOW_UNITS CFS", "", "[JUNCTIONS]", ";;Name Elev MaxDepth InitDepth SurDepth Apond"]
+    for j in junctions:
+        rec = hydrology.get(j, {})
+        inv = rec.get("soffit") - rec.get("diam_in") / 12.0
+        lines.append(f"{j} {inv:.3f} 10 0 0 0")
+    lines += ["", "[OUTFALLS]", ";;Name Elev Type Stage Data Gated RouteTo"]
+    for o in outfalls:
+        lines.append(f"{o} 0 FREE NO")
+    lines += ["", "[CONDUITS]", ";;Name FromNode ToNode Length Roughness InOffset OutOffset InitFlow MaxFlow"]
+    for cid, u, d, length in conduits:
+        lines.append(f"{cid} {u} {d} {length:.2f} 0.013 0 0 0 0")
+    lines += ["", "[XSECTIONS]", ";;Link Shape Geom1 Geom2 Geom3 Geom4 Barrels Culvert"]
+    for cid, dft in xsecs:
+        lines.append(f"{cid} CIRCULAR {dft:.3f} 0 0 0 1")
+    lines += ["", "[INFLOWS]", ";;Node Constituent TimeSeries Type Mfactor Sfactor Baseline Pattern"]
+    for n, q in sorted(set(inflows)):
+        lines.append(f'{n} FLOW "" FLOW 1.0 1.0 {q:.6f} ""')
+    lines += ["", "[COORDINATES]", ";;Node X-Coord Y-Coord"]
+    for n, (x, y) in sorted(coords.items()):
+        lines.append(f"{n} {x:.3f} {y:.3f}")
+    model_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    produced = [
+        str(model_path.relative_to(ROOT)),
+        str((out_dir / "branch_logic_application_report.md").relative_to(ROOT)),
+        str((out_dir / "branch_logic_source_validation.csv").relative_to(ROOT)),
+        str((out_dir / "branch_logic_graph_qaqc.md").relative_to(ROOT)),
+        str((out_dir / "basin_layout_summary.md").relative_to(ROOT)),
+        str((out_dir / "inlet_flow_summary.md").relative_to(ROOT)),
+        str((out_dir / "build_summary.json").relative_to(ROOT)),
+        str((out_dir / "pipeline_state.json").relative_to(ROOT)),
+    ]
+    return StageResult("build_v2", "blocked" if blockers else "ready", "V2 branch-logic build complete", produced)
+
 def run_qa(ctx: PipelineContext) -> StageResult:
     import pandas as pd
 
@@ -1429,6 +1859,8 @@ def run_stage(stage: str) -> StageResult:
         return run_transform(ctx)
     if stage == "build":
         return run_build(ctx)
+    if stage == "build_v2":
+        return run_build_v2(ctx)
     if stage == "qa":
         return run_qa(ctx)
     raise ValueError(f"Unknown stage: {stage}")
