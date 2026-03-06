@@ -1,0 +1,7 @@
+{
+  "status": "blocked",
+  "blockers": [
+    "branch_logic workbook missing: data/raw/Branch_Logic_GPT.xlsx"
+  ],
+  "outputs_root": "outputs/v2_branchlogic_basins_1_to_5"
+}

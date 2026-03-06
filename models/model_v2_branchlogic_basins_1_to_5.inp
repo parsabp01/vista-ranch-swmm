@@ -1,0 +1,20 @@
+[OPTIONS]
+FLOW_UNITS CFS
+
+[JUNCTIONS]
+;;Name Elev MaxDepth InitDepth SurDepth Apond
+
+[OUTFALLS]
+;;Name Elev Type Stage Data Gated RouteTo
+
+[CONDUITS]
+;;Name FromNode ToNode Length Roughness InOffset OutOffset InitFlow MaxFlow
+
+[XSECTIONS]
+;;Link Shape Geom1 Geom2 Geom3 Geom4 Barrels Culvert
+
+[INFLOWS]
+;;Node Constituent TimeSeries Type Mfactor Sfactor Baseline Pattern
+
+[COORDINATES]
+;;Node X-Coord Y-Coord
