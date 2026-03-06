@@ -7,3 +7,5 @@
 - parsed_direction_exceptions:
 - row-level blockers:
   - missing workbook: data/raw/Branch_Logic_GPT.xlsx
+- row_level_blockers:
+  - branch_logic workbook missing: data/raw/Branch_Logic_GPT.xlsx

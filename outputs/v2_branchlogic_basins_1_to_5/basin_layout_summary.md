@@ -5,4 +5,9 @@
 - basin_3: orientation=TOP, square_bounds=(1200.0, 0.0, 1300.0, 100.0)
 - basin_4: orientation=TOP, square_bounds=(1800.0, 0.0, 1900.0, 100.0)
 - basin_5: orientation=TOP, square_bounds=(2400.0, 0.0, 2500.0, 100.0)
+- basin_1: orientation=TOP, extent=None
+- basin_2: orientation=TOP, extent=None
+- basin_3: orientation=TOP, extent=None
+- basin_4: orientation=TOP, extent=None
+- basin_5: orientation=TOP, extent=None
 - non_overlap_applied: yes

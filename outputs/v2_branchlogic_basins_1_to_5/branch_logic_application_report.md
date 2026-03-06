@@ -12,3 +12,5 @@
   - basin_3: 0
   - basin_4: 0
   - basin_5: 0
+- normalization_events: 0
+- basin_edge_counts:

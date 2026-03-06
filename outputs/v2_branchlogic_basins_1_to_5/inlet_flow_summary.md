@@ -8,3 +8,6 @@
   - basin_3: 0
   - basin_4: 0
   - basin_5: 0
+- inlet_count: 0
+- blank_flow_inlets: 0
+- total_inlet_counts_by_basin:
